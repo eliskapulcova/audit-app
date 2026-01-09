@@ -14,9 +14,16 @@
     "@nuxt/fonts": "0.12.1",
     "@nuxt/icon": "2.2.0",
     "@nuxt/image": "2.0.0",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@primeuix/themes": "^2.0.2",
     "eslint": "^9.0.0",
     "nuxt": "^4.2.2",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.5.4",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@primevue/nuxt-module": "^4.5.4"
   }
 }

@@ -5,8 +5,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
-    '@nuxt/icon',
-    '@nuxt/image',
-    '@nuxt/fonts'
-  ]
+    '@nuxt/fonts',
+    '@nuxtjs/tailwindcss',
+    '@primevue/nuxt-module'
+  ],
+  css: ['primeicons/primeicons.css'],
 })
