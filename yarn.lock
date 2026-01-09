@@ -3834,6 +3834,7 @@ __metadata:
     "@primeuix/themes": "npm:^2.0.2"
     "@primevue/nuxt-module": "npm:^4.5.4"
     eslint: "npm:^9.0.0"
+    material-file-icons: "npm:^2.4.0"
     nuxt: "npm:^4.2.2"
     primeicons: "npm:^7.0.0"
     primevue: "npm:^4.5.4"
@@ -7364,6 +7365,13 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^13.0.0"
   checksum: 10c0/525f74915660be60b616bcbd267c4a5b59481b073ba125e45c9c3a041bb1a47a2bd0ae79d028eb6f5f95bf9851a4158423f5068539c3093621abb64027e8e461
+  languageName: node
+  linkType: hard
+
+"material-file-icons@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "material-file-icons@npm:2.4.0"
+  checksum: 10c0/929efb779cb2001298cf832ca425898baf81db0bb0e4d45eed7bbc22d4741ec841b4d23fac6cbaf49e095d0c6b7d28d845787c2790d868a7ac9c798038f3ca52
   languageName: node
   linkType: hard
 

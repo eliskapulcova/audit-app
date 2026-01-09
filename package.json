@@ -17,6 +17,7 @@
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@primeuix/themes": "^2.0.2",
     "eslint": "^9.0.0",
+    "material-file-icons": "^2.4.0",
     "nuxt": "^4.2.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.4",

@@ -1,5 +1,5 @@
 <template>
-    <h1>Issues Report</h1>
+    <h1 class="text-2xl font-bold">Issue Report</h1>
     <IssueTable />
 </template>
 
