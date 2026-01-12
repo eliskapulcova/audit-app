@@ -1,6 +1,5 @@
 <template>
-    <DataTable :value="processedIssues" responsiveLayout="scroll">
-        <!-- <Column field="fileType" header="File Type"></Column> -->
+    <DataTable :value="processedIssues" responsiveLayout="scroll" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50]">
         <Column field="file" header="Location">
             <template #body="slotProps">
                 <div class="flex items-center gap-2">
@@ -45,7 +44,7 @@ const processedIssues = computed(() => {
             severity: issue.severity,
             type: issue.type,
             impacts: Object.fromEntries(issue.impacts.split(', ').map((impact) => impact.split('='))),
-            tags: issue.tags.split(' / '),
+            tags: issue.tags.split(' / ').filter(tag => tag !== ''),
             message: issue.message,
             quickFixAvailable: issue.quickFixAvailable,
             effort: issue.effort,
