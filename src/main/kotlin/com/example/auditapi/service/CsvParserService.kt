@@ -14,15 +14,24 @@ class CsvParserService {
         val lines = resource.inputStream.bufferedReader().readLines()
         if (lines.isEmpty()) return emptyList()
 
-        val header = lines.first().split(",")
+        val delimiter = "\t"
+
+        val header = lines.first()
+            .split(delimiter)
+            .map { it.trim() }
+
         val dataLines = lines.drop(1)
 
+        fun idx(name: String): Int =
+            header.indexOf(name).takeIf { it >= 0 }
+                ?: error("Missing column in CSV: $name")
+
         return dataLines.map { line ->
-            val tokens = line.split(",")
+            val tokens = line.split(delimiter)
 
             AuditIssueDto(
                 updateDate = tokens[header.indexOf("updateDate")],
-                line = tokens[header.indexOf("line")].toInt(),
+                line = tokens[header.indexOf("line")].toDouble(),
                 rule = tokens[header.indexOf("rule")],
                 project = tokens[header.indexOf("project")],
                 effort = tokens[header.indexOf("effort")],
