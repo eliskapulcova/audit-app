@@ -12,7 +12,7 @@
                     </div>
                     <div>
                         <a :href="item.ruleDocLink" target="_blank">{{ item.rule }}</a>
-                        <Chip v-for="tag in item.tags" :key="tag" :label="tag" />
+                        <Chip v-for="tag in item.tags" :key="tag" :label="tag" class="ml-2"/>
                     </div>
                     <div>
                         {{ item.message }}
@@ -41,7 +41,7 @@ const processedIssues = computed(() => {
             severity: issue.severity,
             type: issue.type,
             impacts: Object.fromEntries(issue.impacts.split(', ').map((impact) => impact.split('='))),
-            tags: issue.tags.split(' / '),
+            tags: issue.tags.split(' / ').filter(tag => tag !== ''),
             message: issue.message,
             quickFixAvailable: issue.quickFixAvailable,
             effort: issue.effort,
