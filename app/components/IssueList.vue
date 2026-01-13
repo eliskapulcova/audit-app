@@ -1,8 +1,9 @@
 <template>
-    <DataView :value="processedIssues" responsiveLayout="scroll" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50]" class="mx-5">
+    <h2 class="text-2xl font-bold text-center m-5">Found issues</h2>
+    <DataView :value="processedIssues" responsiveLayout="scroll" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50]" class="mx-5 my-3">
         <template #list="slotProps">
-            <div class="flex flex-col">
-                <div v-for="(item, index) in slotProps.items" :key="index">
+            <div class="flex flex-col divide-y divide-gray-500">
+                <div v-for="(item, index) in slotProps.items" :key="index" class="py-2">
                     <div class="flex items-center gap-2">
                         <div v-html="getIcon(item.component).svg" class="w-5 h-5"></div>
                         <div class="flex flex-col">
