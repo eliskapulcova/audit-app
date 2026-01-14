@@ -26,8 +26,14 @@
 </template>
 
 <script setup>
-import { issues } from '~/mock/issues-report';
 import { getIcon } from 'material-file-icons';
+
+const { issues } = defineProps({
+    issues: {
+        type: Array,
+        required: true
+    }
+})
 
 const processedIssues = computed(() => {
     return issues.map(issue => {

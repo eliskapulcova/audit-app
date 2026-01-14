@@ -1,6 +1,6 @@
-# Nuxt Minimal Starter
+# Audit App Client
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt application for conducting and browsing code audit reports.
 
 ## Setup
 
