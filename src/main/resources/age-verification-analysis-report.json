@@ -1,0 +1,515 @@
+{
+    "codeAnalysis": {
+        "project": "age-verification",
+        "branch": "main",
+        "version": "not provided",
+        "by": "Administrator",
+        "date": "2026-01-05",
+        "analyzedThe": "2025-12-29"
+    },
+    "configuration": {
+        "qualityProfiles": {
+            "names": [
+                "Sonar way [CSS]",
+                "Sonar way [Docker]",
+                "Sonar way [JavaScript]",
+                "Sonar way [PHP]",
+                "Sonar way [Terraform]",
+                "Sonar way [XML]",
+                "Sonar way [YAML]"
+            ],
+            "files": [
+                "bf67986d-0196-464c-967c-e81697fa615b.json",
+                "d93c95c5-067c-4eff-a9c7-9f9bbd51dc3d.json",
+                "26fe7a17-48e4-4e6e-97cc-83d94f166c14.json",
+                "378ed2da-cfb0-4994-8de7-1b11e6fb4a76.json",
+                "71c0de37-d136-4b27-ac4c-35e6460402d4.json",
+                "b9e9acf0-ffa7-4416-a2d9-4c82f65663fc.json",
+                "4f56e955-8a45-4aa6-aa7a-265642408966.json"
+            ]
+        },
+        "qualityGate": {
+            "name": "Sonar way",
+            "file": "Sonar way.xml"
+        }
+    },
+    "synthesis": {
+        "analysisStatus": [
+            {
+                "Reliability": "C",
+                "Security": "C",
+                "Security Review": "E",
+                "Maintainability": "A"
+            }
+        ],
+        "qualityGateStatus": [],
+        "metrics": [
+            {
+                "Coverage": "0.0 %",
+                "Duplications": "1.6 %",
+                "Comment density": "12.1 %",
+                "Median number of lines of code per file": "31.0",
+                "Adherence to coding standard": "99.1 %"
+            }
+        ],
+        "tests": [
+            {
+                "Total": "0",
+                "Success Rate": "0 %",
+                "Skipped": "0",
+                "Errors": "0",
+                "Failures": "0"
+            }
+        ],
+        "detailedTechnicalDebt": [
+            {
+                "Reliability": "0d 0h 45min",
+                "Security": "0d 1h 10min",
+                "Maintainability": "0d 5h 45min",
+                "Total": "0d 7h 40min"
+            }
+        ],
+        "metricsRange": [
+            {
+                "\\": "Min",
+                "Cyclomatic Complexity": "0.0",
+                "Cognitive Complexity": "0.0",
+                "Lines of code per file": "0.0",
+                "Coverage": "0.0",
+                "Comment density (%)": "0.0",
+                "Duplication (%)": "0.0"
+            },
+            {
+                "\\": "Max",
+                "Cyclomatic Complexity": "333.0",
+                "Cognitive Complexity": "165.0",
+                "Lines of code per file": "2888.0",
+                "Coverage": "0.0",
+                "Comment density (%)": "75.0",
+                "Duplication (%)": "75.9"
+            }
+        ],
+        "volume": {
+            "<null>": "6",
+            "CSS": "6",
+            "Docker": "85",
+            "JavaScript": "3012",
+            "PHP": "4463",
+            "Terraform": "311",
+            "XML": "31",
+            "YAML": "397",
+            "Total": "8311"
+        }
+    },
+    "issues": {
+        "countBySeverityAndTypes": [
+            {
+                "Type / Severity": "BUG",
+                "INFO": "0",
+                "MINOR": "0",
+                "MAJOR": "9",
+                "CRITICAL": "0",
+                "BLOCKER": "0"
+            },
+            {
+                "Type / Severity": "VULNERABILITY",
+                "INFO": "0",
+                "MINOR": "0",
+                "MAJOR": "3",
+                "CRITICAL": "0",
+                "BLOCKER": "0"
+            },
+            {
+                "Type / Severity": "CODE_SMELL",
+                "INFO": "1",
+                "MINOR": "17",
+                "MAJOR": "30",
+                "CRITICAL": "13",
+                "BLOCKER": "0"
+            }
+        ],
+        "list": [
+            {
+                "Name": "\"<title>\" should be present in all pages",
+                "Description": "",
+                "Type": "BUG",
+                "Severity": "MAJOR",
+                "Number": "9"
+            },
+            {
+                "Name": "Cognitive Complexity of functions should not be too high",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "CRITICAL",
+                "Number": "1"
+            },
+            {
+                "Name": "String literals should not be duplicated",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "CRITICAL",
+                "Number": "12"
+            },
+            {
+                "Name": "Track uses of \"TODO\" tags",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "INFO",
+                "Number": "1"
+            },
+            {
+                "Name": "Label elements should have a text label and an associated control",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Selectors should not be duplicated",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "CSS files should not be empty",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "3"
+            },
+            {
+                "Name": "If statements should not be the only statement in else blocks",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "1"
+            },
+            {
+                "Name": "Top-level await should be preferred over wrapped async operations",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "1"
+            },
+            {
+                "Name": "Memory requests should be specified",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "CPU requests should be specified",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Storage requests should be specified",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Mergeable \"if\" statements should be combined",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Generic exceptions ErrorException, RuntimeException and Exception should not be thrown",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Unused function parameters should be removed",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "4"
+            },
+            {
+                "Name": "Sections of code should not be commented out",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "5"
+            },
+            {
+                "Name": "Classes named like \"Exception\" should extend \"Exception\" or a subclass",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "1"
+            },
+            {
+                "Name": "Sections of code should not be commented out",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MAJOR",
+                "Number": "1"
+            },
+            {
+                "Name": "Reduce the amount of consecutive RUN instructions",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "3"
+            },
+            {
+                "Name": "Unnecessary imports should be removed",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "4"
+            },
+            {
+                "Name": "Use \"globalThis\" instead of \"window\", \"self\", or \"global\"",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "3"
+            },
+            {
+                "Name": "Node.js built-in modules should be imported using the \"node:\" protocol",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "3"
+            },
+            {
+                "Name": "Strings should use \"replaceAll()\" instead of \"replace()\" with global regex",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Field names should comply with a naming convention",
+                "Description": "",
+                "Type": "CODE_SMELL",
+                "Severity": "MINOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Memory limits should be enforced",
+                "Description": "",
+                "Type": "VULNERABILITY",
+                "Severity": "MAJOR",
+                "Number": "2"
+            },
+            {
+                "Name": "Service account permissions should be restricted",
+                "Description": "",
+                "Type": "VULNERABILITY",
+                "Severity": "MAJOR",
+                "Number": "1"
+            }
+        ]
+    },
+    "securityHotspots": {
+        "countByCategoryAndPriority": [
+            {
+                "Category / Priority": "LDAP Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Object Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Server-Side Request Forgery (SSRF)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "XML External Entity (XXE)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Insecure Configuration",
+                "LOW": "1",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "XPath Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Authentication",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "1"
+            },
+            {
+                "Category / Priority": "Weak Cryptography",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Denial of Service (DoS)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Log Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Cross-Site Request Forgery (CSRF)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Open Redirect",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Permission",
+                "LOW": "0",
+                "MEDIUM": "2",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "SQL Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Encryption of Sensitive Data",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Traceability",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Buffer Overflow",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "File Manipulation",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Code Injection (RCE)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Cross-Site Scripting (XSS)",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Command Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Path Traversal Injection",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "HTTP Response Splitting",
+                "LOW": "0",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            },
+            {
+                "Category / Priority": "Others",
+                "LOW": "4",
+                "MEDIUM": "0",
+                "HIGH": "0"
+            }
+        ],
+        "list": [
+            {
+                "Category": "Permission",
+                "Name": "Recursively copying context directories is security-sensitive",
+                "Priority": "MEDIUM",
+                "Severity": "CRITICAL",
+                "Count": "1"
+            },
+            {
+                "Category": "Permission",
+                "Name": "Running containers as a privileged user is security-sensitive",
+                "Priority": "MEDIUM",
+                "Severity": "MINOR",
+                "Count": "1"
+            },
+            {
+                "Category": "Others",
+                "Name": "Creating cookies without the \"HttpOnly\" flag is security-sensitive",
+                "Priority": "LOW",
+                "Severity": "MINOR",
+                "Count": "1"
+            },
+            {
+                "Category": "Authentication",
+                "Name": "Allowing non-root users to modify resources copied to an image is security-sensitive",
+                "Priority": "HIGH",
+                "Severity": "MINOR",
+                "Count": "1"
+            },
+            {
+                "Category": "Others",
+                "Name": "Using weak hashing algorithms is security-sensitive",
+                "Priority": "LOW",
+                "Severity": "CRITICAL",
+                "Count": "2"
+            },
+            {
+                "Category": "Others",
+                "Name": "Using remote artifacts without integrity checks is security-sensitive",
+                "Priority": "LOW",
+                "Severity": "MINOR",
+                "Count": "1"
+            },
+            {
+                "Category": "Insecure Configuration",
+                "Name": "Creating cookies without the \"secure\" flag is security-sensitive",
+                "Priority": "LOW",
+                "Severity": "MINOR",
+                "Count": "1"
+            }
+        ]
+    }
+}
