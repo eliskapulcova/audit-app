@@ -3,7 +3,7 @@
     <DataView :value="processedIssues" responsiveLayout="scroll" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50]" class="mx-5 my-3">
         <template #list="slotProps">
             <div class="flex flex-col divide-y divide-gray-500">
-                <div v-for="(item, index) in slotProps.items" :key="index" class="py-2">
+                <div v-for="(item, index) in slotProps.items" :key="index" class="p-2">
                     <div class="flex items-center gap-2">
                         <div v-html="getIcon(item.component).svg" class="w-5 h-5"></div>
                         <div class="flex flex-col">
@@ -18,7 +18,14 @@
                     <div>
                         {{ item.message }}
                     </div>
-                    <!-- TODO: severity, type, impacts, quickFixAvailable, effort - use icons -->
+                    <div class="mt-2 mb-1">
+                        <Chip class="m-1" :label="item.severity" />
+                        <Chip class="m-1" :label="item.type" />
+                        <Chip class="m-1" :label="item.impacts.softwareQuality" />
+                        <Chip class="m-1" :label="item.impacts.severity" />
+                        <Chip v-if="item.quickFixAvailable" class="m-1" label="QF" />
+                        <Chip class="m-1" :label="item.effort" />
+                    </div>
                 </div>
             </div>
         </template>
@@ -47,11 +54,11 @@ const processedIssues = computed(() => {
             ruleDocLink: `https://next.sonarqube.com/sonarqube/coding_rules?open=${encodeURIComponent(issue.rule)}&rule_key=${encodeURIComponent(issue.rule)}`,
             severity: issue.severity,
             type: issue.type,
-            impacts: Object.fromEntries(issue.impacts.split(', ').map((impact) => impact.split('='))),
+            impacts: Object.fromEntries(issue.impacts.replace(/[{}\/]/g, '').split(', ').map((impact) => impact.split('='))),
             tags: issue.tags.split(' / ').filter(tag => tag !== ''),
             message: issue.message,
             quickFixAvailable: issue.quickFixAvailable,
-            effort: issue.effort,
+            effort: issue.effort.replace(/^(\d+)(min)$/, "$1 $2."),
         };
     });
 });
