@@ -5,7 +5,7 @@ import java.time.OffsetDateTime
 
 data class AuditIssueDto(
     val updateDate: String,
-    val line: Double,
+    val line: Int,
     val rule: String,
     val project: String,
     val effort: String,

@@ -30,7 +30,7 @@ class CsvParserService {
 
             AuditIssueDto(
                 updateDate = tokens[header.indexOf("updateDate")],
-                line = tokens[header.indexOf("line")].toDouble(),
+                line = tokens[header.indexOf("line")].toDouble().toInt(),
                 rule = tokens[header.indexOf("rule")],
                 project = tokens[header.indexOf("project")],
                 effort = tokens[header.indexOf("effort")],
@@ -48,11 +48,11 @@ class CsvParserService {
                 cleanCodeAttributeCategory = tokens[header.indexOf("cleanCodeAttributeCategory")],
                 linkedTicketStatus = tokens[header.indexOf("linkedTicketStatus")],
                 messageFormattings = tokens[header.indexOf("messageFormattings")],
-                impacts = tokens[header.indexOf("impacts")],
+                impacts = cleanCsvValue(tokens[header.indexOf("impacts")]),
                 message = tokens[header.indexOf("message")],
                 creationDate = tokens[header.indexOf("creationDate")],
                 quickFixAvailable = tokens[header.indexOf("quickFixAvailable")].toBoolean(),
-                tags = tokens[header.indexOf("tags")],
+                tags = cleanCsvValue(tokens[header.indexOf("tags")]),
                 codeVariants = tokens[header.indexOf("codeVariants")],
                 component = tokens[header.indexOf("component")],
                 prioritizedRule = tokens[header.indexOf("prioritizedRule")].toBoolean(),
@@ -63,4 +63,8 @@ class CsvParserService {
             )
         }
     }
+
+    private fun cleanCsvValue(value: String): String =
+        value.trim().removeSurrounding("\"")
+
 }
