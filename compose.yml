@@ -1,0 +1,16 @@
+services:
+  audit-api:
+    build: ./server
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  audit-app-client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - audit-api
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://localhost:8080

@@ -1,0 +1,38 @@
+services:
+  audit-api:
+    build:
+      context: ./server
+      target: build
+    command: gradle bootRun --continuous -Pargs=--spring.profiles.active=docker
+    develop:
+      watch:
+        - action: sync
+          path: ./server
+          target: /home/gradle/src
+          ignore:
+            - build
+            - .gradle
+        - action: rebuild
+          path: ./server/build.gradle.kts
+
+  audit-app-client:
+    build:
+      context: ./client
+      target: build
+    # Using 'bun' as consistent with the Dockerfile. ensure the base image supports it.
+    command: sh -c "bun install && bun run dev --host 0.0.0.0"
+    ports:
+      - "24678:24678" # HMR port for Vite
+    develop:
+      watch:
+        - action: sync
+          path: ./client
+          target: /app
+          ignore:
+            - node_modules
+            - .nuxt
+            - .output
+        - action: rebuild
+          path: ./client/package.json
+        - action: rebuild
+          path: ./client/bun.lock
