@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="flex-1">
+        <h2 class="text-2xl font-bold text-center m-5">Analysis report</h2>
         <OverviewTable title="Run details" :data="runDetailsData" />
         <OverviewTable title="Analysis status" :data="analysisStatusData" />
         <OverviewTable title="Metrics" :data="metricsData" />
