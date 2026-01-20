@@ -20,12 +20,12 @@
                             {{ item.message }}
                         </div>
                         <div class="mt-2 mb-1">
-                            <Chip class="m-1" :label="item.severity" />
-                            <Chip class="m-1" :label="item.type" />
-                            <Chip class="m-1" :label="item.impacts.softwareQuality" />
-                            <Chip class="m-1" :label="item.impacts.severity" />
+                            <Chip class="m-1" v-if="item.severity" :label="item.severity" />
+                            <Chip class="m-1" v-if="item.type" :label="item.type" />
+                            <Chip class="m-1" v-if="item.impacts.softwareQuality" :label="item.impacts.softwareQuality" />
+                            <Chip class="m-1" v-if="item.impacts.severity" :label="item.impacts.severity" />
                             <Chip v-if="item.quickFixAvailable" class="m-1" label="QF" />
-                            <Chip class="m-1" :label="item.effort" />
+                            <Chip class="m-1" v-if="item.effort" :label="item.effort" />
                         </div>
                     </div>
                 </div>
@@ -37,6 +37,9 @@
 <script setup>
 import { getIcon } from 'material-file-icons';
 
+import { SonarQubeIssueMapper } from '../mappers/sonar-qube-issue.mapper';
+import { SemgrepIssueMapper } from '../mappers/semgrep-issue.mapper';
+
 const { issues } = defineProps({
     issues: {
         type: Array,
@@ -45,23 +48,6 @@ const { issues } = defineProps({
 })
 
 const processedIssues = computed(() => {
-    return issues.map(issue => {
-        return {
-            component: issue.component,
-            file: `${issue.component?.match(/[^:/]*$/)?.[0] ?? ''}:${issue.line}`,
-            location: issue.component?.replace(/[^:/]*$/, '').replace(/[:/]$/, '') ?? '',
-            fileType:  issue.component?.match(/\.([^.]*)$/)?.[1] ?? '',
-            author: issue.author,
-            rule: issue.rule,
-            ruleDocLink: `https://next.sonarqube.com/sonarqube/coding_rules?open=${encodeURIComponent(issue.rule)}&rule_key=${encodeURIComponent(issue.rule)}`,
-            severity: issue.severity,
-            type: issue.type,
-            impacts: Object.fromEntries(issue.impacts.replace(/[{}\/]/g, '').split(', ').map((impact) => impact.split('='))),
-            tags: issue.tags.split(' / ').filter(tag => tag !== ''),
-            message: issue.message,
-            quickFixAvailable: issue.quickFixAvailable,
-            effort: issue.effort.replace(/^(\d+)(min)$/, "$1 $2."),
-        };
-    });
+    return issues.map(SemgrepIssueMapper.mapIssue);
 });
 </script>

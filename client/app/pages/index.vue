@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-3xl font-bold text-center m-5 mx-auto">Code Audit Report</h1>
-    <Button v-if="!report" @click="downloadReportFromApi" class="m-5">Download report</Button>
+    <Button v-if="!report" @click="downloadReport" class="m-5">Download report</Button>
     <div v-else class="flex flex-col lg:flex-row">
         <AnalysisReport :report="report.analysisReport.data"/>
         <IssueReport :issues="report.issueReport.auditIssueList" />
@@ -12,6 +12,7 @@ import AnalysisReport from '~/components/AnalysisReport.vue';
 import IssueReport from '~/components/IssueReport.vue';
 import { issues } from '~/mock/issues-report';
 import analysisReport from '~/mock/2026-01-05-age-verification-analysis-report.json';
+import semgrepIssues from '~/mock/semgrep-results.json';
 
 const config = useRuntimeConfig();
 const API_URL = `${config.public.apiBase}/v1/report`;
@@ -24,7 +25,7 @@ function downloadReport() {
             data: analysisReport
         },
         issueReport: {
-            auditIssueList: issues
+            auditIssueList: semgrepIssues.results
         }
     }
 }
