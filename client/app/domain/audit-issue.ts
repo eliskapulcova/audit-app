@@ -1,4 +1,5 @@
 export interface AuditIssue {
+    source: string;
     component: string;
     file: string;
     location: string;

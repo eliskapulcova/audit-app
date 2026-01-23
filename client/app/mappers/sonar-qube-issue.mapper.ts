@@ -2,11 +2,12 @@
  * TODO: Add proper types instead of 'any' for the issue and the return type.
  */
 import type { AuditIssue } from '../domain/audit-issue';
-import type { SonarQubeIssue } from '../domain/sonar-qube-issue';
+import type { SonarQubeIssue } from '../domain/issue_mapping/sonar-qube-issue';
 
 export class SonarQubeIssueMapper {
     static mapIssue(issue: SonarQubeIssue): AuditIssue {
         return {
+            source: 'SonarQube',
             component: issue.component,
             file: `${issue.component?.match(/[^:/]*$/)?.[0] ?? ''}:${issue.line}`,
             location: issue.component?.replace(/[^:/]*$/, '').replace(/[:/]$/, '') ?? '',

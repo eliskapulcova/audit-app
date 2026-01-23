@@ -5,7 +5,7 @@
             <template #list="slotProps">
                 <div class="flex flex-col divide-y divide-gray-500">
                     <div v-for="(item, index) in slotProps.items" :key="index" class="p-2">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 mb-2">
                             <div v-html="getIcon(item.component).svg" class="w-5 h-5"></div>
                             <div class="flex flex-col">
                                 <span>{{ item.file }}</span>
@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <div>
-                            <a :href="item.ruleDocLink" target="_blank">{{ item.rule }}</a>
+                            <a :href="item.ruleDocLink" target="_blank" class="text-blue-600 hover:underline">{{ item.source }} - {{ item.rule }}</a>
                             <Chip v-for="tag in item.tags" :key="tag" :label="tag" class="ml-2"/>
                         </div>
                         <div>
@@ -48,6 +48,6 @@ const { issues } = defineProps({
 })
 
 const processedIssues = computed(() => {
-    return issues.map(SemgrepIssueMapper.mapIssue);
+    return issues.map(SonarQubeIssueMapper.mapIssue);
 });
 </script>

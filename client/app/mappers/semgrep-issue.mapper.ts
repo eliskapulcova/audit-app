@@ -1,10 +1,11 @@
-import type { SemgrepIssue } from '../domain/semgrep-issue';
+import type { SemgrepIssue } from '../domain/issue_mapping/semgrep-issue';
 import type { AuditIssue } from '../domain/audit-issue';
 
 export class SemgrepIssueMapper {
     static mapIssue(issue: SemgrepIssue): AuditIssue {
         console.log('mapping issue', issue);
         return {
+            source: 'Semgrep',
             component: issue.path,
             file: `${issue.path.substring(issue.path.lastIndexOf('/') + 1)}:${issue.start.line}`,
             location: issue.path.slice(issue.path.indexOf('/') + 1, issue.path.lastIndexOf('/')),

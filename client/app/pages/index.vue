@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-3xl font-bold text-center m-5 mx-auto">Code Audit Report</h1>
-    <Button v-if="!report" @click="downloadReport" class="m-5">Download report</Button>
+    <Button v-if="!report" @click="USE_API ? downloadReportFromApi : downloadReport" class="m-5">Download report</Button>
     <div v-else class="flex flex-col lg:flex-row">
         <AnalysisReport :report="report.analysisReport.data"/>
         <IssueReport :issues="report.issueReport.auditIssueList" />
@@ -18,6 +18,8 @@ const config = useRuntimeConfig();
 const API_URL = `${config.public.apiBase}/v1/report`;
 
 const report = ref(null)
+
+const USE_API = false;
 
 function downloadReport() {
     report.value = {
