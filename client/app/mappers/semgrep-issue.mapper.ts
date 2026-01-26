@@ -3,7 +3,6 @@ import type { AuditIssue } from '../domain/audit-issue';
 
 export class SemgrepIssueMapper {
     static mapIssue(issue: SemgrepIssue): AuditIssue {
-        console.log('mapping issue', issue);
         return {
             source: 'Semgrep',
             component: issue.path,

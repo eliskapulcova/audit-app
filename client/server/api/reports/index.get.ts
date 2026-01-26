@@ -1,5 +1,5 @@
-import issueList from '../../data/index.json'
+import projectList from '../../data/index.json'
 
 export default defineEventHandler(() => {
-    return issueList
+    return projectList
 })

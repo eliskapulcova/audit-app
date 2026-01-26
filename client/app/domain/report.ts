@@ -1,6 +1,8 @@
 import type { AuditIssue } from "./audit-issue"
+import type { ReportTool } from "./report-tool"
 
 export interface Report {
-    analysisReport: any // TODO: Add proper type
+    reportTool: ReportTool
+    analysisReport?: any // TODO: Add proper type
     issueList: AuditIssue[]
 }
