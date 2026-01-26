@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "format": "prettier --write \"app/{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\""
   },
   "dependencies": {
     "@nuxt/eslint": "1.12.1",
@@ -25,6 +27,9 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@primevue/nuxt-module": "^4.5.4"
+    "@primevue/nuxt-module": "^4.5.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1"
   }
 }
