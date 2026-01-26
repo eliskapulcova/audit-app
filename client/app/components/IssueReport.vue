@@ -2,7 +2,7 @@
   <div class="flex-1">
     <h2 class="text-2xl font-bold text-center m-5">Issue report</h2>
     <DataView
-      :value="issues"
+      :value="filteredIssues"
       responsive-layout="scroll"
       :sort-field="sortField"
       :sort-order="sortOrder"
@@ -11,8 +11,22 @@
       :rows-per-page-options="[10, 20, 50]"
       class="mx-5 my-3"
     >
-      <template #header>
-        <span class="mr-2">Sort by:</span>
+      <template #header v-if="issues.length > 5">
+        <span class="mr-2">Sources:</span>
+        <MultiSelect
+          v-model="selectedSources"
+          :options="sources"
+          optionLabel="label"
+          placeholder="All"
+        />
+        <span class="ml-4 mr-2">File types:</span>
+        <MultiSelect
+          v-model="selectedFileTypes"
+          :options="fileTypes"
+          optionLabel="label"
+          placeholder="All"
+        />
+        <span class="ml-4 mr-2">Sort by:</span>
         <Select
           v-model="sortKey"
           :options="sortOptions"
@@ -22,6 +36,7 @@
       </template>
       <template #list="slotProps">
         <div class="flex flex-col divide-y divide-gray-500">
+          <!-- TODO: use different key than index -->
           <div
             v-for="(item, index) in slotProps.items"
             :key="index"
@@ -86,6 +101,43 @@ const { issues } = defineProps({
   },
 });
 
+// --- FILTERING ---
+const selectedSources = ref<{ label: string, value: string }[]>([])
+const sources = computed(() => {
+    return [...new Set(issues.map((issue) => issue.source))]
+        .map(source => {
+            return { label: source, value: source }
+        })
+})
+
+const selectedFileTypes = ref<{ label: string, value: string }[]>([])
+const fileTypes = computed(() => {
+    return [...new Set(issues.map((issue) => issue.fileType))]
+        .map(fileType => {
+            return { label: fileType || '<empty>', value: fileType }
+        })
+        .sort((a, b) => a.label.localeCompare(b.label))
+})
+
+const filterBySelectedSources = (issues: AuditIssue[]) => {
+    if (selectedSources.value.length === 0) {
+        return issues
+    }
+    return issues.filter((issue) => selectedSources.value.some(source => source.value === issue.source))
+}
+
+const filterBySelectedFileTypes = (issues: AuditIssue[]) => {
+    if (selectedFileTypes.value.length === 0) {
+        return issues
+    }
+    return issues.filter((issue) => selectedFileTypes.value.some(fileType => fileType.value === issue.fileType))
+}
+
+const filteredIssues = computed(() => {
+    return filterBySelectedFileTypes(filterBySelectedSources(issues))
+})
+
+// --- SORTING ---
 const getFullPath = (issue: AuditIssue) => {
   return `${issue.location}/${issue.file}`
 }
@@ -93,6 +145,7 @@ const getFullPath = (issue: AuditIssue) => {
 const sortOptions = ref([
     { label: 'Full Path', value: 'fullPath' },
     { label: 'Severity', value: 'severity'},
+    { label: 'Effort', value: 'effort'},
 ]);
 const sortKey = ref(sortOptions.value[0])
 const sortOrder = ref(1)
@@ -108,7 +161,6 @@ const onSortChange = (event) => {
     } else {
         sortField.value = value
     }
-    
     sortKey.value = sortValue
 };
 </script>
