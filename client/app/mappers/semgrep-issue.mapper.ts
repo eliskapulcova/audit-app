@@ -7,7 +7,7 @@ export class SemgrepIssueMapper {
             source: 'Semgrep',
             component: issue.path,
             file: `${issue.path.substring(issue.path.lastIndexOf('/') + 1)}:${issue.start.line}`,
-            location: issue.path.slice(issue.path.indexOf('/') + 1, issue.path.lastIndexOf('/')),
+            location: issue.path.replace('/', ':').slice(0, issue.path.lastIndexOf('/')),
             fileType:  issue.path?.match(/\.([^.]*)$/)?.[1] ?? '',
             author: null,
             rule: issue.extra?.metadata?.cwe?.[0]?.split(':')?.[0] ?? '',

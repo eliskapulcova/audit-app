@@ -4,11 +4,22 @@
     <DataView
       :value="issues"
       responsive-layout="scroll"
+      :sort-field="sortField"
+      :sort-order="sortOrder"
       paginator
       :rows="10"
       :rows-per-page-options="[10, 20, 50]"
       class="mx-5 my-3"
     >
+      <template #header>
+        <span class="mr-2">Sort by:</span>
+        <Select
+          v-model="sortKey"
+          :options="sortOptions"
+          optionLabel="label"
+          @change="onSortChange($event)"
+        />
+      </template>
       <template #list="slotProps">
         <div class="flex flex-col divide-y divide-gray-500">
           <div
@@ -74,4 +85,30 @@ const { issues } = defineProps({
     required: true,
   },
 });
+
+const getFullPath = (issue: AuditIssue) => {
+  return `${issue.location}/${issue.file}`
+}
+
+const sortOptions = ref([
+    { label: 'Full Path', value: 'fullPath' },
+    { label: 'Severity', value: 'severity'},
+]);
+const sortKey = ref(sortOptions.value[0])
+const sortOrder = ref(1)
+const sortField = ref(getFullPath)
+
+const onSortChange = (event) => {
+    const value = event.value.value
+    const sortValue = event.value
+    sortOrder.value = 1
+
+    if (value === 'fullPath') {
+        sortField.value = getFullPath
+    } else {
+        sortField.value = value
+    }
+    
+    sortKey.value = sortValue
+};
 </script>
