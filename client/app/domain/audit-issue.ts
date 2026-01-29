@@ -8,7 +8,7 @@ export interface AuditIssue {
     line: number;
     author: string | null;
     rule: string;
-    ruleDocLink: string;
+    ruleDocLink: string | null;
     severity: string;
     issueType: string | null;
     impacts: {
