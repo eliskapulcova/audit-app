@@ -12,27 +12,38 @@
       class="mx-5 my-3"
     >
       <template #header v-if="issues.length > 5">
-        <span class="mr-2">Tools:</span>
-        <MultiSelect
-          v-model="selectedTools"
-          :options="tools"
-          optionLabel="label"
-          placeholder="All"
-        />
-        <span class="ml-4 mr-2">File types:</span>
-        <MultiSelect
-          v-model="selectedFileTypes"
-          :options="fileTypes"
-          optionLabel="label"
-          placeholder="All"
-        />
-        <span class="ml-4 mr-2">Sort by:</span>
-        <Select
-          v-model="sortSelectModel"
-          :options="sortOptions"
-          optionLabel="label"
-          @change="onSortChange($event)"
-        />
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="flex items-center gap-2">
+            <span>Tools:</span>
+            <MultiSelect
+              v-model="selectedTools"
+              :options="tools"
+              optionLabel="label"
+              placeholder="All"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <span>File types:</span>
+            <MultiSelect
+              v-model="selectedFileTypes"
+              :options="fileTypes"
+              optionLabel="label"
+              placeholder="All"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Sort by:</span>
+            <Select
+              v-model="sortSelectModel"
+              :options="sortOptions"
+              optionLabel="label"
+              @change="onSortChange($event)"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            Showing {{ filteredIssues.length }} out of {{ issues.length }}
+          </div>
+        </div>
       </template>
       <template #list="slotProps">
         <div class="flex flex-col divide-y divide-gray-500">
@@ -51,11 +62,13 @@
             </div>
             <div>
               <a
+                v-if="item.ruleDocLink"
                 :href="item.ruleDocLink"
                 target="_blank"
                 class="text-blue-600 hover:underline"
                 >{{ item.tool }} - {{ item.rule }}</a
               >
+              <span v-else class="text-gray-500">{{ item.tool }} - {{ item.rule }}</span>
               <Chip
                 v-for="tag in item.tags"
                 :key="tag"

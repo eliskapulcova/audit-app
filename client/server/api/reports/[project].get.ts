@@ -26,7 +26,7 @@ export default defineEventHandler((event) => {
                 reportTool: 'PHPStan',
                 issueList: Object.entries(phpstanReport.files)
                     .flatMap(([path, file]) => file.messages.map(
-                        (issue: PhpstanIssue) => PhpstanIssueMapper.mapIssue(issue, 'age-verification', path.substring(0, path.indexOf(' '))))),
+                        (issue: PhpstanIssue) => PhpstanIssueMapper.mapIssue(issue, 'age-verification', path.split(/\s+/)[0]))),
                 analysisReport: null,
             }
         ]

@@ -4,10 +4,12 @@ import { ReportTool } from '../domain/report-tool';
 
 export class PhpstanIssueMapper {
     static mapIssue(issue: PhpstanIssue, appName: string, path: string): AuditIssue {
+        const transformedPath = path.replace('/app/', `${appName}:`);
+        const lastSlashIndex = transformedPath.lastIndexOf('/');
         return {
             tool: ReportTool.PHPStan,
-            location: path.replace('/app/', `${appName}:`).slice(0, path.lastIndexOf('/')), 
-            file: path.replace('/app/', `${appName}:`).substring(path.lastIndexOf('/') + 1),
+            location: transformedPath.slice(0, lastSlashIndex), 
+            file: transformedPath.substring(lastSlashIndex + 1),
             fileType: path?.match(/\.(.*)$/)?.[1] ?? '',
             line: issue.line,
             author: null,
