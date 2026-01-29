@@ -4,7 +4,7 @@
     <DataView
       :value="filteredIssues"
       responsive-layout="scroll"
-      :sort-field="sortField"
+      :sort-field="sortFieldOrGetter"
       :sort-order="sortOrder"
       paginator
       :rows="10"
@@ -12,10 +12,10 @@
       class="mx-5 my-3"
     >
       <template #header v-if="issues.length > 5">
-        <span class="mr-2">Sources:</span>
+        <span class="mr-2">Tools:</span>
         <MultiSelect
-          v-model="selectedSources"
-          :options="sources"
+          v-model="selectedTools"
+          :options="tools"
           optionLabel="label"
           placeholder="All"
         />
@@ -28,7 +28,7 @@
         />
         <span class="ml-4 mr-2">Sort by:</span>
         <Select
-          v-model="sortKey"
+          v-model="sortSelectModel"
           :options="sortOptions"
           optionLabel="label"
           @change="onSortChange($event)"
@@ -43,9 +43,9 @@
             class="p-2"
           >
             <div class="flex items-center gap-2 mb-2">
-              <div class="w-5 h-5" v-html="getIcon(item.component).svg" />
+              <div class="w-5 h-5" v-html="getIcon(item.file).svg" />
               <div class="flex flex-col">
-                <span>{{ item.file }}</span>
+                <span>{{ item.file }}:{{ item.line }}</span>
                 <span class="text-xs text-gray-500">{{ item.location }}</span>
               </div>
             </div>
@@ -54,7 +54,7 @@
                 :href="item.ruleDocLink"
                 target="_blank"
                 class="text-blue-600 hover:underline"
-                >{{ item.source }} - {{ item.rule }}</a
+                >{{ item.tool }} - {{ item.rule }}</a
               >
               <Chip
                 v-for="tag in item.tags"
@@ -68,7 +68,7 @@
             </div>
             <div class="mt-2 mb-1">
               <Chip v-if="item.severity" class="m-1" :label="item.severity" />
-              <Chip v-if="item.type" class="m-1" :label="item.type" />
+              <Chip v-if="item.issueType" class="m-1" :label="item.issueType" />
               <Chip
                 v-if="item.impacts.softwareQuality"
                 class="m-1"
@@ -92,7 +92,10 @@
 <script setup lang="ts">
 import { getIcon } from "material-file-icons";
 
+import type { SelectChangeEvent } from "primevue/select";
 import type { AuditIssue } from "~/domain/audit-issue";
+
+type SelectOption = { label: string, value: string }
 
 const { issues } = defineProps({
   issues: {
@@ -102,16 +105,16 @@ const { issues } = defineProps({
 });
 
 // --- FILTERING ---
-const selectedSources = ref<{ label: string, value: string }[]>([])
-const sources = computed(() => {
-    return [...new Set(issues.map((issue) => issue.source))]
-        .map(source => {
-            return { label: source, value: source }
+const selectedTools = ref<SelectOption[]>([])
+const tools = computed<SelectOption[]>(() => {
+    return [...new Set(issues.map((issue) => issue.tool))]
+        .map(tool => {
+            return { label: tool, value: tool }
         })
 })
 
-const selectedFileTypes = ref<{ label: string, value: string }[]>([])
-const fileTypes = computed(() => {
+const selectedFileTypes = ref<SelectOption[]>([])
+const fileTypes = computed<SelectOption[]>(() => {
     return [...new Set(issues.map((issue) => issue.fileType))]
         .map(fileType => {
             return { label: fileType || '<empty>', value: fileType }
@@ -119,48 +122,46 @@ const fileTypes = computed(() => {
         .sort((a, b) => a.label.localeCompare(b.label))
 })
 
-const filterBySelectedSources = (issues: AuditIssue[]) => {
-    if (selectedSources.value.length === 0) {
+const filterBySelectedTools = (issues: AuditIssue[]): AuditIssue[] => {
+    if (selectedTools.value.length === 0) {
         return issues
     }
-    return issues.filter((issue) => selectedSources.value.some(source => source.value === issue.source))
+    return issues.filter((issue) => selectedTools.value.some(tool => tool.value === issue.tool))
 }
 
-const filterBySelectedFileTypes = (issues: AuditIssue[]) => {
+const filterBySelectedFileTypes = (issues: AuditIssue[]): AuditIssue[] => {
     if (selectedFileTypes.value.length === 0) {
         return issues
     }
     return issues.filter((issue) => selectedFileTypes.value.some(fileType => fileType.value === issue.fileType))
 }
 
-const filteredIssues = computed(() => {
-    return filterBySelectedFileTypes(filterBySelectedSources(issues))
+const filteredIssues = computed<AuditIssue[]>(() => {
+    return filterBySelectedFileTypes(filterBySelectedTools(issues))
 })
 
 // --- SORTING ---
 const getFullPath = (issue: AuditIssue) => {
-  return `${issue.location}/${issue.file}`
+  return `${issue.location}/${issue.file}:${issue.line}`
 }
 
-const sortOptions = ref([
+const sortOptions = ref<SelectOption[]>([
     { label: 'Full Path', value: 'fullPath' },
     { label: 'Severity', value: 'severity'},
     { label: 'Effort', value: 'effort'},
 ]);
-const sortKey = ref(sortOptions.value[0])
-const sortOrder = ref(1)
-const sortField = ref(getFullPath)
+const sortSelectModel = ref<SelectOption | undefined>(sortOptions.value[0])
+const sortOrder = ref<number>(1) // 1 = ascending, -1 = descending (only using ascending for now)
+const sortFieldOrGetter = ref<((issue: AuditIssue) => string) | string>(getFullPath)
 
-const onSortChange = (event) => {
-    const value = event.value.value
-    const sortValue = event.value
-    sortOrder.value = 1
+const onSortChange = (event: SelectChangeEvent) => {
+    const selectedOption: SelectOption = event.value
+    const selectedSortField: string = selectedOption.value
 
-    if (value === 'fullPath') {
-        sortField.value = getFullPath
+    if (selectedSortField === 'fullPath') {
+        sortFieldOrGetter.value = getFullPath
     } else {
-        sortField.value = value
+        sortFieldOrGetter.value = selectedSortField
     }
-    sortKey.value = sortValue
 };
 </script>
