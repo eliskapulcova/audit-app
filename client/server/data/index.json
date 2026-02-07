@@ -9,6 +9,10 @@
             {
                 "reportTool": "Semgrep",
                 "createdAt": "2025-01-01"
+            },
+            {
+                "reportTool": "Phpstan",
+                "createdAt": "2025-01-01"
             }
         ]
     },

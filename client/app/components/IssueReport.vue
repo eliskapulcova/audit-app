@@ -13,7 +13,7 @@
     >
       <template #header v-if="issues.length > 5">
         <div class="flex flex-col sm:flex-row gap-2">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2" v-if="tools.length > 1">
             <span>Tools:</span>
             <MultiSelect
               v-model="selectedTools"
@@ -22,7 +22,7 @@
               placeholder="All"
             />
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2" v-if="fileTypes.length > 1">
             <span>File types:</span>
             <MultiSelect
               v-model="selectedFileTypes"
@@ -40,7 +40,7 @@
               @change="onSortChange($event)"
             />
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 pl-2">
             Showing {{ filteredIssues.length }} out of {{ issues.length }}
           </div>
         </div>
