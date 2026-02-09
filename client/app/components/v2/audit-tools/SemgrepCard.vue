@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue'
 import {
   Chart as ChartJS,
   Title,
@@ -87,9 +87,9 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-} from "chart.js";
-import ToolCard from "../ToolCard.vue";
-import type { SemgrepData } from "../../../domain/types";
+} from 'chart.js'
+import ToolCard from '../ToolCard.vue'
+import type { SemgrepData } from '../../../domain/types'
 
 ChartJS.register(
   Title,
@@ -98,18 +98,18 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-);
+  PointElement
+)
 
 const props = defineProps<{
-  data: SemgrepData;
-}>();
+  data: SemgrepData
+}>()
 
 const status = computed(() => {
-  if (props.data.error > 15) return "Critical";
-  if (props.data.warning > 80) return "Warning";
-  return "Healthy";
-});
+  if (props.data.error > 15) return 'Critical'
+  if (props.data.warning > 80) return 'Warning'
+  return 'Healthy'
+})
 
 const lineChartData = computed(() => {
   return {
@@ -117,15 +117,15 @@ const lineChartData = computed(() => {
     datasets: [
       {
         data: props.data.trendData,
-        borderColor: "#06b6d4",
+        borderColor: '#06b6d4',
         borderWidth: 2,
-        pointBackgroundColor: "#06b6d4",
+        pointBackgroundColor: '#06b6d4',
         pointRadius: 3,
         tension: 0.4,
       },
     ],
-  };
-});
+  }
+})
 
 const lineChartOptions = {
   responsive: true,
@@ -133,9 +133,9 @@ const lineChartOptions = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: "#1e293b",
-      titleColor: "#94a3b8",
-      bodyColor: "#f8fafc",
+      backgroundColor: '#1e293b',
+      titleColor: '#94a3b8',
+      bodyColor: '#f8fafc',
       padding: 10,
       displayColors: false,
     },
@@ -143,12 +143,12 @@ const lineChartOptions = {
   scales: {
     x: {
       grid: { display: false },
-      ticks: { color: "#64748b" },
+      ticks: { color: '#64748b' },
     },
     y: {
-      grid: { color: "#334155" },
-      ticks: { color: "#64748b" },
+      grid: { color: '#334155' },
+      ticks: { color: '#64748b' },
     },
   },
-};
+}
 </script>

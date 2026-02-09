@@ -139,24 +139,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import ToolCard from "../ToolCard.vue";
-import type { SonarQubeData } from "../../../domain/types";
+import { computed } from 'vue'
+import ToolCard from '../ToolCard.vue'
+import type { SonarQubeData } from '../../../domain/types'
 
 const props = defineProps<{
-  data: SonarQubeData;
-}>();
+  data: SonarQubeData
+}>()
 
 const status = computed(() => {
-  if (props.data.qualityGate === "Failed" || props.data.vulnerabilities > 20)
-    return "Critical";
-  if (props.data.bugs > 100 || props.data.coverage < 70) return "Warning";
-  return "Healthy";
-});
+  if (props.data.qualityGate === 'Failed' || props.data.vulnerabilities > 20)
+    return 'Critical'
+  if (props.data.bugs > 100 || props.data.coverage < 70) return 'Warning'
+  return 'Healthy'
+})
 
 const totalIssues = computed(
-  () => props.data.bugs + props.data.vulnerabilities + props.data.codeSmells,
-);
+  () => props.data.bugs + props.data.vulnerabilities + props.data.codeSmells
+)
 
 const totalSeverity = computed(
   () =>
@@ -164,23 +164,23 @@ const totalSeverity = computed(
     props.data.severityBreakdown.critical +
     props.data.severityBreakdown.major +
     props.data.severityBreakdown.minor +
-    props.data.severityBreakdown.info,
-);
+    props.data.severityBreakdown.info
+)
 
 const getRatingColor = (rating: string) => {
   switch (rating) {
-    case "A":
-      return "bg-green-500";
-    case "B":
-      return "bg-blue-500";
-    case "C":
-      return "bg-yellow-500";
-    case "D":
-      return "bg-orange-500";
-    case "E":
-      return "bg-red-500";
+    case 'A':
+      return 'bg-green-500'
+    case 'B':
+      return 'bg-blue-500'
+    case 'C':
+      return 'bg-yellow-500'
+    case 'D':
+      return 'bg-orange-500'
+    case 'E':
+      return 'bg-red-500'
     default:
-      return "bg-slate-500";
+      return 'bg-slate-500'
   }
-};
+}
 </script>

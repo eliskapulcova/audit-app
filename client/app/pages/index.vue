@@ -13,18 +13,18 @@
 </template>
 
 <script setup>
-import AnalysisReport from "~/components/AnalysisReport.vue";
-import IssueReport from "~/components/IssueReport.vue";
-import { issues } from "~/mock/issues-report";
-import analysisReport from "~/mock/2026-01-05-age-verification-analysis-report.json";
-import semgrepIssues from "~/mock/semgrep-results.json";
+import AnalysisReport from '~/components/AnalysisReport.vue'
+import IssueReport from '~/components/IssueReport.vue'
+import { issues } from '~/mock/issues-report'
+import analysisReport from '~/mock/2026-01-05-age-verification-analysis-report.json'
+import semgrepIssues from '~/mock/semgrep-results.json'
 
-const config = useRuntimeConfig();
-const API_URL = `${config.public.apiBase}/v1/report`;
+const config = useRuntimeConfig()
+const API_URL = `${config.public.apiBase}/v1/report`
 
-const report = ref(null);
+const report = ref(null)
 
-const USE_API = false;
+const USE_API = false
 
 function downloadReport() {
   report.value = {
@@ -34,11 +34,11 @@ function downloadReport() {
     issueReport: {
       auditIssueList: semgrepIssues.results,
     },
-  };
+  }
 }
 
 async function downloadReportFromApi() {
-  const response = await $fetch(API_URL);
-  report.value = response;
+  const response = await $fetch(API_URL)
+  report.value = response
 }
 </script>

@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue'
 import {
   Chart as ChartJS,
   Title,
@@ -80,9 +80,9 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-} from "chart.js";
-import ToolCard from "../ToolCard.vue";
-import type { PHPStanData } from "../../../domain/types";
+} from 'chart.js'
+import ToolCard from '../ToolCard.vue'
+import type { PHPStanData } from '../../../domain/types'
 
 ChartJS.register(
   Title,
@@ -92,18 +92,18 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-);
+  PointElement
+)
 
 const props = defineProps<{
-  data: PHPStanData;
-}>();
+  data: PHPStanData
+}>()
 
 const status = computed(() => {
-  if (props.data.totalErrors > 600) return "Critical";
-  if (props.data.totalErrors > 400) return "Warning";
-  return "Healthy";
-});
+  if (props.data.totalErrors > 600) return 'Critical'
+  if (props.data.totalErrors > 400) return 'Warning'
+  return 'Healthy'
+})
 
 const barChartData = computed(() => {
   return {
@@ -111,13 +111,13 @@ const barChartData = computed(() => {
     datasets: [
       {
         data: props.data.errorsByLevel.map((d) => d.count),
-        backgroundColor: "#06b6d4",
+        backgroundColor: '#06b6d4',
         borderRadius: 4,
         barThickness: 20,
       },
     ],
-  };
-});
+  }
+})
 
 const barChartOptions = {
   responsive: true,
@@ -125,9 +125,9 @@ const barChartOptions = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: "#1e293b",
-      titleColor: "#94a3b8",
-      bodyColor: "#f8fafc",
+      backgroundColor: '#1e293b',
+      titleColor: '#94a3b8',
+      bodyColor: '#f8fafc',
       padding: 10,
       displayColors: false,
     },
@@ -135,14 +135,14 @@ const barChartOptions = {
   scales: {
     x: {
       grid: { display: false },
-      ticks: { color: "#64748b" },
+      ticks: { color: '#64748b' },
     },
     y: {
-      grid: { color: "#334155" },
-      ticks: { color: "#64748b" },
+      grid: { color: '#334155' },
+      ticks: { color: '#64748b' },
     },
   },
-};
+}
 
 const lineChartData = computed(() => {
   return {
@@ -150,15 +150,15 @@ const lineChartData = computed(() => {
     datasets: [
       {
         data: props.data.trendData,
-        borderColor: "#ef4444",
+        borderColor: '#ef4444',
         borderWidth: 2,
-        pointBackgroundColor: "#ef4444",
+        pointBackgroundColor: '#ef4444',
         pointRadius: 3,
         tension: 0.4,
       },
     ],
-  };
-});
+  }
+})
 
 const lineChartOptions = {
   responsive: true,
@@ -166,9 +166,9 @@ const lineChartOptions = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: "#1e293b",
-      titleColor: "#94a3b8",
-      bodyColor: "#f8fafc",
+      backgroundColor: '#1e293b',
+      titleColor: '#94a3b8',
+      bodyColor: '#f8fafc',
       padding: 10,
       displayColors: false,
     },
@@ -176,12 +176,12 @@ const lineChartOptions = {
   scales: {
     x: {
       grid: { display: false },
-      ticks: { color: "#64748b" },
+      ticks: { color: '#64748b' },
     },
     y: {
-      grid: { color: "#334155" },
-      ticks: { color: "#64748b" },
+      grid: { color: '#334155' },
+      ticks: { color: '#64748b' },
     },
   },
-};
+}
 </script>

@@ -85,16 +85,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import ProjectTile from "~/components/v2/ProjectTile.vue";
-import { projectSummaries } from "../../mock/v2/mock-data";
+import { ref, computed } from 'vue'
+import ProjectTile from '~/components/v2/ProjectTile.vue'
+import { projectSummaries } from '../../mock/v2/mock-data'
 
 definePageMeta({
-  layout: "v2",
-});
+  layout: 'v2',
+})
 
-const searchQuery = ref<string>("");
-const sortBy = ref<"name" | "health" | "issues">("name");
+const searchQuery = ref<string>('')
+const sortBy = ref<'name' | 'health' | 'issues'>('name')
 
 const filteredProjects = computed(() => {
   return projectSummaries
@@ -103,36 +103,36 @@ const filteredProjects = computed(() => {
         project.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
         project.description
           .toLowerCase()
-          .includes(searchQuery.value.toLowerCase()),
+          .includes(searchQuery.value.toLowerCase())
     )
     .sort((a, b) => {
       switch (sortBy.value) {
-        case "health":
-          return b.healthScore - a.healthScore;
-        case "issues":
-          return a.criticalIssues - b.criticalIssues;
-        case "name":
+        case 'health':
+          return b.healthScore - a.healthScore
+        case 'issues':
+          return a.criticalIssues - b.criticalIssues
+        case 'name':
         default:
-          return a.name.localeCompare(b.name);
+          return a.name.localeCompare(b.name)
       }
-    });
-});
+    })
+})
 
 const stats = computed(() => {
   return {
     totalProjects: projectSummaries.length,
     avgHealthScore: Math.round(
       projectSummaries.reduce((sum, p) => sum + p.healthScore, 0) /
-        projectSummaries.length,
+        projectSummaries.length
     ),
     totalRepositories: projectSummaries.reduce(
       (sum, p) => sum + p.repositoryCount,
-      0,
+      0
     ),
     totalCriticalIssues: projectSummaries.reduce(
       (sum, p) => sum + p.criticalIssues,
-      0,
+      0
     ),
-  };
-});
+  }
+})
 </script>

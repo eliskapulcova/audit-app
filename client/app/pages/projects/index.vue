@@ -33,7 +33,7 @@
               @click="
                 () =>
                   navigateTo(
-                    `/projects/${report.projectName.toLowerCase()}/${availableReport.reportTool.toLowerCase()}/audits/latest`,
+                    `/projects/${report.projectName.toLowerCase()}/${availableReport.reportTool.toLowerCase()}/audits/latest`
                   )
               "
             />
@@ -45,5 +45,5 @@
 </template>
 
 <script setup lang="ts">
-const { data, pending, error } = useFetch("/api/reports");
+const { data, pending, error } = useFetch('/api/reports')
 </script>

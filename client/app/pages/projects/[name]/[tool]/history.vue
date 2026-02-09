@@ -18,7 +18,7 @@
             @click="
               () =>
                 navigateTo(
-                  `/projects/${name.toLowerCase()}/${tool.toLowerCase()}/audits/${report.id}`,
+                  `/projects/${name.toLowerCase()}/${tool.toLowerCase()}/audits/${report.id}`
                 )
             "
           >
@@ -35,11 +35,11 @@
 </template>
 
 <script setup>
-const route = useRoute();
-const name = route.params.name;
-const tool = route.params.tool;
+const route = useRoute()
+const name = route.params.name
+const tool = route.params.tool
 
 const { data, pending, error } = useFetch(
-  `/api/projects/${name.toLowerCase()}/${tool.toLowerCase()}/audits`,
-);
+  `/api/projects/${name.toLowerCase()}/${tool.toLowerCase()}/audits`
+)
 </script>

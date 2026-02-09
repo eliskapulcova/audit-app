@@ -105,85 +105,85 @@
 </template>
 
 <script setup lang="ts">
-import { getIcon } from "material-file-icons";
+import { getIcon } from 'material-file-icons'
 
-import type { SelectChangeEvent } from "primevue/select";
-import type { AuditIssue } from "~/domain/audit-issue";
+import type { SelectChangeEvent } from 'primevue/select'
+import type { AuditIssue } from '~/domain/audit-issue'
 
-type SelectOption = { label: string; value: string };
+type SelectOption = { label: string; value: string }
 
 const { issues } = defineProps({
   issues: {
     type: Array<AuditIssue>,
     required: true,
   },
-});
+})
 
 // --- FILTERING ---
-const selectedTools = ref<SelectOption[]>([]);
+const selectedTools = ref<SelectOption[]>([])
 const tools = computed<SelectOption[]>(() => {
   return [...new Set(issues.map((issue) => issue.tool))].map((tool) => {
-    return { label: tool, value: tool };
-  });
-});
+    return { label: tool, value: tool }
+  })
+})
 
-const selectedFileTypes = ref<SelectOption[]>([]);
+const selectedFileTypes = ref<SelectOption[]>([])
 const fileTypes = computed<SelectOption[]>(() => {
   return [...new Set(issues.map((issue) => issue.fileType))]
     .map((fileType) => {
-      return { label: fileType || "<empty>", value: fileType };
+      return { label: fileType || '<empty>', value: fileType }
     })
-    .sort((a, b) => a.label.localeCompare(b.label));
-});
+    .sort((a, b) => a.label.localeCompare(b.label))
+})
 
 const filterBySelectedTools = (issues: AuditIssue[]): AuditIssue[] => {
   if (selectedTools.value.length === 0) {
-    return issues;
+    return issues
   }
   return issues.filter((issue) =>
-    selectedTools.value.some((tool) => tool.value === issue.tool),
-  );
-};
+    selectedTools.value.some((tool) => tool.value === issue.tool)
+  )
+}
 
 const filterBySelectedFileTypes = (issues: AuditIssue[]): AuditIssue[] => {
   if (selectedFileTypes.value.length === 0) {
-    return issues;
+    return issues
   }
   return issues.filter((issue) =>
     selectedFileTypes.value.some(
-      (fileType) => fileType.value === issue.fileType,
-    ),
-  );
-};
+      (fileType) => fileType.value === issue.fileType
+    )
+  )
+}
 
 const filteredIssues = computed<AuditIssue[]>(() => {
-  return filterBySelectedFileTypes(filterBySelectedTools(issues));
-});
+  return filterBySelectedFileTypes(filterBySelectedTools(issues))
+})
 
 // --- SORTING ---
 const getFullPath = (issue: AuditIssue) => {
-  return `${issue.location}/${issue.file}:${issue.line}`;
-};
+  return `${issue.location}/${issue.file}:${issue.line}`
+}
 
 const sortOptions = ref<SelectOption[]>([
-  { label: "Full Path", value: "fullPath" },
-  { label: "Severity", value: "severity" },
-  { label: "Effort", value: "effort" },
-]);
-const sortSelectModel = ref<SelectOption | undefined>(sortOptions.value[0]);
-const sortOrder = ref<number>(1); // 1 = ascending, -1 = descending (only using ascending for now)
+  { label: 'Full Path', value: 'fullPath' },
+  { label: 'Severity', value: 'severity' },
+  { label: 'Effort', value: 'effort' },
+])
+const sortSelectModel = ref<SelectOption | undefined>(sortOptions.value[0])
+const sortOrder = ref<number>(1) // 1 = ascending, -1 = descending (only using ascending for now)
 const sortFieldOrGetter = ref<((issue: AuditIssue) => string) | string>(
-  getFullPath,
-);
+  getFullPath
+)
 
 const onSortChange = (event: SelectChangeEvent) => {
-  const selectedOption: SelectOption = event.value;
-  const selectedSortField: string = selectedOption.value;
+  const selectedOption: SelectOption = event.value
+  const selectedSortField: string = selectedOption.value
 
-  if (selectedSortField === "fullPath") {
-    sortFieldOrGetter.value = getFullPath;
+  if (selectedSortField === 'fullPath') {
+    sortFieldOrGetter.value = getFullPath
   } else {
-    sortFieldOrGetter.value = selectedSortField;
+    sortFieldOrGetter.value = selectedSortField
   }
-};
+}
 </script>

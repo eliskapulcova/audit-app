@@ -137,91 +137,91 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import type { Issue } from "../../domain/types";
+import { ref, computed } from 'vue'
+import type { Issue } from '../../domain/types'
 
 const props = defineProps<{
-  issues: Issue[];
-}>();
+  issues: Issue[]
+}>()
 
-const sortColumn = ref<keyof Issue>("severity");
-const sortDirection = ref<"asc" | "desc">("asc");
-const filterSeverity = ref<string>("all");
-const filterTool = ref<string>("all");
+const sortColumn = ref<keyof Issue>('severity')
+const sortDirection = ref<'asc' | 'desc'>('asc')
+const filterSeverity = ref<string>('all')
+const filterTool = ref<string>('all')
 
 const handleSort = (column: keyof Issue) => {
   if (sortColumn.value === column) {
-    sortDirection.value = sortDirection.value === "asc" ? "desc" : "asc";
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc'
   } else {
-    sortColumn.value = column;
-    sortDirection.value = "asc";
+    sortColumn.value = column
+    sortDirection.value = 'asc'
   }
-};
+}
 
 const sortedIssues = computed(() => {
   const filtered = props.issues.filter((issue) => {
     if (
-      filterSeverity.value !== "all" &&
+      filterSeverity.value !== 'all' &&
       issue.severity !== filterSeverity.value
     )
-      return false;
-    if (filterTool.value !== "all" && issue.tool !== filterTool.value)
-      return false;
-    return true;
-  });
+      return false
+    if (filterTool.value !== 'all' && issue.tool !== filterTool.value)
+      return false
+    return true
+  })
 
   return filtered.sort((a, b) => {
-    const aValue = a[sortColumn.value];
-    const bValue = b[sortColumn.value];
+    const aValue = a[sortColumn.value]
+    const bValue = b[sortColumn.value]
 
-    if (sortColumn.value === "severity") {
-      const severityOrder = { Critical: 0, High: 1, Medium: 2, Low: 3 };
-      const aOrder = severityOrder[a.severity as keyof typeof severityOrder];
-      const bOrder = severityOrder[b.severity as keyof typeof severityOrder];
-      return sortDirection.value === "asc" ? aOrder - bOrder : bOrder - aOrder;
+    if (sortColumn.value === 'severity') {
+      const severityOrder = { Critical: 0, High: 1, Medium: 2, Low: 3 }
+      const aOrder = severityOrder[a.severity as keyof typeof severityOrder]
+      const bOrder = severityOrder[b.severity as keyof typeof severityOrder]
+      return sortDirection.value === 'asc' ? aOrder - bOrder : bOrder - aOrder
     }
 
-    if (typeof aValue === "string" && typeof bValue === "string") {
-      return sortDirection.value === "asc"
+    if (typeof aValue === 'string' && typeof bValue === 'string') {
+      return sortDirection.value === 'asc'
         ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
+        : bValue.localeCompare(aValue)
     }
 
-    return 0;
-  });
-});
+    return 0
+  })
+})
 
 const getSeverityColor = (severity: string) => {
   switch (severity) {
-    case "Critical":
-      return "bg-red-500/10 text-red-400 border-red-500";
-    case "High":
-      return "bg-orange-500/10 text-orange-400 border-orange-500";
-    case "Medium":
-      return "bg-yellow-500/10 text-yellow-400 border-yellow-500";
-    case "Low":
-      return "bg-blue-500/10 text-blue-400 border-blue-500";
+    case 'Critical':
+      return 'bg-red-500/10 text-red-400 border-red-500'
+    case 'High':
+      return 'bg-orange-500/10 text-orange-400 border-orange-500'
+    case 'Medium':
+      return 'bg-yellow-500/10 text-yellow-400 border-yellow-500'
+    case 'Low':
+      return 'bg-blue-500/10 text-blue-400 border-blue-500'
     default:
-      return "bg-slate-500/10 text-slate-400 border-slate-500";
+      return 'bg-slate-500/10 text-slate-400 border-slate-500'
   }
-};
+}
 
 const getToolColor = (tool: string) => {
   switch (tool) {
-    case "SonarQube":
-      return "bg-cyan-500/10 text-cyan-400";
-    case "Semgrep":
-      return "bg-green-500/10 text-green-400";
-    case "PHPCS":
-      return "bg-yellow-500/10 text-yellow-400";
-    case "PHPStan":
-      return "bg-red-500/10 text-red-400";
+    case 'SonarQube':
+      return 'bg-cyan-500/10 text-cyan-400'
+    case 'Semgrep':
+      return 'bg-green-500/10 text-green-400'
+    case 'PHPCS':
+      return 'bg-yellow-500/10 text-yellow-400'
+    case 'PHPStan':
+      return 'bg-red-500/10 text-red-400'
     default:
-      return "bg-slate-500/10 text-slate-400";
+      return 'bg-slate-500/10 text-slate-400'
   }
-};
+}
 
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString();
-};
+  return new Date(dateString).toLocaleDateString()
+}
 </script>

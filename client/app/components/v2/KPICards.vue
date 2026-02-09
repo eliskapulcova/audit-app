@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type { KPI } from "../../domain/types";
+import type { KPI } from '../../domain/types'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -56,7 +56,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
+} from 'chart.js'
 
 ChartJS.register(
   CategoryScale,
@@ -65,12 +65,12 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-);
+  Legend
+)
 
 defineProps<{
-  kpis: KPI[];
-}>();
+  kpis: KPI[]
+}>()
 
 // Helper to convert PascalCase icon names (from React) to kebab-case (for Iconify) if necessary
 // Or just handle the mapping. The React version imported specific icons.
@@ -79,8 +79,8 @@ const kpiIconName = (icon: string) => {
   // Simple conversion or mapping if needed.
   // Lucide icons in Iconify are typically kebab-case, e.g. "alert-triangle".
   // The React component used specific imports, so `kpi.icon` is likely a string like "AlertTriangle".
-  return icon.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
-};
+  return icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+}
 
 const getSparklineData = (data: number[]) => {
   return {
@@ -88,15 +88,15 @@ const getSparklineData = (data: number[]) => {
     datasets: [
       {
         data: data,
-        borderColor: "#06b6d4", // cyan-500
+        borderColor: '#06b6d4', // cyan-500
         borderWidth: 2,
         pointRadius: 0,
         fill: false,
         tension: 0.4, // 'monotone' equivalent
       },
     ],
-  };
-};
+  }
+}
 
 const sparklineOptions = {
   plugins: {
@@ -117,5 +117,5 @@ const sparklineOptions = {
   },
   maintainAspectRatio: false,
   responsive: true,
-};
+}
 </script>

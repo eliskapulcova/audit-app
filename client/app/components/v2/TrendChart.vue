@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 import {
   Chart as ChartJS,
   Title,
@@ -48,8 +48,8 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-} from "chart.js";
-import type { TrendDataPoint } from "../../domain/types";
+} from 'chart.js'
+import type { TrendDataPoint } from '../../domain/types'
 
 ChartJS.register(
   Title,
@@ -58,82 +58,82 @@ ChartJS.register(
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-);
+  PointElement
+)
 
 const props = defineProps<{
-  data: TrendDataPoint[];
-}>();
+  data: TrendDataPoint[]
+}>()
 
 const tools = [
-  { key: "sonarqube", name: "SonarQube", color: "#06b6d4" },
-  { key: "semgrep", name: "Semgrep", color: "#10b981" },
-  { key: "phpcs", name: "PHPCS", color: "#f59e0b" },
-  { key: "phpstan", name: "PHPStan", color: "#ef4444" },
-] as const;
+  { key: 'sonarqube', name: 'SonarQube', color: '#06b6d4' },
+  { key: 'semgrep', name: 'Semgrep', color: '#10b981' },
+  { key: 'phpcs', name: 'PHPCS', color: '#f59e0b' },
+  { key: 'phpstan', name: 'PHPStan', color: '#ef4444' },
+] as const
 
 const visibleTools = ref<Record<string, boolean>>({
   sonarqube: true,
   semgrep: true,
   phpcs: true,
   phpstan: true,
-});
+})
 
 const toggleTool = (key: string) => {
-  visibleTools.value[key] = !visibleTools.value[key];
-};
+  visibleTools.value[key] = !visibleTools.value[key]
+}
 
 const chartData = computed(() => {
   return {
     labels: props.data.map((d) => d.date),
     datasets: [
       {
-        label: "SonarQube",
+        label: 'SonarQube',
         data: props.data.map((d) => d.sonarqube),
-        borderColor: "#06b6d4",
-        backgroundColor: "#06b6d4",
+        borderColor: '#06b6d4',
+        backgroundColor: '#06b6d4',
         tension: 0.4,
-        pointBackgroundColor: "#06b6d4",
+        pointBackgroundColor: '#06b6d4',
         pointRadius: 4,
         pointHoverRadius: 6,
         hidden: !visibleTools.value.sonarqube,
       },
       {
-        label: "Semgrep",
+        label: 'Semgrep',
         data: props.data.map((d) => d.semgrep),
-        borderColor: "#10b981",
-        backgroundColor: "#10b981",
+        borderColor: '#10b981',
+        backgroundColor: '#10b981',
         tension: 0.4,
-        pointBackgroundColor: "#10b981",
+        pointBackgroundColor: '#10b981',
         pointRadius: 4,
         pointHoverRadius: 6,
         hidden: !visibleTools.value.semgrep,
       },
       {
-        label: "PHPCS",
+        label: 'PHPCS',
         data: props.data.map((d) => d.phpcs),
-        borderColor: "#f59e0b",
-        backgroundColor: "#f59e0b",
+        borderColor: '#f59e0b',
+        backgroundColor: '#f59e0b',
         tension: 0.4,
-        pointBackgroundColor: "#f59e0b",
+        pointBackgroundColor: '#f59e0b',
         pointRadius: 4,
         pointHoverRadius: 6,
         hidden: !visibleTools.value.phpcs,
       },
       {
-        label: "PHPStan",
+        label: 'PHPStan',
         data: props.data.map((d) => d.phpstan),
-        borderColor: "#ef4444",
-        backgroundColor: "#ef4444",
+        borderColor: '#ef4444',
+        backgroundColor: '#ef4444',
         tension: 0.4,
-        pointBackgroundColor: "#ef4444",
+        pointBackgroundColor: '#ef4444',
         pointRadius: 4,
         pointHoverRadius: 6,
         hidden: !visibleTools.value.phpstan,
       },
     ],
-  };
-});
+  }
+})
 
 const chartOptions = {
   responsive: true,
@@ -142,14 +142,14 @@ const chartOptions = {
     legend: {
       display: true,
       labels: {
-        color: "#94a3b8",
+        color: '#94a3b8',
       },
     },
     tooltip: {
-      backgroundColor: "#1e293b",
-      titleColor: "#f8fafc",
-      bodyColor: "#f8fafc",
-      borderColor: "#334155",
+      backgroundColor: '#1e293b',
+      titleColor: '#f8fafc',
+      bodyColor: '#f8fafc',
+      borderColor: '#334155',
       borderWidth: 1,
       padding: 10,
       displayColors: true,
@@ -158,20 +158,20 @@ const chartOptions = {
   scales: {
     x: {
       grid: {
-        color: "#334155",
+        color: '#334155',
       },
       ticks: {
-        color: "#94a3b8",
+        color: '#94a3b8',
       },
     },
     y: {
       grid: {
-        color: "#334155",
+        color: '#334155',
       },
       ticks: {
-        color: "#94a3b8",
+        color: '#94a3b8',
       },
     },
   },
-};
+}
 </script>

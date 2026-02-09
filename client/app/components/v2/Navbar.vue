@@ -59,23 +59,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps<{
-  lastScanDate: string;
-}>();
+  lastScanDate: string
+}>()
 
-const route = useRoute();
-const isOverview = computed(() => route.path === "/");
+const route = useRoute()
+const isOverview = computed(() => route.path === '/')
 
 const formattedDate = computed(() => {
-  return new Date(props.lastScanDate).toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-});
+  return new Date(props.lastScanDate).toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+})
 </script>

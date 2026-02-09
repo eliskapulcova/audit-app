@@ -13,20 +13,20 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
+const route = useRoute()
 
 const { data, pending, error } = await useFetch(
-  `/api/reports/${route.params.project}`,
-);
+  `/api/reports/${route.params.project}`
+)
 
 const allIssues = computed(() => {
-  return data.value?.flatMap((report) => report.issueList) ?? [];
-});
+  return data.value?.flatMap((report) => report.issueList) ?? []
+})
 
 const analysisReport = computed(() => {
   // TODO: design a general report interface
   return (
     data.value?.find((report) => report.analysisReport)?.analysisReport ?? null
-  );
-});
+  )
+})
 </script>

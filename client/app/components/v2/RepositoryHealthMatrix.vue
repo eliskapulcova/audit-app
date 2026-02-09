@@ -76,28 +76,28 @@
 </template>
 
 <script setup lang="ts">
-import type { RepositoryHealth } from "../../domain/types";
+import type { RepositoryHealth } from '../../domain/types'
 
 defineProps<{
-  repositories: RepositoryHealth[];
-}>();
+  repositories: RepositoryHealth[]
+}>()
 
-const tools = ["SonarQube", "Semgrep", "PHPCS", "PHPStan"];
+const tools = ['SonarQube', 'Semgrep', 'PHPCS', 'PHPStan']
 
 const getHealthColor = (health: string) => {
   switch (health) {
-    case "healthy":
-      return "bg-green-500 hover:bg-green-600";
-    case "warning":
-      return "bg-yellow-500 hover:bg-yellow-600";
-    case "critical":
-      return "bg-red-500 hover:bg-red-600";
+    case 'healthy':
+      return 'bg-green-500 hover:bg-green-600'
+    case 'warning':
+      return 'bg-yellow-500 hover:bg-yellow-600'
+    case 'critical':
+      return 'bg-red-500 hover:bg-red-600'
     default:
-      return "bg-slate-600";
+      return 'bg-slate-600'
   }
-};
+}
 
 const getHealthStatus = (repo: RepositoryHealth, tool: string): string => {
-  return repo[tool.toLowerCase() as keyof RepositoryHealth];
-};
+  return repo[tool.toLowerCase() as keyof RepositoryHealth]
+}
 </script>

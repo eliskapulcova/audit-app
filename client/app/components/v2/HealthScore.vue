@@ -70,57 +70,57 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import type { HealthScore, ProjectSummary } from "../../domain/types";
+import { computed } from 'vue'
+import type { HealthScore, ProjectSummary } from '../../domain/types'
 
 const props = defineProps<{
-  healthScore: HealthScore;
-  projectSummary: ProjectSummary;
-}>();
+  healthScore: HealthScore
+  projectSummary: ProjectSummary
+}>()
 
 const gradeColor = computed(() => {
   switch (props.healthScore.grade) {
-    case "A":
-      return "from-green-500 to-emerald-600";
-    case "B":
-      return "from-blue-500 to-cyan-600";
-    case "C":
-      return "from-yellow-500 to-orange-500";
-    case "D":
-      return "from-orange-500 to-red-500";
-    case "F":
-      return "from-red-500 to-rose-700";
+    case 'A':
+      return 'from-green-500 to-emerald-600'
+    case 'B':
+      return 'from-blue-500 to-cyan-600'
+    case 'C':
+      return 'from-yellow-500 to-orange-500'
+    case 'D':
+      return 'from-orange-500 to-red-500'
+    case 'F':
+      return 'from-red-500 to-rose-700'
     default:
-      return "from-slate-500 to-slate-600";
+      return 'from-slate-500 to-slate-600'
   }
-});
+})
 
 const chartData = computed(() => {
-  const grade = props.healthScore.grade;
+  const grade = props.healthScore.grade
   const color =
-    grade === "A"
-      ? "#10b981"
-      : grade === "B"
-        ? "#06b6d4"
-        : grade === "C"
-          ? "#f59e0b"
-          : "#ef4444";
+    grade === 'A'
+      ? '#10b981'
+      : grade === 'B'
+        ? '#06b6d4'
+        : grade === 'C'
+          ? '#f59e0b'
+          : '#ef4444'
 
   return {
-    labels: ["Score", "Remaining"],
+    labels: ['Score', 'Remaining'],
     datasets: [
       {
         data: [props.healthScore.score, 100 - props.healthScore.score],
-        backgroundColor: [color, "#1e293b"],
+        backgroundColor: [color, '#1e293b'],
         borderWidth: 0,
-        hoverBackgroundColor: [color, "#1e293b"],
+        hoverBackgroundColor: [color, '#1e293b'],
       },
     ],
-  };
-});
+  }
+})
 
 const chartOptions = {
-  cutout: "75%",
+  cutout: '75%',
   plugins: {
     legend: {
       display: false,
@@ -131,7 +131,7 @@ const chartOptions = {
   },
   maintainAspectRatio: false,
   responsive: true,
-};
+}
 
 import {
   Chart as ChartJS,
@@ -141,7 +141,7 @@ import {
   ArcElement,
   CategoryScale,
   DoughnutController,
-} from "chart.js";
+} from 'chart.js'
 
 ChartJS.register(
   Title,
@@ -149,6 +149,6 @@ ChartJS.register(
   Legend,
   ArcElement,
   CategoryScale,
-  DoughnutController,
-);
+  DoughnutController
+)
 </script>

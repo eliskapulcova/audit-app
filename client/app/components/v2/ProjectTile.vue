@@ -117,56 +117,56 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import type { ProjectSummary } from "../../domain/types";
+import { computed } from 'vue'
+import type { ProjectSummary } from '../../domain/types'
 
 const props = defineProps<{
-  project: ProjectSummary;
-}>();
+  project: ProjectSummary
+}>()
 
 const getGradeColor = (grade: string) => {
   switch (grade) {
-    case "A":
-      return "from-green-500 to-emerald-600";
-    case "B":
-      return "from-blue-500 to-cyan-600";
-    case "C":
-      return "from-yellow-500 to-orange-500";
-    case "D":
-      return "from-orange-500 to-red-500";
-    case "F":
-      return "from-red-500 to-rose-700";
+    case 'A':
+      return 'from-green-500 to-emerald-600'
+    case 'B':
+      return 'from-blue-500 to-cyan-600'
+    case 'C':
+      return 'from-yellow-500 to-orange-500'
+    case 'D':
+      return 'from-orange-500 to-red-500'
+    case 'F':
+      return 'from-red-500 to-rose-700'
     default:
-      return "from-slate-500 to-slate-600";
+      return 'from-slate-500 to-slate-600'
   }
-};
+}
 
 const status = computed(() => {
   if (props.project.criticalIssues > 15) {
     return {
-      label: "Critical",
-      color: "text-red-400 bg-red-500/10",
-      icon: "lucide:alert-triangle",
-    };
+      label: 'Critical',
+      color: 'text-red-400 bg-red-500/10',
+      icon: 'lucide:alert-triangle',
+    }
   }
   if (props.project.criticalIssues > 8) {
     return {
-      label: "Warning",
-      color: "text-yellow-400 bg-yellow-500/10",
-      icon: "lucide:alert-triangle",
-    };
+      label: 'Warning',
+      color: 'text-yellow-400 bg-yellow-500/10',
+      icon: 'lucide:alert-triangle',
+    }
   }
   return {
-    label: "Healthy",
-    color: "text-green-400 bg-green-500/10",
-    icon: "lucide:check-circle-2",
-  };
-});
+    label: 'Healthy',
+    color: 'text-green-400 bg-green-500/10',
+    icon: 'lucide:check-circle-2',
+  }
+})
 
 const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
-};
+  return new Date(dateString).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+  })
+}
 </script>

@@ -30,16 +30,16 @@
 </template>
 
 <script setup lang="ts">
-import HealthScore from "~/components/v2/HealthScore.vue";
-import KPICards from "~/components/v2/KPICards.vue";
-import SonarQubeCard from "~/components/v2/audit-tools/SonarQubeCard.vue";
-import SemgrepCard from "~/components/v2/audit-tools/SemgrepCard.vue";
-import PHPCSCard from "~/components/v2/audit-tools/PHPCSCard.vue";
-import PHPStanCard from "~/components/v2/audit-tools/PHPStanCard.vue";
-import AddToolCard from "~/components/v2/AddToolCard.vue";
-import TrendChart from "~/components/v2/TrendChart.vue";
-import TopIssuesTable from "~/components/v2/TopIssuesTable.vue";
-import RepositoryHealthMatrix from "~/components/v2/RepositoryHealthMatrix.vue";
+import HealthScore from '~/components/v2/HealthScore.vue'
+import KPICards from '~/components/v2/KPICards.vue'
+import SonarQubeCard from '~/components/v2/audit-tools/SonarQubeCard.vue'
+import SemgrepCard from '~/components/v2/audit-tools/SemgrepCard.vue'
+import PHPCSCard from '~/components/v2/audit-tools/PHPCSCard.vue'
+import PHPStanCard from '~/components/v2/audit-tools/PHPStanCard.vue'
+import AddToolCard from '~/components/v2/AddToolCard.vue'
+import TrendChart from '~/components/v2/TrendChart.vue'
+import TopIssuesTable from '~/components/v2/TopIssuesTable.vue'
+import RepositoryHealthMatrix from '~/components/v2/RepositoryHealthMatrix.vue'
 
 import {
   healthScore,
@@ -52,14 +52,14 @@ import {
   topIssues,
   repositoryHealth,
   projectSummaries,
-} from "~/mock/v2/mock-data";
+} from '~/mock/v2/mock-data'
 
 definePageMeta({
-  layout: "v2",
-});
+  layout: 'v2',
+})
 
-const route = useRoute();
+const route = useRoute()
 const projectSummary = computed(() => {
-  return projectSummaries.find((p) => p.id === route.params.name);
-});
+  return projectSummaries.find((p) => p.id === route.params.name)
+})
 </script>

@@ -38,7 +38,7 @@
         @click="isExpanded = !isExpanded"
         class="text-sm text-cyan-400 hover:text-cyan-300 mb-4 font-medium"
       >
-        {{ isExpanded ? "Collapse" : "Expand" }} Details
+        {{ isExpanded ? 'Collapse' : 'Expand' }} Details
       </button>
 
       <div v-if="isExpanded" class="space-y-4">
@@ -49,47 +49,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue'
 
 const props = defineProps<{
-  title: string;
-  icon: string;
-  status: "Healthy" | "Warning" | "Critical";
-  lastRun: string;
-}>();
+  title: string
+  icon: string
+  status: 'Healthy' | 'Warning' | 'Critical'
+  lastRun: string
+}>()
 
-const isExpanded = ref(true);
+const isExpanded = ref(true)
 
 const formattedDate = computed(() => {
-  return new Date(props.lastRun).toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-});
+  return new Date(props.lastRun).toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+})
 
 const statusConfig = computed(() => {
   const configs = {
     Healthy: {
-      icon: "lucide:check-circle-2",
-      color: "text-green-400",
-      bg: "bg-green-500/10",
-      border: "border-green-500",
+      icon: 'lucide:check-circle-2',
+      color: 'text-green-400',
+      bg: 'bg-green-500/10',
+      border: 'border-green-500',
     },
     Warning: {
-      icon: "lucide:alert-triangle",
-      color: "text-yellow-400",
-      bg: "bg-yellow-500/10",
-      border: "border-yellow-500",
+      icon: 'lucide:alert-triangle',
+      color: 'text-yellow-400',
+      bg: 'bg-yellow-500/10',
+      border: 'border-yellow-500',
     },
     Critical: {
-      icon: "lucide:x-circle",
-      color: "text-red-400",
-      bg: "bg-red-500/10",
-      border: "border-red-500",
+      icon: 'lucide:x-circle',
+      color: 'text-red-400',
+      bg: 'bg-red-500/10',
+      border: 'border-red-500',
     },
-  };
-  return configs[props.status];
-});
+  }
+  return configs[props.status]
+})
 </script>

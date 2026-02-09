@@ -39,5 +39,5 @@
 </template>
 
 <script setup>
-const { data, pending, error } = useFetch("/api/reports");
+const { data, pending, error } = useFetch('/api/reports')
 </script>

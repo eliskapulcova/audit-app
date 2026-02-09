@@ -9,101 +9,101 @@
 </template>
 
 <script setup>
-import OverviewTable from "./auditOverview/OverviewTable.vue";
+import OverviewTable from './auditOverview/OverviewTable.vue'
 
 const { report } = defineProps({
   report: {
     type: Object,
     required: true,
   },
-});
+})
 
 const runDetailsData = computed(() => [
   {
-    key: "Project",
+    key: 'Project',
     value: report.codeAnalysis.project,
   },
   {
-    key: "Branch",
+    key: 'Branch',
     value: report.codeAnalysis.branch,
   },
   {
-    key: "Version",
+    key: 'Version',
     value: report.codeAnalysis.version,
   },
   {
-    key: "Commit date",
+    key: 'Commit date',
     value: report.codeAnalysis.analyzedThe,
   },
   {
-    key: "Date of analysis",
+    key: 'Date of analysis',
     value: report.codeAnalysis.date,
   },
   {
-    key: "Analyzed by",
+    key: 'Analyzed by',
     value: report.codeAnalysis.by,
   },
-]);
+])
 
 const analysisStatusData = computed(() => [
   {
-    key: "Reliability",
+    key: 'Reliability',
     value: report.synthesis.analysisStatus[0].Reliability,
   },
   {
-    key: "Security",
+    key: 'Security',
     value: report.synthesis.analysisStatus[0].Security,
   },
   {
-    key: "Security Review",
-    value: report.synthesis.analysisStatus[0]["Security Review"],
+    key: 'Security Review',
+    value: report.synthesis.analysisStatus[0]['Security Review'],
   },
   {
-    key: "Maintainability",
+    key: 'Maintainability',
     value: report.synthesis.analysisStatus[0].Maintainability,
   },
-]);
+])
 
 const metricsData = computed(() => [
   {
-    key: "Coverage",
+    key: 'Coverage',
     value: report.synthesis.metrics[0].Coverage,
   },
   {
-    key: "Duplications",
+    key: 'Duplications',
     value: report.synthesis.metrics[0].Duplications,
   },
   {
-    key: "Comment density",
-    value: report.synthesis.metrics[0]["Comment density"],
+    key: 'Comment density',
+    value: report.synthesis.metrics[0]['Comment density'],
   },
   {
-    key: "Median number of lines of code per file",
+    key: 'Median number of lines of code per file',
     value:
-      report.synthesis.metrics[0]["Median number of lines of code per file"],
+      report.synthesis.metrics[0]['Median number of lines of code per file'],
   },
   {
-    key: "Adherence to coding standard",
-    value: report.synthesis.metrics[0]["Adherence to coding standard"],
+    key: 'Adherence to coding standard',
+    value: report.synthesis.metrics[0]['Adherence to coding standard'],
   },
-]);
+])
 
 const technicalDebtData = computed(() => [
   {
-    key: "Reliability",
+    key: 'Reliability',
     value: report.synthesis.detailedTechnicalDebt[0].Reliability,
   },
   {
-    key: "Security",
+    key: 'Security',
     value: report.synthesis.detailedTechnicalDebt[0].Security,
   },
   {
-    key: "Maintainability",
+    key: 'Maintainability',
     value: report.synthesis.detailedTechnicalDebt[0].Maintainability,
   },
   {
-    key: "Total",
+    key: 'Total',
     value: report.synthesis.detailedTechnicalDebt[0].Total,
   },
-]);
+])
 </script>

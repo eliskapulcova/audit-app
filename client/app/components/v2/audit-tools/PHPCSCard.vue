@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue'
 import {
   Chart as ChartJS,
   Title,
@@ -79,55 +79,55 @@ import {
   Legend,
   ArcElement,
   DoughnutController,
-} from "chart.js";
-import ToolCard from "../ToolCard.vue";
-import type { PHPCSData } from "../../../domain/types";
+} from 'chart.js'
+import ToolCard from '../ToolCard.vue'
+import type { PHPCSData } from '../../../domain/types'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController);
+ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController)
 
 const props = defineProps<{
-  data: PHPCSData;
-}>();
+  data: PHPCSData
+}>()
 
 const status = computed(() => {
-  if (props.data.errors > 1000) return "Critical";
-  if (props.data.errors > 500) return "Warning";
-  return "Healthy";
-});
+  if (props.data.errors > 1000) return 'Critical'
+  if (props.data.errors > 500) return 'Warning'
+  return 'Healthy'
+})
 
 const pieChartData = computed(() => {
   return {
-    labels: ["Errors", "Warnings"],
+    labels: ['Errors', 'Warnings'],
     datasets: [
       {
         data: [props.data.errors, props.data.warnings],
-        backgroundColor: ["#ef4444", "#f59e0b"],
+        backgroundColor: ['#ef4444', '#f59e0b'],
         borderWidth: 0,
       },
     ],
-  };
-});
+  }
+})
 
 const pieChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      position: "bottom" as const,
+      position: 'bottom' as const,
       labels: {
-        color: "#94a3b8",
+        color: '#94a3b8',
         usePointStyle: true,
         padding: 20,
       },
     },
     tooltip: {
-      backgroundColor: "#1e293b",
-      titleColor: "#94a3b8",
-      bodyColor: "#f8fafc",
+      backgroundColor: '#1e293b',
+      titleColor: '#94a3b8',
+      bodyColor: '#f8fafc',
       padding: 10,
       displayColors: true,
     },
   },
-  cutout: "60%",
-};
+  cutout: '60%',
+}
 </script>
