@@ -117,7 +117,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { ProjectSummary } from '../../domain/types'
 import { healthGradeGradientColors, projectHealthStatusColors, projectHealthStatusIcons } from '../../config/visuals'
 

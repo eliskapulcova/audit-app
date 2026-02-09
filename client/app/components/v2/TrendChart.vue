@@ -38,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import {
   Chart as ChartJS,
   Title,

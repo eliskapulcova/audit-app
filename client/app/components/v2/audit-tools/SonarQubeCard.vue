@@ -139,7 +139,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import ToolCard from '../ToolCard.vue'
 import type { SonarQubeData } from '../../../domain/types'
 

@@ -85,7 +85,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import ProjectTile from '~/components/v2/ProjectTile.vue'
 import type { ProjectSummary } from '~/domain/types'
 

@@ -70,7 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { HealthScore, ProjectSummary } from '../../domain/types'
 import { healthGradeChartColors, healthGradeGradientColors } from '../../config/visuals'
 
