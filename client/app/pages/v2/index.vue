@@ -87,17 +87,23 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import ProjectTile from '~/components/v2/ProjectTile.vue'
-import { projectSummaries } from '../../mock/v2/mock-data'
+import type { ProjectSummary } from '~/domain/types'
 
 definePageMeta({
   layout: 'v2',
 })
 
+// TODO: Handle pending and error states
+const { data, pending, error } = await useFetch<{
+  projectSummaries: ProjectSummary[]
+}>('/api/v2/project-summaries')
+const projectSummaries = computed(() => data.value?.projectSummaries || [])
+
 const searchQuery = ref<string>('')
 const sortBy = ref<'name' | 'health' | 'issues'>('name')
 
 const filteredProjects = computed(() => {
-  return projectSummaries
+  return projectSummaries.value
     .filter(
       (project) =>
         project.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
@@ -120,16 +126,16 @@ const filteredProjects = computed(() => {
 
 const stats = computed(() => {
   return {
-    totalProjects: projectSummaries.length,
+    totalProjects: projectSummaries.value.length,
     avgHealthScore: Math.round(
-      projectSummaries.reduce((sum, p) => sum + p.healthScore, 0) /
-        projectSummaries.length
+      projectSummaries.value.reduce((sum, p) => sum + p.healthScore, 0) /
+        projectSummaries.value.length
     ),
-    totalRepositories: projectSummaries.reduce(
+    totalRepositories: projectSummaries.value.reduce(
       (sum, p) => sum + p.repositoryCount,
       0
     ),
-    totalCriticalIssues: projectSummaries.reduce(
+    totalCriticalIssues: projectSummaries.value.reduce(
       (sum, p) => sum + p.criticalIssues,
       0
     ),

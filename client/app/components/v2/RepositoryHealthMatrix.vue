@@ -76,28 +76,19 @@
 </template>
 
 <script setup lang="ts">
-import type { RepositoryHealth } from '../../domain/types'
+import { repositoryHealthStatusColors } from '~/config/visuals';
+import type { HealthStatus, RepositoryHealth, Tool } from '../../domain/types'
 
 defineProps<{
   repositories: RepositoryHealth[]
+  tools: Tool[]
 }>()
 
-const tools = ['SonarQube', 'Semgrep', 'PHPCS', 'PHPStan']
-
-const getHealthColor = (health: string) => {
-  switch (health) {
-    case 'healthy':
-      return 'bg-green-500 hover:bg-green-600'
-    case 'warning':
-      return 'bg-yellow-500 hover:bg-yellow-600'
-    case 'critical':
-      return 'bg-red-500 hover:bg-red-600'
-    default:
-      return 'bg-slate-600'
-  }
+const getHealthColor = (health: HealthStatus) => {
+  return repositoryHealthStatusColors[health]
 }
 
-const getHealthStatus = (repo: RepositoryHealth, tool: string): string => {
-  return repo[tool.toLowerCase() as keyof RepositoryHealth]
+const getHealthStatus = (repo: RepositoryHealth, tool: Tool): HealthStatus => {
+  return repo.healthStatuses[tool]
 }
 </script>

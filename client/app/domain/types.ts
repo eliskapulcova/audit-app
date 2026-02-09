@@ -1,17 +1,26 @@
+export type AToEGrade = 'A' | 'B' | 'C' | 'D' | 'E'
+export type AToFGrade = 'A' | 'B' | 'C' | 'D' | 'F'
+export type HealthStatus = 'healthy' | 'warning' | 'critical'
+export type PassedOrFailed = 'Passed' | 'Failed'
+export type SeverityRating = 'Critical' | 'High' | 'Medium' | 'Low'
+
+export type KPIType = 'total-issues' | 'critical-high' | 'coverage' | 'tech-debt'
+export type Tool = 'SonarQube' | 'Semgrep' | 'PHPCS' | 'PHPStan'
+
 export interface HealthScore {
   score: number;
-  grade: 'A' | 'B' | 'C' | 'D' | 'F';
+  grade: AToFGrade;
   trend: number;
   previousScore: number;
 }
 
 export interface KPI {
-  id: string;
+  id: KPIType;
   label: string;
   value: string | number;
   trend: number;
+  isTrendPositive: boolean;
   sparklineData: number[];
-  icon: string;
 }
 
 export interface SonarQubeData {
@@ -20,10 +29,10 @@ export interface SonarQubeData {
   codeSmells: number;
   coverage: number;
   duplications: number;
-  qualityGate: 'Passed' | 'Failed';
-  reliability: 'A' | 'B' | 'C' | 'D' | 'E';
-  security: 'A' | 'B' | 'C' | 'D' | 'E';
-  maintainability: 'A' | 'B' | 'C' | 'D' | 'E';
+  qualityGate: PassedOrFailed;
+  reliability: AToEGrade;
+  security: AToEGrade;
+  maintainability: AToEGrade;
   severityBreakdown: {
     blocker: number;
     critical: number;
@@ -74,8 +83,8 @@ export interface TrendDataPoint {
 
 export interface Issue {
   id: string;
-  severity: 'Critical' | 'High' | 'Medium' | 'Low';
-  tool: 'SonarQube' | 'Semgrep' | 'PHPCS' | 'PHPStan';
+  severity: SeverityRating;
+  tool: Tool;
   ruleId: string;
   description: string;
   filePath: string;
@@ -84,10 +93,9 @@ export interface Issue {
 
 export interface RepositoryHealth {
   repository: string;
-  sonarqube: 'healthy' | 'warning' | 'critical';
-  semgrep: 'healthy' | 'warning' | 'critical';
-  phpcs: 'healthy' | 'warning' | 'critical';
-  phpstan: 'healthy' | 'warning' | 'critical';
+  healthStatuses: {
+    [key in Tool]: HealthStatus;
+  };
 }
 
 export interface ProjectSummary {
@@ -96,11 +104,26 @@ export interface ProjectSummary {
   description: string;
   repositoryCount: number;
   healthScore: number;
-  grade: 'A' | 'B' | 'C' | 'D' | 'F';
+  healthStatus: HealthStatus;
+  grade: AToFGrade;
   totalIssues: number;
   criticalIssues: number;
   coverage: number;
   lastScan: string;
   trend: number;
-  toolsActive: number;
+  tools: Tool[];
 }
+
+export interface ProjectDetails {
+  healthScore: HealthScore;
+  kpis: KPI[];
+  sonarQubeData: SonarQubeData;
+  semgrepData: SemgrepData;
+  phpcsData: PHPCSData;
+  phpstanData: PHPStanData;
+  trendData: TrendDataPoint[];
+  topIssues: Issue[];
+  repositoryHealth: RepositoryHealth[];
+  projectSummary: ProjectSummary;
+}
+

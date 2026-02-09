@@ -6,7 +6,7 @@
       <div class="flex-1 text-center lg:text-left">
         <h2 class="text-2xl font-bold text-white mb-2">Overall Health Score</h2>
         <p class="text-slate-400 mb-6">
-          Aggregated across {{ projectSummary.toolsActive }} tools,
+          Aggregated across {{ projectSummary.tools.length }} tools,
           {{ projectSummary.repositoryCount }} repositories
         </p>
 
@@ -72,6 +72,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { HealthScore, ProjectSummary } from '../../domain/types'
+import { healthGradeChartColors, healthGradeGradientColors } from '../../config/visuals'
 
 const props = defineProps<{
   healthScore: HealthScore
@@ -79,32 +80,12 @@ const props = defineProps<{
 }>()
 
 const gradeColor = computed(() => {
-  switch (props.healthScore.grade) {
-    case 'A':
-      return 'from-green-500 to-emerald-600'
-    case 'B':
-      return 'from-blue-500 to-cyan-600'
-    case 'C':
-      return 'from-yellow-500 to-orange-500'
-    case 'D':
-      return 'from-orange-500 to-red-500'
-    case 'F':
-      return 'from-red-500 to-rose-700'
-    default:
-      return 'from-slate-500 to-slate-600'
-  }
+  return healthGradeGradientColors[props.healthScore.grade] || healthGradeGradientColors.default
 })
 
 const chartData = computed(() => {
   const grade = props.healthScore.grade
-  const color =
-    grade === 'A'
-      ? '#10b981'
-      : grade === 'B'
-        ? '#06b6d4'
-        : grade === 'C'
-          ? '#f59e0b'
-          : '#ef4444'
+  const color = healthGradeChartColors[grade]
 
   return {
     labels: ['Score', 'Remaining'],

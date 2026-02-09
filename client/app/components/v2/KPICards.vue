@@ -8,14 +8,14 @@
       <div class="flex items-start justify-between mb-4">
         <div class="p-2 bg-slate-700 rounded-lg">
           <Icon
-            :name="`lucide:${kpiIconName(kpi.icon)}`"
+            :name="`lucide:${kpiIconName(kpi)}`"
             class="w-5 h-5 text-cyan-400"
           />
         </div>
         <div
           :class="[
             'flex items-center gap-1 text-sm',
-            kpi.trend > 0 ? 'text-red-400' : 'text-green-400',
+            kpi.isTrendPositive ? 'text-green-400' : 'text-red-400',
           ]"
         >
           <Icon
@@ -47,6 +47,7 @@
 
 <script setup lang="ts">
 import type { KPI } from '../../domain/types'
+import { kpiIcons } from '../../config/visuals'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -72,14 +73,8 @@ defineProps<{
   kpis: KPI[]
 }>()
 
-// Helper to convert PascalCase icon names (from React) to kebab-case (for Iconify) if necessary
-// Or just handle the mapping. The React version imported specific icons.
-// Assuming the backend provides icon names like "AlertTriangle", "Clock", etc.
-const kpiIconName = (icon: string) => {
-  // Simple conversion or mapping if needed.
-  // Lucide icons in Iconify are typically kebab-case, e.g. "alert-triangle".
-  // The React component used specific imports, so `kpi.icon` is likely a string like "AlertTriangle".
-  return icon.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+const kpiIconName = (kpi: KPI) => {
+  return kpiIcons[kpi.id]
 }
 
 const getSparklineData = (data: number[]) => {
