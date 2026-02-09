@@ -1,31 +1,42 @@
 <template>
-  <div class="bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-xl p-8 shadow-xl border border-slate-700">
+  <div
+    class="bg-gradient-to-br from-slate-800 via-slate-800 to-slate-900 rounded-xl p-8 shadow-xl border border-slate-700"
+  >
     <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
       <div class="flex-1 text-center lg:text-left">
         <h2 class="text-2xl font-bold text-white mb-2">Overall Health Score</h2>
-        <p class="text-slate-400 mb-6">Aggregated across {{ projectSummary.toolsActive }} tools, {{ projectSummary.repositoryCount }} repositories</p>
+        <p class="text-slate-400 mb-6">
+          Aggregated across {{ projectSummary.toolsActive }} tools,
+          {{ projectSummary.repositoryCount }} repositories
+        </p>
 
         <div class="flex items-center justify-center lg:justify-start gap-4">
           <div
-            :class="[ 'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r text-white font-bold text-lg', gradeColor ]"
+            :class="[
+              'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r text-white font-bold text-lg',
+              gradeColor,
+            ]"
           >
             Grade: {{ healthScore.grade }}
           </div>
 
           <div
-            :class="[ 'flex items-center gap-1 px-3 py-2 rounded-lg', healthScore.trend > 0 ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400' ]"
+            :class="[
+              'flex items-center gap-1 px-3 py-2 rounded-lg',
+              healthScore.trend > 0
+                ? 'bg-green-500/10 text-green-400'
+                : 'bg-red-500/10 text-red-400',
+            ]"
           >
             <Icon
               v-if="healthScore.trend > 0"
               name="lucide:trending-up"
               class="w-4 h-4"
             />
-            <Icon
-              v-else
-              name="lucide:trending-down"
-              class="w-4 h-4"
-            />
-            <span class="font-semibold">{{ Math.abs(healthScore.trend) }}%</span>
+            <Icon v-else name="lucide:trending-down" class="w-4 h-4" />
+            <span class="font-semibold"
+              >{{ Math.abs(healthScore.trend) }}%</span
+            >
           </div>
         </div>
 
@@ -36,10 +47,19 @@
 
       <div class="relative flex items-center justify-center">
         <div class="relative w-48 h-48">
-          <Chart type="doughnut" :data="chartData" :options="chartOptions" class="w-full h-full" />
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <Chart
+            type="doughnut"
+            :data="chartData"
+            :options="chartOptions"
+            class="w-full h-full"
+          />
+          <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
             <div class="text-center">
-              <div class="text-5xl font-bold text-white">{{ healthScore.score }}</div>
+              <div class="text-5xl font-bold text-white">
+                {{ healthScore.score }}
+              </div>
               <div class="text-sm text-slate-400">/ 100</div>
             </div>
           </div>
@@ -50,8 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { HealthScore, ProjectSummary } from '../../domain/types'
+import { computed } from "vue";
+import type { HealthScore, ProjectSummary } from "../../domain/types";
 
 const props = defineProps<{
   healthScore: HealthScore;
@@ -60,41 +80,47 @@ const props = defineProps<{
 
 const gradeColor = computed(() => {
   switch (props.healthScore.grade) {
-    case 'A':
-      return 'from-green-500 to-emerald-600';
-    case 'B':
-      return 'from-blue-500 to-cyan-600';
-    case 'C':
-      return 'from-yellow-500 to-orange-500';
-    case 'D':
-      return 'from-orange-500 to-red-500';
-    case 'F':
-      return 'from-red-500 to-rose-700';
+    case "A":
+      return "from-green-500 to-emerald-600";
+    case "B":
+      return "from-blue-500 to-cyan-600";
+    case "C":
+      return "from-yellow-500 to-orange-500";
+    case "D":
+      return "from-orange-500 to-red-500";
+    case "F":
+      return "from-red-500 to-rose-700";
     default:
-      return 'from-slate-500 to-slate-600';
+      return "from-slate-500 to-slate-600";
   }
 });
 
 const chartData = computed(() => {
   const grade = props.healthScore.grade;
-  const color = grade === 'A' ? '#10b981' : grade === 'B' ? '#06b6d4' : grade === 'C' ? '#f59e0b' : '#ef4444';
+  const color =
+    grade === "A"
+      ? "#10b981"
+      : grade === "B"
+        ? "#06b6d4"
+        : grade === "C"
+          ? "#f59e0b"
+          : "#ef4444";
 
   return {
-    labels: ['Score', 'Remaining'],
+    labels: ["Score", "Remaining"],
     datasets: [
       {
         data: [props.healthScore.score, 100 - props.healthScore.score],
-        backgroundColor: [color, '#1e293b'],
+        backgroundColor: [color, "#1e293b"],
         borderWidth: 0,
-        hoverBackgroundColor: [color, '#1e293b']
+        hoverBackgroundColor: [color, "#1e293b"],
       },
     ],
   };
 });
 
-
 const chartOptions = {
-  cutout: '75%',
+  cutout: "75%",
   plugins: {
     legend: {
       display: false,
@@ -114,8 +140,15 @@ import {
   Legend,
   ArcElement,
   CategoryScale,
-  DoughnutController
-} from 'chart.js';
+  DoughnutController,
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, DoughnutController);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale,
+  DoughnutController,
+);
 </script>

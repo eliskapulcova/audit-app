@@ -6,7 +6,9 @@
     :last-run="data.lastRun"
   >
     <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-3xl font-bold text-white mb-1">{{ data.totalFindings }}</div>
+      <div class="text-3xl font-bold text-white mb-1">
+        {{ data.totalFindings }}
+      </div>
       <div class="text-sm text-slate-400">Total Findings</div>
     </div>
 
@@ -33,23 +35,36 @@
           :key="category.name"
           class="flex items-center justify-between"
         >
-          <span class="text-sm text-slate-300 font-mono">{{ category.name }}</span>
-          <span class="text-sm font-bold text-cyan-400">{{ category.count }}</span>
+          <span class="text-sm text-slate-300 font-mono">{{
+            category.name
+          }}</span>
+          <span class="text-sm font-bold text-cyan-400">{{
+            category.count
+          }}</span>
         </div>
       </div>
     </div>
 
     <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Findings Trend (Last 8 Scans)</div>
+      <div class="text-sm text-slate-400 mb-3">
+        Findings Trend (Last 8 Scans)
+      </div>
       <div class="w-full h-[120px]">
-        <Chart type="line" :data="lineChartData" :options="lineChartOptions" class="w-full h-full" />
+        <Chart
+          type="line"
+          :data="lineChartData"
+          :options="lineChartOptions"
+          class="w-full h-full"
+        />
       </div>
     </div>
 
     <div class="bg-slate-900 p-4 rounded-lg">
       <div class="flex items-center justify-between">
         <span class="text-sm text-slate-400">OWASP Top 10 Coverage</span>
-        <span class="text-xl font-bold text-green-400">{{ data.owaspCoverage }}%</span>
+        <span class="text-xl font-bold text-green-400"
+          >{{ data.owaspCoverage }}%</span
+        >
       </div>
       <div class="mt-2 h-2 bg-slate-700 rounded-full overflow-hidden">
         <div
@@ -62,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 import {
   Chart as ChartJS,
   Title,
@@ -71,21 +86,29 @@ import {
   LineElement,
   CategoryScale,
   LinearScale,
-  PointElement
-} from 'chart.js';
-import ToolCard from '../ToolCard.vue';
-import type { SemgrepData } from '../../../domain/types';
+  PointElement,
+} from "chart.js";
+import ToolCard from "../ToolCard.vue";
+import type { SemgrepData } from "../../../domain/types";
 
-ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+);
 
 const props = defineProps<{
   data: SemgrepData;
 }>();
 
 const status = computed(() => {
-  if (props.data.error > 15) return 'Critical';
-  if (props.data.warning > 80) return 'Warning';
-  return 'Healthy';
+  if (props.data.error > 15) return "Critical";
+  if (props.data.warning > 80) return "Warning";
+  return "Healthy";
 });
 
 const lineChartData = computed(() => {
@@ -94,13 +117,13 @@ const lineChartData = computed(() => {
     datasets: [
       {
         data: props.data.trendData,
-        borderColor: '#06b6d4',
+        borderColor: "#06b6d4",
         borderWidth: 2,
-        pointBackgroundColor: '#06b6d4',
+        pointBackgroundColor: "#06b6d4",
         pointRadius: 3,
-        tension: 0.4
-      }
-    ]
+        tension: 0.4,
+      },
+    ],
   };
 });
 
@@ -110,22 +133,22 @@ const lineChartOptions = {
   plugins: {
     legend: { display: false },
     tooltip: {
-      backgroundColor: '#1e293b',
-      titleColor: '#94a3b8',
-      bodyColor: '#f8fafc',
+      backgroundColor: "#1e293b",
+      titleColor: "#94a3b8",
+      bodyColor: "#f8fafc",
       padding: 10,
       displayColors: false,
-    }
+    },
   },
   scales: {
     x: {
       grid: { display: false },
-      ticks: { color: '#64748b' }
+      ticks: { color: "#64748b" },
     },
     y: {
-      grid: { color: '#334155' },
-      ticks: { color: '#64748b' }
-    }
-  }
+      grid: { color: "#334155" },
+      ticks: { color: "#64748b" },
+    },
+  },
 };
 </script>

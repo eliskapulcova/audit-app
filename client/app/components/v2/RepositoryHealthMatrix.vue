@@ -1,8 +1,12 @@
 <template>
   <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
     <div class="mb-6">
-      <h2 class="text-xl font-bold text-white mb-2">Repository Health Matrix</h2>
-      <p class="text-sm text-slate-400">Quick overview of repository health across all analysis tools</p>
+      <h2 class="text-xl font-bold text-white mb-2">
+        Repository Health Matrix
+      </h2>
+      <p class="text-sm text-slate-400">
+        Quick overview of repository health across all analysis tools
+      </p>
     </div>
 
     <div class="overflow-x-auto">
@@ -39,7 +43,10 @@
                 <div
                   v-for="tool in tools"
                   :key="tool"
-                  :class="['flex-1 h-10 rounded transition-all cursor-pointer shadow-sm', getHealthColor(getHealthStatus(repo, tool))]"
+                  :class="[
+                    'flex-1 h-10 rounded transition-all cursor-pointer shadow-sm',
+                    getHealthColor(getHealthStatus(repo, tool)),
+                  ]"
                   :title="`${repo.repository} - ${tool}: ${getHealthStatus(repo, tool)}`"
                 />
               </div>
@@ -49,7 +56,9 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-slate-700">
+    <div
+      class="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-slate-700"
+    >
       <div class="flex items-center gap-2">
         <div class="w-4 h-4 rounded bg-green-500" />
         <span class="text-sm text-slate-400">Healthy</span>
@@ -67,24 +76,24 @@
 </template>
 
 <script setup lang="ts">
-import type { RepositoryHealth } from '../../domain/types';
+import type { RepositoryHealth } from "../../domain/types";
 
 defineProps<{
   repositories: RepositoryHealth[];
 }>();
 
-const tools = ['SonarQube', 'Semgrep', 'PHPCS', 'PHPStan'];
+const tools = ["SonarQube", "Semgrep", "PHPCS", "PHPStan"];
 
 const getHealthColor = (health: string) => {
   switch (health) {
-    case 'healthy':
-      return 'bg-green-500 hover:bg-green-600';
-    case 'warning':
-      return 'bg-yellow-500 hover:bg-yellow-600';
-    case 'critical':
-      return 'bg-red-500 hover:bg-red-600';
+    case "healthy":
+      return "bg-green-500 hover:bg-green-600";
+    case "warning":
+      return "bg-yellow-500 hover:bg-yellow-600";
+    case "critical":
+      return "bg-red-500 hover:bg-red-600";
     default:
-      return 'bg-slate-600';
+      return "bg-slate-600";
   }
 };
 

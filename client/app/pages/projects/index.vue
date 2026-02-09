@@ -30,7 +30,12 @@
               :key="availableReport.reportTool"
               :label="availableReport.reportTool"
               class="mr-2 mb-2 cursor-pointer hover:text-blue-500 transition-colors"
-              @click="() => navigateTo(`/projects/${report.projectName.toLowerCase()}/${availableReport.reportTool.toLowerCase()}/audits/latest`)"
+              @click="
+                () =>
+                  navigateTo(
+                    `/projects/${report.projectName.toLowerCase()}/${availableReport.reportTool.toLowerCase()}/audits/latest`,
+                  )
+              "
             />
           </div>
         </div>

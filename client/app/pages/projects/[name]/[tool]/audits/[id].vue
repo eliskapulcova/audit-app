@@ -13,5 +13,7 @@ const name = route.params.name;
 const tool = route.params.tool;
 const id = route.params.id;
 
-const { data, pending, error } = useFetch(`/api/projects/${name}/${tool}/audits/${id}`);
+const { data, pending, error } = useFetch(
+  `/api/projects/${name}/${tool}/audits/${id}`,
+);
 </script>
