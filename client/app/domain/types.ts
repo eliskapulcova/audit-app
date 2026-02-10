@@ -27,27 +27,37 @@ export interface KPI {
   sparklineData: number[]
 }
 
+/**
+ * TODO: There are some additional metrics that could be included:
+ * "Comment density": "12.1 %",
+ * "Median number of lines of code per file": "31.0",
+ * "Adherence to coding standard": "99.1 %"
+ */
 export interface SonarQubeData {
-  healthStatus: HealthStatus
-  bugs: number
-  vulnerabilities: number
-  codeSmells: number
-  coverage: number
-  duplications: number
-  qualityGate: PassedOrFailed
-  reliability: AToEGrade
-  security: AToEGrade
-  maintainability: AToEGrade
-  severityBreakdown: {
+  healthStatus: HealthStatus // TODO: define how to calculate this
+  bugs: number // issues.countBySeverityAndTypes
+  vulnerabilities: number // issues.countBySeverityAndTypes
+  codeSmells: number // issues.countBySeverityAndTypes
+  coverage: number // synthesis.metrics
+  technicalDebt: number // synthesis.detailedTechnicalDebt
+  duplications: number // synthesis.metrics
+  qualityGate: PassedOrFailed // TODO: define how to calculate this
+  reliability: AToEGrade // synthesis.analysisStatus
+  security: AToEGrade // synthesis.analysisStatus
+  maintainability: AToEGrade // synthesis.analysisStatus
+  severityBreakdown: { // issues.countBySeverityAndTypes - add all types together
     blocker: number
     critical: number
     major: number
     minor: number
     info: number
   }
-  lastRun: string
+  lastRun: string // date of the last analysis
 }
 
+/**
+ * Skip for now
+ */
 export interface SemgrepData {
   healthStatus: HealthStatus
   totalFindings: number
@@ -62,12 +72,12 @@ export interface SemgrepData {
 
 export interface PHPCSData {
   healthStatus: HealthStatus
-  totalViolations: number
+  totalViolations: number // errors + warnings
   errors: number
   warnings: number
-  standard: string
-  topSniffs: { name: string; count: number }[]
-  topFiles: { file: string; violations: number }[]
+  standard: string // TODO: define what this is
+  topSniffs: { name: string; count: number }[] // sniff = source (e.g. Generic.Files.LineEndings.InvalidEOLChar)
+  topFiles: { file: string; violations: number }[] // files with most # of errors + warnings, TODO: this could be added to other tools as well; the path should include name of the repository
   lastRun: string
 }
 
@@ -75,7 +85,7 @@ export interface PHPStanData {
   healthStatus: HealthStatus
   totalErrors: number
   level: number
-  errorsByLevel: { level: number; count: number }[]
+  errorsByLevel: { level: number; count: number }[] // in order to get this, we would probably need to run the audit on multiple different levels
   topCategories: { name: string; count: number }[]
   trendData: number[]
   lastRun: string
@@ -84,7 +94,7 @@ export interface PHPStanData {
 export interface TrendDataPoint {
   date: string
   tools: {
-    [key in Tool]: number
+    [key in Tool]: number // value is total number of issues for that tool
   }
 }
 
@@ -101,7 +111,7 @@ export interface Issue {
 export interface RepositoryHealth {
   repository: string
   healthStatuses: {
-    [key in Tool]: HealthStatus
+    [key in Tool]: HealthStatus // TODO: define how to calculate this for each tool
   }
 }
 
@@ -122,14 +132,14 @@ export interface ProjectSummary {
 }
 
 export interface ProjectDetails {
-  healthScore: HealthScore
+  healthScore: HealthScore // TODO: define how to calculate this
   kpis: KPI[]
-  sonarQubeData: SonarQubeData
-  semgrepData: SemgrepData
-  phpcsData: PHPCSData
-  phpstanData: PHPStanData
-  trendData: TrendDataPoint[]
-  topIssues: Issue[]
+  sonarQubeData: SonarQubeData | null
+  semgrepData: SemgrepData | null
+  phpcsData: PHPCSData | null
+  phpstanData: PHPStanData | null
+  trendData: TrendDataPoint[] // should only be displayed if at least 3 points are available
+  topIssues: Issue[] // 20 issues with the highest severity (pagination will not be implemented yet)
   repositoryHealth: RepositoryHealth[]
   projectSummary: ProjectSummary
 }
