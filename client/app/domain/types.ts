@@ -83,10 +83,9 @@ export interface PHPStanData {
 
 export interface TrendDataPoint {
   date: string
-  sonarqube: number
-  semgrep: number
-  phpcs: number
-  phpstan: number
+  tools: {
+    [key in Tool]: number
+  }
 }
 
 export interface Issue {

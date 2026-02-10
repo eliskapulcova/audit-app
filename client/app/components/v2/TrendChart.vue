@@ -8,20 +8,20 @@
       <div class="flex flex-wrap gap-3">
         <button
           v-for="tool in tools"
-          :key="tool.key"
-          @click="toggleTool(tool.key)"
+          :key="tool"
+          @click="toggleTool(tool)"
           :class="[
             'flex items-center gap-2 px-3 py-1 rounded-lg transition-all',
-            visibleTools[tool.key]
+            visibleTools[tool]
               ? 'bg-slate-700 opacity-100'
               : 'bg-slate-900 opacity-50',
           ]"
         >
           <div
             class="w-3 h-3 rounded-full"
-            :style="{ backgroundColor: tool.color }"
+            :style="{ backgroundColor: trendToolColors[tool] }"
           />
-          <span class="text-sm text-slate-300">{{ tool.name }}</span>
+          <span class="text-sm text-slate-300">{{ tool }}</span>
         </button>
       </div>
     </div>
@@ -48,7 +48,10 @@ import {
   LinearScale,
   PointElement,
 } from 'chart.js'
-import type { TrendDataPoint } from '../../domain/types'
+import type { Tool, TrendDataPoint } from '../../domain/types'
+import { tools } from '../../domain/types'
+import { trendToolColors } from '~/config/visuals';
+
 
 ChartJS.register(
   Title,
@@ -64,73 +67,28 @@ const props = defineProps<{
   data: TrendDataPoint[]
 }>()
 
-const tools = [
-  { key: 'sonarqube', name: 'SonarQube', color: '#06b6d4' },
-  { key: 'semgrep', name: 'Semgrep', color: '#10b981' },
-  { key: 'phpcs', name: 'PHPCS', color: '#f59e0b' },
-  { key: 'phpstan', name: 'PHPStan', color: '#ef4444' },
-] as const
+const visibleTools = ref<Record<string, boolean>>(Object.fromEntries(tools.map((tool) => [tool, true])))
 
-const visibleTools = ref<Record<string, boolean>>({
-  sonarqube: true,
-  semgrep: true,
-  phpcs: true,
-  phpstan: true,
-})
-
-const toggleTool = (key: string) => {
-  visibleTools.value[key] = !visibleTools.value[key]
+const toggleTool = (tool: Tool) => {
+  visibleTools.value[tool] = !visibleTools.value[tool]
 }
 
 const chartData = computed(() => {
   return {
     labels: props.data.map((d) => d.date),
-    datasets: [
-      {
-        label: 'SonarQube',
-        data: props.data.map((d) => d.sonarqube),
-        borderColor: '#06b6d4',
-        backgroundColor: '#06b6d4',
+    datasets: tools.map((tool) => {
+      return {
+        label: tool,
+        data: props.data.map((d) => d.tools[tool]),
+        borderColor: trendToolColors[tool],
+        backgroundColor: trendToolColors[tool],
         tension: 0.4,
-        pointBackgroundColor: '#06b6d4',
+        pointBackgroundColor: trendToolColors[tool],
         pointRadius: 4,
         pointHoverRadius: 6,
-        hidden: !visibleTools.value.sonarqube,
-      },
-      {
-        label: 'Semgrep',
-        data: props.data.map((d) => d.semgrep),
-        borderColor: '#10b981',
-        backgroundColor: '#10b981',
-        tension: 0.4,
-        pointBackgroundColor: '#10b981',
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        hidden: !visibleTools.value.semgrep,
-      },
-      {
-        label: 'PHPCS',
-        data: props.data.map((d) => d.phpcs),
-        borderColor: '#f59e0b',
-        backgroundColor: '#f59e0b',
-        tension: 0.4,
-        pointBackgroundColor: '#f59e0b',
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        hidden: !visibleTools.value.phpcs,
-      },
-      {
-        label: 'PHPStan',
-        data: props.data.map((d) => d.phpstan),
-        borderColor: '#ef4444',
-        backgroundColor: '#ef4444',
-        tension: 0.4,
-        pointBackgroundColor: '#ef4444',
-        pointRadius: 4,
-        pointHoverRadius: 6,
-        hidden: !visibleTools.value.phpstan,
-      },
-    ],
+        hidden: !visibleTools.value[tool],
+      }
+    })
   }
 })
 

@@ -134,18 +134,18 @@ export const phpstanData: PHPStanData = {
 };
 
 export const trendData: TrendDataPoint[] = [
-  { date: 'Week 1', sonarqube: 920, semgrep: 389, phpcs: 2890, phpstan: 678 },
-  { date: 'Week 2', sonarqube: 895, semgrep: 367, phpcs: 2750, phpstan: 645 },
-  { date: 'Week 3', sonarqube: 880, semgrep: 351, phpcs: 2650, phpstan: 623 },
-  { date: 'Week 4', sonarqube: 865, semgrep: 342, phpcs: 2580, phpstan: 605 },
-  { date: 'Week 5', sonarqube: 855, semgrep: 334, phpcs: 2490, phpstan: 589 },
-  { date: 'Week 6', sonarqube: 850, semgrep: 325, phpcs: 2410, phpstan: 578 },
-  { date: 'Week 7', sonarqube: 842, semgrep: 318, phpcs: 2370, phpstan: 571 },
-  { date: 'Week 8', sonarqube: 847, semgrep: 312, phpcs: 2341, phpstan: 567 },
-  { date: 'Week 9', sonarqube: 847, semgrep: 312, phpcs: 2341, phpstan: 567 },
-  { date: 'Week 10', sonarqube: 847, semgrep: 312, phpcs: 2341, phpstan: 567 },
-  { date: 'Week 11', sonarqube: 847, semgrep: 312, phpcs: 2341, phpstan: 567 },
-  { date: 'Week 12', sonarqube: 847, semgrep: 312, phpcs: 2341, phpstan: 567 },
+  { date: 'Week 1', tools: { SonarQube: 920, Semgrep: 389, PHPCS: 2890, PHPStan: 678 } },
+  { date: 'Week 2', tools: { SonarQube: 895, Semgrep: 367, PHPCS: 2750, PHPStan: 645 } },
+  { date: 'Week 3', tools: { SonarQube: 880, Semgrep: 351, PHPCS: 2650, PHPStan: 623 } },
+  { date: 'Week 4', tools: { SonarQube: 865, Semgrep: 342, PHPCS: 2580, PHPStan: 605 } },
+  { date: 'Week 5', tools: { SonarQube: 855, Semgrep: 334, PHPCS: 2490, PHPStan: 589 } },
+  { date: 'Week 6', tools: { SonarQube: 850, Semgrep: 325, PHPCS: 2410, PHPStan: 578 } },
+  { date: 'Week 7', tools: { SonarQube: 842, Semgrep: 318, PHPCS: 2370, PHPStan: 571 } },
+  { date: 'Week 8', tools: { SonarQube: 847, Semgrep: 312, PHPCS: 2341, PHPStan: 567 } },
+  { date: 'Week 9', tools: { SonarQube: 847, Semgrep: 312, PHPCS: 2341, PHPStan: 567 } },
+  { date: 'Week 10', tools: { SonarQube: 847, Semgrep: 312, PHPCS: 2341, PHPStan: 567 } },
+  { date: 'Week 11', tools: { SonarQube: 847, Semgrep: 312, PHPCS: 2341, PHPStan: 567 } },
+  { date: 'Week 12', tools: { SonarQube: 847, Semgrep: 312, PHPCS: 2341, PHPStan: 567 } },
 ];
 
 export const topIssues: Issue[] = [
