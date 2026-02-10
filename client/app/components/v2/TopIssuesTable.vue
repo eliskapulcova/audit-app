@@ -11,10 +11,7 @@
           class="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         >
           <option value="all">All Severities</option>
-          <option value="Critical">Critical</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
+          <option v-for="severity in severities" :key="severity" :value="severity">{{ severity }}</option>
         </select>
 
         <select
@@ -22,10 +19,7 @@
           class="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         >
           <option value="all">All Tools</option>
-          <option value="SonarQube">SonarQube</option>
-          <option value="Semgrep">Semgrep</option>
-          <option value="PHPCS">PHPCS</option>
-          <option value="PHPStan">PHPStan</option>
+          <option v-for="tool in tools" :key="tool" :value="tool">{{ tool }}</option>
         </select>
       </div>
     </div>
@@ -137,7 +131,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Issue } from '../../domain/types'
+import { issueSeverityColors, issueToolColors } from '~/config/visuals';
+import { type Issue, type SeverityRating, type Tool, tools, severities } from '../../domain/types'
 
 const props = defineProps<{
   issues: Issue[]
@@ -190,34 +185,12 @@ const sortedIssues = computed(() => {
   })
 })
 
-const getSeverityColor = (severity: string) => {
-  switch (severity) {
-    case 'Critical':
-      return 'bg-red-500/10 text-red-400 border-red-500'
-    case 'High':
-      return 'bg-orange-500/10 text-orange-400 border-orange-500'
-    case 'Medium':
-      return 'bg-yellow-500/10 text-yellow-400 border-yellow-500'
-    case 'Low':
-      return 'bg-blue-500/10 text-blue-400 border-blue-500'
-    default:
-      return 'bg-slate-500/10 text-slate-400 border-slate-500'
-  }
+const getSeverityColor = (severity: SeverityRating) => {
+  return issueSeverityColors[severity] || issueSeverityColors.default
 }
 
-const getToolColor = (tool: string) => {
-  switch (tool) {
-    case 'SonarQube':
-      return 'bg-cyan-500/10 text-cyan-400'
-    case 'Semgrep':
-      return 'bg-green-500/10 text-green-400'
-    case 'PHPCS':
-      return 'bg-yellow-500/10 text-yellow-400'
-    case 'PHPStan':
-      return 'bg-red-500/10 text-red-400'
-    default:
-      return 'bg-slate-500/10 text-slate-400'
-  }
+const getToolColor = (tool: Tool) => {
+  return issueToolColors[tool] || issueToolColors.default
 }
 
 const formatDate = (dateString: string) => {

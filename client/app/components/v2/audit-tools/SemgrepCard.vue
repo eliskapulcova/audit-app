@@ -2,7 +2,7 @@
   <ToolCard
     title="Semgrep"
     icon="lucide:shield"
-    :status="status"
+    :status="data.healthStatus"
     :last-run="data.lastRun"
   >
     <div class="bg-slate-900 p-4 rounded-lg">
@@ -103,12 +103,6 @@ ChartJS.register(
 const props = defineProps<{
   data: SemgrepData
 }>()
-
-const status = computed(() => {
-  if (props.data.error > 15) return 'Critical'
-  if (props.data.warning > 80) return 'Warning'
-  return 'Healthy'
-})
 
 const lineChartData = computed(() => {
   return {

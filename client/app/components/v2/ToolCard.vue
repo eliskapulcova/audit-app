@@ -49,10 +49,13 @@
 </template>
 
 <script setup lang="ts">
+import { toolHealthStatuses } from '~/config/visuals';
+import type { HealthStatus } from '~/domain/types';
+
 const props = defineProps<{
   title: string
   icon: string
-  status: 'Healthy' | 'Warning' | 'Critical'
+  status: HealthStatus
   lastRun: string
 }>()
 
@@ -68,26 +71,6 @@ const formattedDate = computed(() => {
 })
 
 const statusConfig = computed(() => {
-  const configs = {
-    Healthy: {
-      icon: 'lucide:check-circle-2',
-      color: 'text-green-400',
-      bg: 'bg-green-500/10',
-      border: 'border-green-500',
-    },
-    Warning: {
-      icon: 'lucide:alert-triangle',
-      color: 'text-yellow-400',
-      bg: 'bg-yellow-500/10',
-      border: 'border-yellow-500',
-    },
-    Critical: {
-      icon: 'lucide:x-circle',
-      color: 'text-red-400',
-      bg: 'bg-red-500/10',
-      border: 'border-red-500',
-    },
-  }
-  return configs[props.status]
+  return toolHealthStatuses[props.status]
 })
 </script>

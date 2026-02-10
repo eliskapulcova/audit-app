@@ -54,6 +54,7 @@ export const kpis: KPI[] = [
 ];
 
 export const sonarQubeData: SonarQubeData = {
+  healthStatus: 'critical',
   bugs: 124,
   vulnerabilities: 23,
   codeSmells: 700,
@@ -74,6 +75,7 @@ export const sonarQubeData: SonarQubeData = {
 };
 
 export const semgrepData: SemgrepData = {
+  healthStatus: 'critical',
   totalFindings: 312,
   error: 18,
   warning: 89,
@@ -89,6 +91,7 @@ export const semgrepData: SemgrepData = {
 };
 
 export const phpcsData: PHPCSData = {
+  healthStatus: 'warning',
   totalViolations: 2341,
   errors: 891,
   warnings: 1450,
@@ -109,6 +112,7 @@ export const phpcsData: PHPCSData = {
 };
 
 export const phpstanData: PHPStanData = {
+  healthStatus: 'warning',
   totalErrors: 567,
   level: 6,
   errorsByLevel: [

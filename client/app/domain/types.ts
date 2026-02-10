@@ -1,11 +1,15 @@
+export const severities = ['Critical', 'High', 'Medium', 'Low'] as const
+export type SeverityRating = typeof severities[number]
+
+export const tools = ['SonarQube', 'Semgrep', 'PHPCS', 'PHPStan'] as const
+export type Tool = typeof tools[number]
+
 export type AToEGrade = 'A' | 'B' | 'C' | 'D' | 'E'
 export type AToFGrade = 'A' | 'B' | 'C' | 'D' | 'F'
 export type HealthStatus = 'healthy' | 'warning' | 'critical'
 export type PassedOrFailed = 'Passed' | 'Failed'
-export type SeverityRating = 'Critical' | 'High' | 'Medium' | 'Low'
 
 export type KPIType = 'total-issues' | 'critical-high' | 'coverage' | 'tech-debt'
-export type Tool = 'SonarQube' | 'Semgrep' | 'PHPCS' | 'PHPStan'
 
 export interface HealthScore {
   score: number
@@ -24,6 +28,7 @@ export interface KPI {
 }
 
 export interface SonarQubeData {
+  healthStatus: HealthStatus
   bugs: number
   vulnerabilities: number
   codeSmells: number
@@ -44,6 +49,7 @@ export interface SonarQubeData {
 }
 
 export interface SemgrepData {
+  healthStatus: HealthStatus
   totalFindings: number
   error: number
   warning: number
@@ -55,6 +61,7 @@ export interface SemgrepData {
 }
 
 export interface PHPCSData {
+  healthStatus: HealthStatus
   totalViolations: number
   errors: number
   warnings: number
@@ -65,6 +72,7 @@ export interface PHPCSData {
 }
 
 export interface PHPStanData {
+  healthStatus: HealthStatus
   totalErrors: number
   level: number
   errorsByLevel: { level: number; count: number }[]

@@ -2,7 +2,7 @@
   <ToolCard
     title="SonarQube"
     icon="lucide:database"
-    :status="status"
+    :status="data.healthStatus"
     :last-run="data.lastRun"
   >
     <div class="grid grid-cols-3 gap-4">
@@ -145,13 +145,6 @@ import type { SonarQubeData } from '../../../domain/types'
 const props = defineProps<{
   data: SonarQubeData
 }>()
-
-const status = computed(() => {
-  if (props.data.qualityGate === 'Failed' || props.data.vulnerabilities > 20)
-    return 'Critical'
-  if (props.data.bugs > 100 || props.data.coverage < 70) return 'Warning'
-  return 'Healthy'
-})
 
 const totalIssues = computed(
   () => props.data.bugs + props.data.vulnerabilities + props.data.codeSmells

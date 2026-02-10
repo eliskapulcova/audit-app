@@ -2,7 +2,7 @@
   <ToolCard
     title="PHPStan"
     icon="lucide:bug"
-    :status="status"
+    :status="data.healthStatus"
     :last-run="data.lastRun"
   >
     <div class="bg-slate-900 p-4 rounded-lg">
@@ -97,12 +97,6 @@ ChartJS.register(
 const props = defineProps<{
   data: PHPStanData
 }>()
-
-const status = computed(() => {
-  if (props.data.totalErrors > 600) return 'Critical'
-  if (props.data.totalErrors > 400) return 'Warning'
-  return 'Healthy'
-})
 
 const barChartData = computed(() => {
   return {

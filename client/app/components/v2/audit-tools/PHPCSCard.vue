@@ -2,7 +2,7 @@
   <ToolCard
     title="PHPCS"
     icon="lucide:code"
-    :status="status"
+    :status="data.healthStatus"
     :last-run="data.lastRun"
   >
     <div class="bg-slate-900 p-4 rounded-lg">
@@ -87,12 +87,6 @@ ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController)
 const props = defineProps<{
   data: PHPCSData
 }>()
-
-const status = computed(() => {
-  if (props.data.errors > 1000) return 'Critical'
-  if (props.data.errors > 500) return 'Warning'
-  return 'Healthy'
-})
 
 const pieChartData = computed(() => {
   return {
