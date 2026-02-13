@@ -32,39 +32,11 @@
       </div>
     </div>
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Top Error Categories</div>
-      <div class="space-y-3">
-        <div v-for="category in data.topCategories" :key="category.name">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-sm text-slate-300">{{ category.name }}</span>
-            <span class="text-sm font-bold text-red-400">{{
-              category.count
-            }}</span>
-          </div>
-          <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-gradient-to-r from-red-500 to-orange-500"
-              :style="{
-                width: `${(category.count / data.totalErrors) * 100}%`,
-              }"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Error Trend (Last 8 Scans)</div>
-      <div class="w-full h-[120px]">
-        <Chart
-          type="line"
-          :data="lineChartData"
-          :options="lineChartOptions"
-          class="w-full h-full"
-        />
-      </div>
-    </div>
+    <ViolationCategories title="Top Error Categories" :data="data.topCategories" />
+
+    <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
   </ToolCard>
 </template>
 
@@ -81,7 +53,12 @@ import {
   PointElement,
 } from 'chart.js'
 import ToolCard from '../ToolCard.vue'
+import TotalFindings from './details/TotalFindings.vue'
+import ViolationCategories from './details/ViolationCategories.vue'
+import FindingsTrend from './details/FindingsTrend.vue'
+import TopFiles from './details/TopFiles.vue'
 import type { PHPStanData } from '../../../domain/types'
+import { TREND_DATA_MIN_POINTS } from '../../../config/general'
 
 ChartJS.register(
   Title,

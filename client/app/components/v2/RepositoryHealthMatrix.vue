@@ -76,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import { repositoryHealthStatusColors } from '~/config/visuals';
+import { repositoryHealthStatusColors } from '~/config/visuals'
 import type { HealthStatus, RepositoryHealth, Tool } from '../../domain/types'
 
 defineProps<{

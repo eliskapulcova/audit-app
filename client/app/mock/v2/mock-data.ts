@@ -58,6 +58,7 @@ export const sonarQubeData: SonarQubeData = {
   bugs: 124,
   vulnerabilities: 23,
   codeSmells: 700,
+  technicalDebt: '124 days',
   coverage: 67.3,
   duplications: 3.8,
   qualityGate: 'Passed',
@@ -71,7 +72,15 @@ export const sonarQubeData: SonarQubeData = {
     minor: 489,
     info: 177,
   },
+  trendData: [920, 895, 880, 865, 855, 850, 842, 847],
   lastRun: '2026-02-06T08:30:00Z',
+  topFiles: [
+    { file: 'src/Auth/LoginHandler.php', violations: 18 },
+    { file: 'src/Repository/UserRepository.php', violations: 15 },
+    { file: 'src/Legacy/PaymentProcessor.php', violations: 12 },
+    { file: 'src/Controllers/AdminController.php', violations: 10 },
+    { file: 'src/Utils/ArrayHelper.php', violations: 8 },
+  ],
 };
 
 export const semgrepData: SemgrepData = {
@@ -88,6 +97,13 @@ export const semgrepData: SemgrepData = {
   trendData: [389, 367, 351, 342, 334, 325, 318, 312],
   owaspCoverage: 87,
   lastRun: '2026-02-06T09:15:00Z',
+  topFiles: [
+    { file: 'src/Controllers/OrderController.php', violations: 12 },
+    { file: 'src/Views/UserProfile.php', violations: 9 },
+    { file: 'src/Repository/ProductRepository.php', violations: 7 },
+    { file: 'src/Services/AuthService.php', violations: 6 },
+    { file: 'src/Config/AppConfig.php', violations: 5 },
+  ],
 };
 
 export const phpcsData: PHPCSData = {
@@ -108,6 +124,7 @@ export const phpcsData: PHPCSData = {
     { file: 'src/Services/EmailService.php', violations: 87 },
     { file: 'src/Utils/ArrayHelper.php', violations: 76 },
   ],
+  trendData: [2890, 2750, 2650, 2580, 2490, 2410, 2370, 2341],
   lastRun: '2026-02-06T07:45:00Z',
 };
 
@@ -131,6 +148,13 @@ export const phpstanData: PHPStanData = {
   ],
   trendData: [678, 645, 623, 605, 589, 578, 571, 567],
   lastRun: '2026-02-06T08:00:00Z',
+  topFiles: [
+    { file: 'src/Services/PaymentService.php', violations: 45 },
+    { file: 'src/Utils/StringHelper.php', violations: 32 },
+    { file: 'src/Models/Transaction.php', violations: 28 },
+    { file: 'src/Controllers/ApiController.php', violations: 21 },
+    { file: 'src/Legacy/OldPaymentGateway.php', violations: 19 },
+  ],
 };
 
 export const trendData: TrendDataPoint[] = [

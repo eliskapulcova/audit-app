@@ -13,6 +13,7 @@
           />
         </div>
         <div
+          v-if="kpi.trend"
           :class="[
             'flex items-center gap-1 text-sm',
             kpi.isTrendPositive ? 'text-green-400' : 'text-red-400',
@@ -33,7 +34,7 @@
         <div class="text-sm text-slate-400">{{ kpi.label }}</div>
       </div>
 
-      <div class="h-12 -mx-2">
+      <div v-if="kpi.sparklineData.length >= TREND_DATA_MIN_POINTS" class="h-12 -mx-2">
         <Chart
           type="line"
           :data="getSparklineData(kpi.sparklineData)"
@@ -48,6 +49,7 @@
 <script setup lang="ts">
 import type { KPI } from '../../domain/types'
 import { kpiIcons } from '../../config/visuals'
+import { TREND_DATA_MIN_POINTS } from '../../config/general'
 import {
   Chart as ChartJS,
   CategoryScale,

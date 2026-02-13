@@ -11,7 +11,13 @@
           class="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         >
           <option value="all">All Severities</option>
-          <option v-for="severity in severities" :key="severity" :value="severity">{{ severity }}</option>
+          <option
+            v-for="severity in severities"
+            :key="severity"
+            :value="severity"
+          >
+            {{ severity }}
+          </option>
         </select>
 
         <select
@@ -19,7 +25,9 @@
           class="bg-slate-700 text-white px-3 py-2 rounded-lg border border-slate-600 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
         >
           <option value="all">All Tools</option>
-          <option v-for="tool in tools" :key="tool" :value="tool">{{ tool }}</option>
+          <option v-for="tool in tools" :key="tool" :value="tool">
+            {{ tool }}
+          </option>
         </select>
       </div>
     </div>
@@ -131,8 +139,14 @@
 </template>
 
 <script setup lang="ts">
-import { issueSeverityColors, issueToolColors } from '~/config/visuals';
-import { type Issue, type SeverityRating, type Tool, tools, severities } from '../../domain/types'
+import { issueSeverityColors, issueToolColors } from '~/config/visuals'
+import {
+  type Issue,
+  type SeverityRating,
+  type Tool,
+  tools,
+  severities,
+} from '../../domain/types'
 
 const props = defineProps<{
   issues: Issue[]

@@ -12,18 +12,18 @@ export type PassedOrFailed = 'Passed' | 'Failed'
 export type KPIType = 'total-issues' | 'critical-high' | 'coverage' | 'tech-debt'
 
 export interface HealthScore {
-  score: number
-  grade: AToFGrade
-  trend: number
-  previousScore: number
+  score: number | null
+  grade: AToFGrade | null
+  trend: number | null
+  previousScore: number | null
 }
 
 export interface KPI {
   id: KPIType
   label: string
   value: string | number
-  trend: number
-  isTrendPositive: boolean
+  trend: number | null
+  isTrendPositive: boolean | null
   sparklineData: number[]
 }
 
@@ -34,17 +34,18 @@ export interface KPI {
  * "Adherence to coding standard": "99.1 %"
  */
 export interface SonarQubeData {
-  healthStatus: HealthStatus // TODO: define how to calculate this
+  healthStatus: HealthStatus | null // TODO: define how to calculate this
   bugs: number // issues.countBySeverityAndTypes
   vulnerabilities: number // issues.countBySeverityAndTypes
   codeSmells: number // issues.countBySeverityAndTypes
-  coverage: number // synthesis.metrics
-  technicalDebt: number // synthesis.detailedTechnicalDebt
-  duplications: number // synthesis.metrics
-  qualityGate: PassedOrFailed // TODO: define how to calculate this
-  reliability: AToEGrade // synthesis.analysisStatus
-  security: AToEGrade // synthesis.analysisStatus
-  maintainability: AToEGrade // synthesis.analysisStatus
+  coverage: number | null // synthesis.metrics
+  technicalDebt: string | null // synthesis.detailedTechnicalDebt
+  duplications: number | null // synthesis.metrics
+  qualityGate: PassedOrFailed | null // TODO: define how to calculate this
+  reliability: AToEGrade | null // synthesis.analysisStatus
+  security: AToEGrade | null // synthesis.analysisStatus
+  maintainability: AToEGrade | null // synthesis.analysisStatus
+  trendData: number[]
   severityBreakdown: { // issues.countBySeverityAndTypes - add all types together
     blocker: number
     critical: number
@@ -52,6 +53,7 @@ export interface SonarQubeData {
     minor: number
     info: number
   }
+  topFiles: { file: string; violations: number }[]
   lastRun: string // date of the last analysis
 }
 
@@ -66,7 +68,8 @@ export interface SemgrepData {
   info: number
   topCategories: { name: string; count: number }[]
   trendData: number[]
-  owaspCoverage: number
+  owaspCoverage: number | null
+  topFiles: { file: string; violations: number }[]
   lastRun: string
 }
 
@@ -78,6 +81,7 @@ export interface PHPCSData {
   standard: string // TODO: define what this is
   topSniffs: { name: string; count: number }[] // sniff = source (e.g. Generic.Files.LineEndings.InvalidEOLChar)
   topFiles: { file: string; violations: number }[] // files with most # of errors + warnings, TODO: this could be added to other tools as well; the path should include name of the repository
+  trendData: number[]
   lastRun: string
 }
 
@@ -88,6 +92,7 @@ export interface PHPStanData {
   errorsByLevel: { level: number; count: number }[] // in order to get this, we would probably need to run the audit on multiple different levels
   topCategories: { name: string; count: number }[]
   trendData: number[]
+  topFiles: { file: string; violations: number }[]
   lastRun: string
 }
 

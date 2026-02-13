@@ -5,68 +5,31 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-3xl font-bold text-white mb-1">
-        {{ data.totalViolations.toLocaleString() }}
-      </div>
-      <div class="text-sm text-slate-400">Total Violations</div>
-      <div class="mt-2 text-xs text-cyan-400">
-        Standard: {{ data.standard }}
-      </div>
-    </div>
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Errors vs Warnings</div>
-      <div class="w-full h-[180px]">
-        <Chart
-          type="doughnut"
-          :data="pieChartData"
-          :options="pieChartOptions"
-          class="w-full h-full"
-        />
-      </div>
-    </div>
-
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Top Violated Standards</div>
-      <div class="space-y-2">
-        <div
-          v-for="(sniff, index) in data.topSniffs"
-          :key="sniff.name"
-          class="flex items-center gap-3"
-        >
-          <div
-            class="flex-shrink-0 w-6 h-6 bg-cyan-500/20 rounded-full flex items-center justify-center text-xs font-bold text-cyan-400"
-          >
-            {{ index + 1 }}
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-sm text-slate-300 truncate font-mono">
-              {{ sniff.name }}
-            </div>
-          </div>
-          <div class="text-sm font-bold text-red-400">{{ sniff.count }}</div>
+    <TotalFindings :total-violations="data.totalViolations" title="Total Violations">
+      <template #additionalInfo>
+        <div class="mt-2 text-xs text-cyan-400">
+          Standard: {{ data.standard }}
         </div>
+      </template>
+    </TotalFindings>
+
+    <div class="flex flex-row flex-wrap gap-4">
+      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
+        <div class="text-2xl font-bold text-red-400">{{ data.errors }}</div>
+        <div class="text-xs text-slate-400">Error</div>
+      </div>
+      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
+        <div class="text-2xl font-bold text-yellow-400">{{ data.warnings }}</div>
+        <div class="text-xs text-slate-400">Warning</div>
       </div>
     </div>
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Files with Most Violations</div>
-      <div class="space-y-2">
-        <div
-          v-for="file in data.topFiles"
-          :key="file.file"
-          class="flex items-start justify-between gap-2"
-        >
-          <span class="text-xs text-slate-400 flex-1 truncate font-mono">{{
-            file.file
-          }}</span>
-          <span class="text-sm font-bold text-orange-400 flex-shrink-0">{{
-            file.violations
-          }}</span>
-        </div>
-      </div>
-    </div>
+    <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
+
+    <ViolationCategories title="Top Violated Standards" :data="data.topSniffs" />
+
+    <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
   </ToolCard>
 </template>
 
@@ -80,7 +43,12 @@ import {
   DoughnutController,
 } from 'chart.js'
 import ToolCard from '../ToolCard.vue'
+import TotalFindings from './details/TotalFindings.vue'
+import FindingsTrend from './details/FindingsTrend.vue'
+import ViolationCategories from './details/ViolationCategories.vue'
+import TopFiles from './details/TopFiles.vue'
 import type { PHPCSData } from '../../../domain/types'
+import { TREND_DATA_MIN_POINTS } from '../../../config/general'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController)
 

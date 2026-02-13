@@ -18,6 +18,7 @@
         </div>
 
         <div
+          v-if="status"
           :class="[
             'flex items-center gap-2 px-3 py-1 rounded-full border',
             statusConfig.bg,
@@ -49,13 +50,13 @@
 </template>
 
 <script setup lang="ts">
-import { toolHealthStatuses } from '~/config/visuals';
-import type { HealthStatus } from '~/domain/types';
+import { toolHealthStatuses } from '~/config/visuals'
+import type { HealthStatus } from '~/domain/types'
 
 const props = defineProps<{
   title: string
   icon: string
-  status: HealthStatus
+  status: HealthStatus | null
   lastRun: string
 }>()
 
@@ -71,6 +72,9 @@ const formattedDate = computed(() => {
 })
 
 const statusConfig = computed(() => {
+  if (!props.status) {
+    return toolHealthStatuses['healthy']
+  }
   return toolHealthStatuses[props.status]
 })
 </script>

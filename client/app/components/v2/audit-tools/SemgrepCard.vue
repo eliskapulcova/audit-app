@@ -5,61 +5,31 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-3xl font-bold text-white mb-1">
-        {{ data.totalFindings }}
-      </div>
-      <div class="text-sm text-slate-400">Total Findings</div>
-    </div>
 
-    <div class="grid grid-cols-3 gap-3">
-      <div class="bg-slate-900 p-3 rounded-lg border-l-4 border-red-500">
-        <div class="text-xl font-bold text-red-400">{{ data.error }}</div>
+    <TotalFindings :total-violations="data.totalFindings" title="Total Findings" />
+
+    <div class="flex flex-row flex-wrap gap-4">
+      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
+        <div class="text-2xl font-bold text-red-400">{{ data.error }}</div>
         <div class="text-xs text-slate-400">Error</div>
       </div>
-      <div class="bg-slate-900 p-3 rounded-lg border-l-4 border-yellow-500">
-        <div class="text-xl font-bold text-yellow-400">{{ data.warning }}</div>
+      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
+        <div class="text-2xl font-bold text-yellow-400">{{ data.warning }}</div>
         <div class="text-xs text-slate-400">Warning</div>
       </div>
-      <div class="bg-slate-900 p-3 rounded-lg border-l-4 border-blue-500">
-        <div class="text-xl font-bold text-blue-400">{{ data.info }}</div>
+      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-blue-500">
+        <div class="text-2xl font-bold text-blue-400">{{ data.info }}</div>
         <div class="text-xs text-slate-400">Info</div>
       </div>
     </div>
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">Top Rule Categories</div>
-      <div class="space-y-2">
-        <div
-          v-for="category in data.topCategories"
-          :key="category.name"
-          class="flex items-center justify-between"
-        >
-          <span class="text-sm text-slate-300 font-mono">{{
-            category.name
-          }}</span>
-          <span class="text-sm font-bold text-cyan-400">{{
-            category.count
-          }}</span>
-        </div>
-      </div>
-    </div>
+    <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
 
-    <div class="bg-slate-900 p-4 rounded-lg">
-      <div class="text-sm text-slate-400 mb-3">
-        Findings Trend (Last 8 Scans)
-      </div>
-      <div class="w-full h-[120px]">
-        <Chart
-          type="line"
-          :data="lineChartData"
-          :options="lineChartOptions"
-          class="w-full h-full"
-        />
-      </div>
-    </div>
+    <ViolationCategories title="Top Rule Categories" :data="data.topCategories" />
 
-    <div class="bg-slate-900 p-4 rounded-lg">
+    <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
+
+    <div v-if="data.owaspCoverage != null" class="bg-slate-900 p-4 rounded-lg">
       <div class="flex items-center justify-between">
         <span class="text-sm text-slate-400">OWASP Top 10 Coverage</span>
         <span class="text-xl font-bold text-green-400"
@@ -88,6 +58,11 @@ import {
   PointElement,
 } from 'chart.js'
 import ToolCard from '../ToolCard.vue'
+import TotalFindings from './details/TotalFindings.vue'
+import ViolationCategories from './details/ViolationCategories.vue'
+import FindingsTrend from './details/FindingsTrend.vue'
+import TopFiles from './details/TopFiles.vue'
+import { TREND_DATA_MIN_POINTS } from '../../../config/general'
 import type { SemgrepData } from '../../../domain/types'
 
 ChartJS.register(

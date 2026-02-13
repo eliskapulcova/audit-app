@@ -50,8 +50,7 @@ import {
 } from 'chart.js'
 import type { Tool, TrendDataPoint } from '../../domain/types'
 import { tools } from '../../domain/types'
-import { trendToolColors } from '~/config/visuals';
-
+import { trendToolColors } from '~/config/visuals'
 
 ChartJS.register(
   Title,
@@ -67,7 +66,9 @@ const props = defineProps<{
   data: TrendDataPoint[]
 }>()
 
-const visibleTools = ref<Record<string, boolean>>(Object.fromEntries(tools.map((tool) => [tool, true])))
+const visibleTools = ref<Record<string, boolean>>(
+  Object.fromEntries(tools.map((tool) => [tool, true]))
+)
 
 const toggleTool = (tool: Tool) => {
   visibleTools.value[tool] = !visibleTools.value[tool]
@@ -88,7 +89,7 @@ const chartData = computed(() => {
         pointHoverRadius: 6,
         hidden: !visibleTools.value[tool],
       }
-    })
+    }),
   }
 })
 
