@@ -95,6 +95,9 @@ const props = defineProps<{
 }>()
 
 const gradeColor = computed(() => {
+  if (!props.healthScore.grade) {
+    return healthGradeGradientColors.default
+  }
   return (
     healthGradeGradientColors[props.healthScore.grade] ||
     healthGradeGradientColors.default
@@ -102,14 +105,14 @@ const gradeColor = computed(() => {
 })
 
 const chartData = computed(() => {
-  const grade = props.healthScore.grade
+  const grade = props.healthScore.grade ?? 'F'
   const color = healthGradeChartColors[grade]
 
   return {
     labels: ['Score', 'Remaining'],
     datasets: [
       {
-        data: [props.healthScore.score, 100 - props.healthScore.score],
+        data: [props.healthScore.score ?? 0, 100 - (props.healthScore.score ?? 0)],
         backgroundColor: [color, '#1e293b'],
         borderWidth: 0,
         hoverBackgroundColor: [color, '#1e293b'],

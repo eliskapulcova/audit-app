@@ -13,7 +13,7 @@
         <SemgrepCard v-if="data.semgrepData" :data="data.semgrepData" />
         <PHPCSCard v-if="data.phpcsData" :data="data.phpcsData" />
         <PHPStanCard v-if="data.phpstanData" :data="data.phpstanData" />
-        <AddToolCard />
+        <!-- <AddToolCard /> -->
       </div>
     </div>
 
