@@ -62,8 +62,8 @@ import TotalFindings from './details/TotalFindings.vue'
 import ViolationCategories from './details/ViolationCategories.vue'
 import FindingsTrend from './details/FindingsTrend.vue'
 import TopFiles from './details/TopFiles.vue'
-import { TREND_DATA_MIN_POINTS } from '../../../config/general'
-import type { SemgrepData } from '../../../domain/types'
+import { TREND_DATA_MIN_POINTS } from '../../config/general'
+import type { SemgrepData } from '../../domain/types'
 
 ChartJS.register(
   Title,

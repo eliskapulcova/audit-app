@@ -83,11 +83,11 @@
 </template>
 
 <script setup lang="ts">
-import type { HealthScore, ProjectSummary } from '../../domain/types'
+import type { HealthScore, ProjectSummary } from '../domain/types'
 import {
   healthGradeChartColors,
   healthGradeGradientColors,
-} from '../../config/visuals'
+} from '../config/visuals'
 
 const props = defineProps<{
   healthScore: HealthScore

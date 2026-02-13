@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/v2/project/${project.id}`"
+    :to="`/project/${project.id}`"
     class="block bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700 hover:border-cyan-500 transition-all hover:shadow-cyan-500/10 hover:scale-[1.02] group"
   >
     <div class="flex items-start justify-between mb-4">
@@ -117,12 +117,13 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectSummary } from '../../domain/types'
+import type { ProjectSummary } from '../domain/types'
 import {
+  healthGradeChartColors,
   healthGradeGradientColors,
   projectHealthStatusColors,
   projectHealthStatusIcons,
-} from '../../config/visuals'
+} from '../config/visuals'
 
 const props = defineProps<{
   project: ProjectSummary

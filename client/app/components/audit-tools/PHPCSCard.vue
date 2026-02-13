@@ -47,8 +47,8 @@ import TotalFindings from './details/TotalFindings.vue'
 import FindingsTrend from './details/FindingsTrend.vue'
 import ViolationCategories from './details/ViolationCategories.vue'
 import TopFiles from './details/TopFiles.vue'
-import type { PHPCSData } from '../../../domain/types'
-import { TREND_DATA_MIN_POINTS } from '../../../config/general'
+import type { PHPCSData } from '../../domain/types'
+import { TREND_DATA_MIN_POINTS } from '../../config/general'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, DoughnutController)
 

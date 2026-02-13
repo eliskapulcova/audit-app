@@ -5,7 +5,7 @@ import phpstanReport from '../../data/phpstan-report.json'
 import {SonarQubeIssueMapper} from "~/mappers/sonar-qube-issue.mapper";
 import {SemgrepIssueMapper} from "~/mappers/semgrep-issue.mapper";
 import {PhpstanIssueMapper} from "~/mappers/phpstan-issue-mapper";
-import { PhpstanIssue } from '~/domain/issue_mapping/phpstan-issue';
+import { PhpstanIssue } from '~/domain/_obsolete/issue_mapping/phpstan-issue';
 
 export default defineEventHandler((event) => {
     const project = getRouterParam(event, 'project')

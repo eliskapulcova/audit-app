@@ -23,7 +23,7 @@
 
           <div class="hidden md:flex items-center gap-4">
             <NuxtLink
-              to="/v2"
+              to="/"
               :class="[
                 'flex items-center gap-2 px-3 py-2 rounded-lg transition-colors',
                 isOverview

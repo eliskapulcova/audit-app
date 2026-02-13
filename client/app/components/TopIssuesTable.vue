@@ -146,7 +146,7 @@ import {
   type Tool,
   tools,
   severities,
-} from '../../domain/types'
+} from '../domain/types'
 
 const props = defineProps<{
   issues: Issue[]

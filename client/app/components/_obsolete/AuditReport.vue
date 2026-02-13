@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Report } from '~/domain/report'
+import type { Report } from '~/domain/_obsolete/report'
 
 const props = defineProps<{
   projectName: string

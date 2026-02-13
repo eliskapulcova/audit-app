@@ -1,9 +1,9 @@
 /**
  * TODO: Add proper types instead of 'any' for the issue and the return type.
  */
-import { ReportTool } from '~/domain/report-tool';
-import type { AuditIssue } from '../domain/audit-issue';
-import type { SonarQubeIssue } from '../domain/issue_mapping/sonar-qube-issue';
+import { ReportTool } from '~/domain/_obsolete/report-tool';
+import type { AuditIssue } from '../domain/_obsolete/audit-issue';
+import type { SonarQubeIssue } from '../domain/_obsolete/issue_mapping/sonar-qube-issue';
 
 export class SonarQubeIssueMapper {
     static mapIssue(issue: SonarQubeIssue): AuditIssue {

@@ -33,16 +33,16 @@
 </template>
 
 <script setup lang="ts">
-import HealthScore from '~/components/v2/HealthScore.vue'
-import KPICards from '~/components/v2/KPICards.vue'
-import SonarQubeCard from '~/components/v2/audit-tools/SonarQubeCard.vue'
-import SemgrepCard from '~/components/v2/audit-tools/SemgrepCard.vue'
-import PHPCSCard from '~/components/v2/audit-tools/PHPCSCard.vue'
-import PHPStanCard from '~/components/v2/audit-tools/PHPStanCard.vue'
-import AddToolCard from '~/components/v2/AddToolCard.vue'
-import TrendChart from '~/components/v2/TrendChart.vue'
-import TopIssuesTable from '~/components/v2/TopIssuesTable.vue'
-import RepositoryHealthMatrix from '~/components/v2/RepositoryHealthMatrix.vue'
+import HealthScore from '~/components/HealthScore.vue'
+import KPICards from '~/components/KPICards.vue'
+import SonarQubeCard from '~/components/audit-tools/SonarQubeCard.vue'
+import SemgrepCard from '~/components/audit-tools/SemgrepCard.vue'
+import PHPCSCard from '~/components/audit-tools/PHPCSCard.vue'
+import PHPStanCard from '~/components/audit-tools/PHPStanCard.vue'
+import AddToolCard from '~/components/AddToolCard.vue'
+import TrendChart from '~/components/TrendChart.vue'
+import TopIssuesTable from '~/components/TopIssuesTable.vue'
+import RepositoryHealthMatrix from '~/components/RepositoryHealthMatrix.vue'
 import type { ProjectDetails } from '~/domain/types'
 
 definePageMeta({

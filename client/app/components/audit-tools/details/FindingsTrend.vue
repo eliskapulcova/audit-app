@@ -25,7 +25,7 @@ import {
   LinearScale,
   PointElement,
 } from 'chart.js'
-import { TREND_DATA_MAX_POINTS } from '../../../../config/general'
+import { TREND_DATA_MAX_POINTS } from '../../../config/general'
 
 ChartJS.register(
   Title,

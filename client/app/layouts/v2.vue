@@ -8,6 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from '~/components/v2/Navbar.vue'
+import Navbar from '~/components/Navbar.vue'
 import { lastScanDate } from '~/mock/v2/mock-data'
 </script>

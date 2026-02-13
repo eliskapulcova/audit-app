@@ -48,8 +48,8 @@ import {
   LinearScale,
   PointElement,
 } from 'chart.js'
-import type { Tool, TrendDataPoint } from '../../domain/types'
-import { tools } from '../../domain/types'
+import type { Tool, TrendDataPoint } from '../domain/types'
+import { tools } from '../domain/types'
 import { trendToolColors } from '~/config/visuals'
 
 ChartJS.register(

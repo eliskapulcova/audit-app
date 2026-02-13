@@ -149,8 +149,8 @@ import ToolCard from '../ToolCard.vue'
 import TotalFindings from './details/TotalFindings.vue'
 import FindingsTrend from './details/FindingsTrend.vue'
 import TopFiles from './details/TopFiles.vue'
-import type { SonarQubeData } from '../../../domain/types'
-import { TREND_DATA_MIN_POINTS } from '../../../config/general'
+import type { SonarQubeData } from '../../domain/types'
+import { TREND_DATA_MIN_POINTS } from '../../config/general'
 
 const props = defineProps<{
   data: SonarQubeData

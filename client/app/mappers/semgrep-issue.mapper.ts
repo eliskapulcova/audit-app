@@ -1,6 +1,6 @@
-import type { SemgrepIssue } from '../domain/issue_mapping/semgrep-issue';
-import type { AuditIssue } from '../domain/audit-issue';
-import { ReportTool } from '../domain/report-tool';
+import type { SemgrepIssue } from '../domain/_obsolete/issue_mapping/semgrep-issue';
+import type { AuditIssue } from '../domain/_obsolete/audit-issue';
+import { ReportTool } from '../domain/_obsolete/report-tool';
 
 export class SemgrepIssueMapper {
     static mapIssue(issue: SemgrepIssue): AuditIssue {

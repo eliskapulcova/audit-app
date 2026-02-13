@@ -108,7 +108,7 @@
 import { getIcon } from 'material-file-icons'
 
 import type { SelectChangeEvent } from 'primevue/select'
-import type { AuditIssue } from '~/domain/audit-issue'
+import type { AuditIssue } from '~/domain/_obsolete/audit-issue'
 
 type SelectOption = { label: string; value: string }
 

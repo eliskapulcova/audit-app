@@ -1,6 +1,6 @@
-import type { PhpstanIssue } from '../domain/issue_mapping/phpstan-issue';
-import type { AuditIssue } from '../domain/audit-issue';
-import { ReportTool } from '../domain/report-tool';
+import type { PhpstanIssue } from '../domain/_obsolete/issue_mapping/phpstan-issue';
+import type { AuditIssue } from '../domain/_obsolete/audit-issue';
+import { ReportTool } from '../domain/_obsolete/report-tool';
 
 export class PhpstanIssueMapper {
     static mapIssue(issue: PhpstanIssue, appName: string, path: string): AuditIssue {

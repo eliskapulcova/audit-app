@@ -47,9 +47,9 @@
 </template>
 
 <script setup lang="ts">
-import type { KPI } from '../../domain/types'
-import { kpiIcons } from '../../config/visuals'
-import { TREND_DATA_MIN_POINTS } from '../../config/general'
+import type { KPI } from '../domain/types'
+import { kpiIcons } from '../config/visuals'
+import { TREND_DATA_MIN_POINTS } from '../config/general'
 import {
   Chart as ChartJS,
   CategoryScale,
