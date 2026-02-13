@@ -1,0 +1,965 @@
+{
+  "version": "1.146.0",
+  "results": [
+    {
+      "check_id": "javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html",
+      "path": "age-verification/resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+      "start": {
+        "line": 148,
+        "col": 21,
+        "offset": 4751
+      },
+      "end": {
+        "line": 148,
+        "col": 72,
+        "offset": 4802
+      },
+      "extra": {
+        "message": "Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content.",
+        "metadata": {
+          "references": [
+            "https://vuejs.org/v2/guide/syntax.html#Raw-HTML"
+          ],
+          "category": "security",
+          "cwe": [
+            "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+          ],
+          "technology": [
+            "vue"
+          ],
+          "owasp": [
+            "A07:2017 - Cross-Site Scripting (XSS)",
+            "A03:2021 - Injection"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "audit"
+          ],
+          "likelihood": "LOW",
+          "impact": "LOW",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Cross-Site-Scripting (XSS)"
+          ],
+          "source": "https://semgrep.dev/r/javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html",
+          "shortlink": "https://sg.run/0QEw"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html",
+      "path": "age-verification/resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+      "start": {
+        "line": 152,
+        "col": 40,
+        "offset": 4990
+      },
+      "end": {
+        "line": 152,
+        "col": 53,
+        "offset": 5003
+      },
+      "extra": {
+        "message": "Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to XSS vulnerabilities. Only use HTML interpolation on trusted content and never on user-provided content.",
+        "metadata": {
+          "references": [
+            "https://vuejs.org/v2/guide/syntax.html#Raw-HTML"
+          ],
+          "category": "security",
+          "cwe": [
+            "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"
+          ],
+          "technology": [
+            "vue"
+          ],
+          "owasp": [
+            "A07:2017 - Cross-Site Scripting (XSS)",
+            "A03:2021 - Injection"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "audit"
+          ],
+          "likelihood": "LOW",
+          "impact": "LOW",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Cross-Site-Scripting (XSS)"
+          ],
+          "source": "https://semgrep.dev/r/javascript.vue.security.audit.xss.templates.avoid-v-html.avoid-v-html",
+          "shortlink": "https://sg.run/0QEw"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "dockerfile.security.missing-user.missing-user",
+      "path": "age-verification/rootfs/Dockerfile",
+      "start": {
+        "line": 65,
+        "col": 1,
+        "offset": 2002
+      },
+      "end": {
+        "line": 65,
+        "col": 16,
+        "offset": 2017
+      },
+      "extra": {
+        "message": "By not specifying a USER, a program in the container may run as 'root'. This is a security hazard. If an attacker can control a process running as root, they may have control over the container. Ensure that the last USER in a Dockerfile is a USER other than 'root'.",
+        "fix": "USER non-root\nCMD [\"php-fpm\"]",
+        "metadata": {
+          "cwe": [
+            "CWE-250: Execution with Unnecessary Privileges"
+          ],
+          "category": "security",
+          "technology": [
+            "dockerfile"
+          ],
+          "confidence": "MEDIUM",
+          "owasp": [
+            "A04:2021 - Insecure Design"
+          ],
+          "references": [
+            "https://owasp.org/Top10/A04_2021-Insecure_Design"
+          ],
+          "subcategory": [
+            "audit"
+          ],
+          "likelihood": "LOW",
+          "impact": "MEDIUM",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Improper Authorization"
+          ],
+          "source": "https://semgrep.dev/r/dockerfile.security.missing-user.missing-user",
+          "shortlink": "https://sg.run/Gbvn"
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "dockerfile.security.missing-user.missing-user",
+      "path": "age-verification/rootfs/Dockerfile",
+      "start": {
+        "line": 75,
+        "col": 1,
+        "offset": 2116
+      },
+      "end": {
+        "line": 75,
+        "col": 33,
+        "offset": 2148
+      },
+      "extra": {
+        "message": "By not specifying a USER, a program in the container may run as 'root'. This is a security hazard. If an attacker can control a process running as root, they may have control over the container. Ensure that the last USER in a Dockerfile is a USER other than 'root'.",
+        "fix": "USER non-root\nCMD [\"php\", \"artisan\", \"--help\"]",
+        "metadata": {
+          "cwe": [
+            "CWE-250: Execution with Unnecessary Privileges"
+          ],
+          "category": "security",
+          "technology": [
+            "dockerfile"
+          ],
+          "confidence": "MEDIUM",
+          "owasp": [
+            "A04:2021 - Insecure Design"
+          ],
+          "references": [
+            "https://owasp.org/Top10/A04_2021-Insecure_Design"
+          ],
+          "subcategory": [
+            "audit"
+          ],
+          "likelihood": "LOW",
+          "impact": "MEDIUM",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Improper Authorization"
+          ],
+          "source": "https://semgrep.dev/r/dockerfile.security.missing-user.missing-user",
+          "shortlink": "https://sg.run/Gbvn"
+        },
+        "severity": "ERROR",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 9,
+        "col": 40,
+        "offset": 355
+      },
+      "end": {
+        "line": 9,
+        "col": 51,
+        "offset": 366
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 30,
+        "col": 50,
+        "offset": 1188
+      },
+      "end": {
+        "line": 30,
+        "col": 61,
+        "offset": 1199
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 30,
+        "col": 63,
+        "offset": 1201
+      },
+      "end": {
+        "line": 30,
+        "col": 72,
+        "offset": 1210
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 67,
+        "col": 22,
+        "offset": 2831
+      },
+      "end": {
+        "line": 67,
+        "col": 33,
+        "offset": 2842
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 67,
+        "col": 35,
+        "offset": 2844
+      },
+      "end": {
+        "line": 67,
+        "col": 45,
+        "offset": 2854
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    },
+    {
+      "check_id": "javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+      "path": "age-verification/vite-module-loader.js",
+      "start": {
+        "line": 67,
+        "col": 47,
+        "offset": 2856
+      },
+      "end": {
+        "line": 67,
+        "col": 55,
+        "offset": 2864
+      },
+      "extra": {
+        "message": "Detected possible user input going into a `path.join` or `path.resolve` function. This could possibly lead to a path traversal vulnerability,  where the attacker can access arbitrary files stored in the file system. Instead, be sure to sanitize or validate user input first.",
+        "metadata": {
+          "owasp": [
+            "A05:2017 - Broken Access Control",
+            "A01:2021 - Broken Access Control"
+          ],
+          "cwe": [
+            "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+          ],
+          "category": "security",
+          "references": [
+            "https://owasp.org/www-community/attacks/Path_Traversal"
+          ],
+          "technology": [
+            "javascript",
+            "node.js"
+          ],
+          "cwe2022-top25": true,
+          "cwe2021-top25": true,
+          "subcategory": [
+            "vuln"
+          ],
+          "likelihood": "HIGH",
+          "impact": "MEDIUM",
+          "confidence": "LOW",
+          "license": "Semgrep Rules License v1.0. For more details, visit semgrep.dev/legal/rules-license",
+          "vulnerability_class": [
+            "Path Traversal"
+          ],
+          "source": "https://semgrep.dev/r/javascript.lang.security.audit.path-traversal.path-join-resolve-traversal.path-join-resolve-traversal",
+          "shortlink": "https://sg.run/OPqk"
+        },
+        "severity": "WARNING",
+        "fingerprint": "requires login",
+        "lines": "requires login",
+        "validation_state": "NO_VALIDATOR",
+        "engine_kind": "OSS"
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/secret-tls-ingress.yaml:2:\n (approximate error location; error nearby after) error calling parser: did not find expected <document start> character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/secret-tls-ingress.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/serviceaccount.yaml:2:\n (approximate error location; error nearby after) error calling parser: did not find expected <document start> character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/serviceaccount.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/configmap-app.yaml:13:\n (approximate error location; error nearby after) error calling parser: did not find expected node content character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/configmap-app.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/deployment.yaml:50:\n (approximate error location; error nearby after) error calling parser: did not find expected node content character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/deployment.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/ingress.yaml:1:\n (approximate error location; error nearby after) error calling parser: did not find expected node content character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/ingress.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/secret-app.yaml:13:\n (approximate error location; error nearby after) error calling parser: did not find expected node content character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/secret-app.yaml"
+    },
+    {
+      "code": 2,
+      "level": "warn",
+      "type": "Other syntax error",
+      "message": "Other syntax error at line age-verification/chart/templates/secret-newrelic.yaml:1:\n (approximate error location; error nearby after) error calling parser: did not find expected node content character 0 position 0 returned: 0",
+      "path": "age-verification/chart/templates/secret-newrelic.yaml"
+    },
+    {
+      "code": 3,
+      "level": "warn",
+      "type": [
+        "PartialParsing",
+        [
+          {
+            "path": "age-verification/app/Domain/VerificationProvider/Services/VerificationProviderFactory.php",
+            "start": {
+              "line": 16,
+              "col": 17,
+              "offset": 0
+            },
+            "end": {
+              "line": 16,
+              "col": 25,
+              "offset": 8
+            }
+          }
+        ]
+      ],
+      "message": "Syntax error at line age-verification/app/Domain/VerificationProvider/Services/VerificationProviderFactory.php:16:\n `readonly` was unexpected",
+      "path": "age-verification/app/Domain/VerificationProvider/Services/VerificationProviderFactory.php",
+      "spans": [
+        {
+          "file": "age-verification/app/Domain/VerificationProvider/Services/VerificationProviderFactory.php",
+          "start": {
+            "line": 16,
+            "col": 17,
+            "offset": 0
+          },
+          "end": {
+            "line": 16,
+            "col": 25,
+            "offset": 8
+          }
+        }
+      ]
+    }
+  ],
+  "paths": {
+    "scanned": [
+      "age-verification/.dockerignore",
+      "age-verification/.editorconfig",
+      "age-verification/.env.docker",
+      "age-verification/.env.example",
+      "age-verification/.gitattributes",
+      "age-verification/.gitignore",
+      "age-verification/.gitlab-ci.yml",
+      "age-verification/.scannerwork/.sonar_lock",
+      "age-verification/.scannerwork/report-task.txt",
+      "age-verification/Makefile",
+      "age-verification/README.md",
+      "age-verification/app/Actions/Fortify/CreateNewUser.php",
+      "age-verification/app/Actions/Fortify/PasswordValidationRules.php",
+      "age-verification/app/Actions/Fortify/ResetUserPassword.php",
+      "age-verification/app/Actions/Fortify/UpdateUserPassword.php",
+      "age-verification/app/Actions/Fortify/UpdateUserProfileInformation.php",
+      "age-verification/app/Actions/Jetstream/DeleteUser.php",
+      "age-verification/app/Console/Commands/CreateDefaultTenantCommand.php",
+      "age-verification/app/Console/Commands/CreateWebsiteCommand.php",
+      "age-verification/app/Domain/Logging/Formatter/SplitJsonFormatter.php",
+      "age-verification/app/Domain/Verification/Actions/CheckVerificationIsAccessible.php",
+      "age-verification/app/Domain/Verification/Actions/CreateVerificationSession.php",
+      "age-verification/app/Domain/Verification/Actions/GenerateResultToken.php",
+      "age-verification/app/Domain/Verification/Actions/GetResultCallbackUrl.php",
+      "age-verification/app/Domain/Verification/Actions/GetVerificationByToken.php",
+      "age-verification/app/Domain/Verification/Actions/HandleVerificationException.php",
+      "age-verification/app/Domain/Verification/Actions/RetryVerificationSession.php",
+      "age-verification/app/Domain/Verification/Actions/SetVerificationStatus.php",
+      "age-verification/app/Domain/Verification/Actions/UpdateUserFieldsFromRequest.php",
+      "age-verification/app/Domain/Verification/Actions/ValidateToken.php",
+      "age-verification/app/Domain/Verification/Api/SessionAttributes.php",
+      "age-verification/app/Domain/Verification/Api/TokenValidationResultInterface.php",
+      "age-verification/app/Domain/Verification/Api/VerificationResultInterface.php",
+      "age-verification/app/Domain/Verification/Enums/TokenValidationStatusEnum.php",
+      "age-verification/app/Domain/Verification/Enums/VerificationStatusEnum.php",
+      "age-verification/app/Domain/Verification/Exceptions/VerificationWrongStatusException.php",
+      "age-verification/app/Domain/Verification/Models/Token/TokenValidationResult.php",
+      "age-verification/app/Domain/Verification/Models/Verification.php",
+      "age-verification/app/Domain/Verification/Policies/VerificationPolicy.php",
+      "age-verification/app/Domain/Verification/Requests/ValidateTokenRequest.php",
+      "age-verification/app/Domain/Verification/Requests/VerifyRequest.php",
+      "age-verification/app/Domain/Verification/Resources/TokenValidationResultResource.php",
+      "age-verification/app/Domain/Verification/Resources/VerificationResource.php",
+      "age-verification/app/Domain/Verification/Resources/VerificationResultResource.php",
+      "age-verification/app/Domain/VerificationProvider/Actions/GetEnabledProvidersForWebsite.php",
+      "age-verification/app/Domain/VerificationProvider/Actions/GetVerificationByProviderSessionIdentifier.php",
+      "age-verification/app/Domain/VerificationProvider/Actions/ProcessVerificationProviderResult.php",
+      "age-verification/app/Domain/VerificationProvider/Actions/ResolveProviderConfiguration.php",
+      "age-verification/app/Domain/VerificationProvider/Api/Actions/GetVerificationByProviderSessionIdentifierInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/Actions/ProcessVerificationProviderResultInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/Actions/ResolveProviderConfigurationInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/Config/ConfigEntryInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/Config/ConfigEntryOptionInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/VerificationProviderAdapterInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/VerificationProviderAdapterPool.php",
+      "age-verification/app/Domain/VerificationProvider/Api/VerificationProviderFactoryInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Api/VerificationProviderInterface.php",
+      "age-verification/app/Domain/VerificationProvider/Exceptions/VerificationProviderConfigurationException.php",
+      "age-verification/app/Domain/VerificationProvider/Models/Config/ConfigEntry.php",
+      "age-verification/app/Domain/VerificationProvider/Models/Config/ConfigEntryOption.php",
+      "age-verification/app/Domain/VerificationProvider/Models/UserVerificationProvider.php",
+      "age-verification/app/Domain/VerificationProvider/Models/WebsiteVerificationProvider.php",
+      "age-verification/app/Domain/VerificationProvider/Requests/UserVerificationProviderRequest.php",
+      "age-verification/app/Domain/VerificationProvider/Requests/WebsiteVerificationProviderRequest.php",
+      "age-verification/app/Domain/VerificationProvider/Resources/UserVerificationProviderResource.php",
+      "age-verification/app/Domain/VerificationProvider/Resources/VerificationProviderResource.php",
+      "age-verification/app/Domain/VerificationProvider/Resources/WebsiteVerificationProviderResource.php",
+      "age-verification/app/Domain/VerificationProvider/Services/AbstractVerificationProvider.php",
+      "age-verification/app/Domain/VerificationProvider/Services/VerificationProviderFactory.php",
+      "age-verification/app/Domain/Website/Actions/CreateWebsite.php",
+      "age-verification/app/Domain/Website/Actions/ResolveWebsiteByApiKey.php",
+      "age-verification/app/Domain/Website/Actions/UpdateWebsite.php",
+      "age-verification/app/Domain/Website/Actions/ValidateCallbackDomain.php",
+      "age-verification/app/Domain/Website/Models/Website.php",
+      "age-verification/app/Domain/Website/Requests/WebsiteRequest.php",
+      "age-verification/app/Domain/Website/Resources/WebsiteResource.php",
+      "age-verification/app/Exceptions/IntegrationMissingInfoException.php",
+      "age-verification/app/Exceptions/IntegrationResponseException.php",
+      "age-verification/app/Exceptions/NoSuchEntityException.php",
+      "age-verification/app/Exceptions/NotFoundException.php",
+      "age-verification/app/Helpers/CalculateAge.php",
+      "age-verification/app/Http/Controllers/Controller.php",
+      "age-verification/app/Http/Controllers/ErrorController.php",
+      "age-verification/app/Http/Controllers/Public/SessionController.php",
+      "age-verification/app/Http/Controllers/Public/VerifyController.php",
+      "age-verification/app/Http/Controllers/Tenant/TokenController.php",
+      "age-verification/app/Http/Controllers/Tenant/UserVerificationProviderController.php",
+      "age-verification/app/Http/Controllers/Tenant/WebsiteController.php",
+      "age-verification/app/Http/Controllers/Tenant/WebsiteVerificationProviderController.php",
+      "age-verification/app/Http/Middleware/DetectBrowserLanguageMiddleware.php",
+      "age-verification/app/Http/Middleware/HandleInertiaRequests.php",
+      "age-verification/app/Listeners/DiagnosingHealthListener.php",
+      "age-verification/app/Models/User.php",
+      "age-verification/app/Providers/AppServiceProvider.php",
+      "age-verification/app/Providers/FortifyServiceProvider.php",
+      "age-verification/app/Providers/JetstreamServiceProvider.php",
+      "age-verification/app/Services/DataObject.php",
+      "age-verification/artisan",
+      "age-verification/azure-pipelines/jobs/build.yml",
+      "age-verification/azure-pipelines/jobs/deploy.yml",
+      "age-verification/bootstrap/app.php",
+      "age-verification/bootstrap/cache/.gitignore",
+      "age-verification/bootstrap/providers.php",
+      "age-verification/chart/.gitignore",
+      "age-verification/chart/.helmignore",
+      "age-verification/chart/Chart.yaml",
+      "age-verification/chart/templates/_helpers.tpl",
+      "age-verification/chart/templates/configmap-app.yaml",
+      "age-verification/chart/templates/deployment.yaml",
+      "age-verification/chart/templates/ingress.yaml",
+      "age-verification/chart/templates/secret-app.yaml",
+      "age-verification/chart/templates/secret-newrelic.yaml",
+      "age-verification/chart/templates/secret-tls-ingress.yaml",
+      "age-verification/chart/templates/secret-tls-web.yaml",
+      "age-verification/chart/templates/service.yaml",
+      "age-verification/chart/templates/serviceaccount.yaml",
+      "age-verification/chart/values.yaml",
+      "age-verification/composer.json",
+      "age-verification/composer.lock",
+      "age-verification/config/app.php",
+      "age-verification/config/auth.php",
+      "age-verification/config/avs.php",
+      "age-verification/config/cache.php",
+      "age-verification/config/database.php",
+      "age-verification/config/default-tenant.php",
+      "age-verification/config/filesystems.php",
+      "age-verification/config/fortify.php",
+      "age-verification/config/jetstream.php",
+      "age-verification/config/logging.php",
+      "age-verification/config/mail.php",
+      "age-verification/config/modules.php",
+      "age-verification/config/new-relic.php",
+      "age-verification/config/queue.php",
+      "age-verification/config/sanctum.php",
+      "age-verification/config/services.php",
+      "age-verification/config/session.php",
+      "age-verification/config/vite.php",
+      "age-verification/database/.gitignore",
+      "age-verification/database/factories/UserFactory.php",
+      "age-verification/database/migrations/0001_01_01_000000_create_users_table.php",
+      "age-verification/database/migrations/0001_01_01_000001_create_cache_table.php",
+      "age-verification/database/migrations/0001_01_01_000002_create_jobs_table.php",
+      "age-verification/database/migrations/2024_11_05_090556_add_two_factor_columns_to_users_table.php",
+      "age-verification/database/migrations/2024_11_05_090602_create_personal_access_tokens_table.php",
+      "age-verification/database/migrations/2024_11_05_143702_create_websites_table.php",
+      "age-verification/database/migrations/2024_11_05_145801_create_user_verification_providers_table.php",
+      "age-verification/database/migrations/2024_11_05_145914_create_website_verification_providers_table.php",
+      "age-verification/database/migrations/2024_11_11_144130_create_verifications_table.php",
+      "age-verification/database/migrations/2024_11_25_123750_add_status_reason_to_verifications_table.php",
+      "age-verification/database/migrations/2024_12_17_145028_add_is_default_tenant_to_users_table.php",
+      "age-verification/database/seeders/DatabaseSeeder.php",
+      "age-verification/docker/bin/artisan",
+      "age-verification/docker/bin/dc_down",
+      "age-verification/docker/bin/dc_exec",
+      "age-verification/docker/bin/dc_recreate",
+      "age-verification/docker/bin/dc_restart_php",
+      "age-verification/docker/bin/dc_up",
+      "age-verification/docker/bin/dc_xdebug",
+      "age-verification/docker/dev/app/.bash_aliases",
+      "age-verification/docker/docker-compose.yml",
+      "age-verification/docker/nginx/nginx.conf",
+      "age-verification/docker/php/Dockerfile",
+      "age-verification/docker/php/config/php/xdebug.ini.template",
+      "age-verification/infrastructure/main.tf",
+      "age-verification/infrastructure/outputs.tf",
+      "age-verification/infrastructure/variables.tf",
+      "age-verification/infrastructure/versions.tf",
+      "age-verification/infrastructure-ondemand/global/main.tf",
+      "age-verification/infrastructure-ondemand/global/variables.tf",
+      "age-verification/infrastructure-ondemand/tenant/main.tf",
+      "age-verification/infrastructure-ondemand/tenant/variables.tf",
+      "age-verification/jsconfig.json",
+      "age-verification/lang/cs.json",
+      "age-verification/lang/en/auth.php",
+      "age-verification/lang/en/pagination.php",
+      "age-verification/lang/en/passwords.php",
+      "age-verification/lang/en/validation.php",
+      "age-verification/modules_statuses.json",
+      "age-verification/package-lock.json",
+      "age-verification/package.json",
+      "age-verification/phpstan.neon",
+      "age-verification/phpunit.xml",
+      "age-verification/postcss.config.js",
+      "age-verification/public/.htaccess",
+      "age-verification/public/favicon.ico",
+      "age-verification/public/index.php",
+      "age-verification/public/robots.txt",
+      "age-verification/resources/css/app.css",
+      "age-verification/resources/images/bat_logo.png",
+      "age-verification/resources/images/main_logo.png",
+      "age-verification/resources/js/Components/ActionMessage.vue",
+      "age-verification/resources/js/Components/ActionSection.vue",
+      "age-verification/resources/js/Components/ApplicationLogo.vue",
+      "age-verification/resources/js/Components/ApplicationMark.vue",
+      "age-verification/resources/js/Components/AuthenticationCard.vue",
+      "age-verification/resources/js/Components/AuthenticationCardLogo.vue",
+      "age-verification/resources/js/Components/Banner.vue",
+      "age-verification/resources/js/Components/Checkbox.vue",
+      "age-verification/resources/js/Components/ConfirmationModal.vue",
+      "age-verification/resources/js/Components/ConfirmsPassword.vue",
+      "age-verification/resources/js/Components/Custom/DangerButton.vue",
+      "age-verification/resources/js/Components/Custom/ErrorIcon.vue",
+      "age-verification/resources/js/Components/Custom/MainLogo.vue",
+      "age-verification/resources/js/Components/Custom/PrimaryButton.vue",
+      "age-verification/resources/js/Components/Custom/SecondaryButton.vue",
+      "age-verification/resources/js/Components/Custom/SuccessIcon.vue",
+      "age-verification/resources/js/Components/DangerButton.vue",
+      "age-verification/resources/js/Components/DialogModal.vue",
+      "age-verification/resources/js/Components/Dropdown.vue",
+      "age-verification/resources/js/Components/DropdownLink.vue",
+      "age-verification/resources/js/Components/FormSection.vue",
+      "age-verification/resources/js/Components/InputError.vue",
+      "age-verification/resources/js/Components/InputLabel.vue",
+      "age-verification/resources/js/Components/Modal.vue",
+      "age-verification/resources/js/Components/NavLink.vue",
+      "age-verification/resources/js/Components/PrimaryButton.vue",
+      "age-verification/resources/js/Components/Providers/ProviderList.vue",
+      "age-verification/resources/js/Components/Providers/ProviderListBtn.vue",
+      "age-verification/resources/js/Components/ResponsiveNavLink.vue",
+      "age-verification/resources/js/Components/SecondaryButton.vue",
+      "age-verification/resources/js/Components/SectionBorder.vue",
+      "age-verification/resources/js/Components/SectionTitle.vue",
+      "age-verification/resources/js/Components/TextInput.vue",
+      "age-verification/resources/js/Components/Welcome.vue",
+      "age-verification/resources/js/Layouts/AppLayout.vue",
+      "age-verification/resources/js/Layouts/PublicLayout.vue",
+      "age-verification/resources/js/Pages/Auth/ConfirmPassword.vue",
+      "age-verification/resources/js/Pages/Auth/ForgotPassword.vue",
+      "age-verification/resources/js/Pages/Auth/Login.vue",
+      "age-verification/resources/js/Pages/Auth/Register.vue",
+      "age-verification/resources/js/Pages/Auth/ResetPassword.vue",
+      "age-verification/resources/js/Pages/Auth/TwoFactorChallenge.vue",
+      "age-verification/resources/js/Pages/Auth/VerifyEmail.vue",
+      "age-verification/resources/js/Pages/Dashboard.vue",
+      "age-verification/resources/js/Pages/Error.vue",
+      "age-verification/resources/js/Pages/Profile/Partials/DeleteUserForm.vue",
+      "age-verification/resources/js/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue",
+      "age-verification/resources/js/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue",
+      "age-verification/resources/js/Pages/Profile/Partials/UpdatePasswordForm.vue",
+      "age-verification/resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.vue",
+      "age-verification/resources/js/Pages/Profile/Show.vue",
+      "age-verification/resources/js/Pages/Result.vue",
+      "age-verification/resources/js/Pages/Verify.vue",
+      "age-verification/resources/js/Pages/Welcome.vue",
+      "age-verification/resources/js/app.js",
+      "age-verification/resources/js/bootstrap.js",
+      "age-verification/resources/js/i18n/messages.js",
+      "age-verification/resources/markdown/policy.md",
+      "age-verification/resources/markdown/terms.md",
+      "age-verification/resources/views/app.blade.php",
+      "age-verification/resources/views/emails/team-invitation.blade.php",
+      "age-verification/resources/views/errors/health-down.blade.php",
+      "age-verification/rootfs/Dockerfile",
+      "age-verification/rootfs/default.conf.template",
+      "age-verification/rootfs/php.ini",
+      "age-verification/routes/api.php",
+      "age-verification/routes/console.php",
+      "age-verification/routes/web.php",
+      "age-verification/storage/app/.gitignore",
+      "age-verification/storage/app/private/.gitignore",
+      "age-verification/storage/app/public/.gitignore",
+      "age-verification/storage/framework/.gitignore",
+      "age-verification/storage/framework/cache/.gitignore",
+      "age-verification/storage/framework/cache/data/.gitignore",
+      "age-verification/storage/framework/sessions/.gitignore",
+      "age-verification/storage/framework/testing/.gitignore",
+      "age-verification/storage/framework/views/.gitignore",
+      "age-verification/storage/logs/.gitignore",
+      "age-verification/tailwind.config.js",
+      "age-verification/vite-module-loader.js",
+      "age-verification/vite.config.js"
+    ]
+  },
+  "time": {
+    "rules": [],
+    "rules_parse_time": 1.1768121719360352,
+    "profiling_times": {
+      "config_time": 2.4914515018463135,
+      "core_time": 2.9407122135162354,
+      "ignores_time": 0.0013203620910644531,
+      "total_time": 5.4367265701293945
+    },
+    "parsing_time": {
+      "total_time": 0.0,
+      "per_file_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "scanning_time": {
+      "total_time": 2.019044876098633,
+      "per_file_time": {
+        "mean": 0.0028042289945814343,
+        "std_dev": 2.8130217740352346e-05
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_files": []
+    },
+    "matching_time": {
+      "total_time": 0.0,
+      "per_file_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_files": []
+    },
+    "tainting_time": {
+      "total_time": 0.0,
+      "per_def_and_rule_time": {
+        "mean": 0.0,
+        "std_dev": 0.0
+      },
+      "very_slow_stats": {
+        "time_ratio": 0.0,
+        "count_ratio": 0.0
+      },
+      "very_slow_rules_on_defs": []
+    },
+    "fixpoint_timeouts": [],
+    "prefiltering": {
+      "project_level_time": 0.0,
+      "file_level_time": 0.0,
+      "rules_with_project_prefilters_ratio": 0.0,
+      "rules_with_file_prefilters_ratio": 0.9797014337094152,
+      "rules_selected_ratio": 0.04266640390205449,
+      "rules_matched_ratio": 0.04266640390205449
+    },
+    "targets": [],
+    "total_bytes": 0,
+    "max_memory_bytes": 1390819200
+  },
+  "engine_requested": "OSS",
+  "skipped_rules": [],
+  "profiling_results": []
+}

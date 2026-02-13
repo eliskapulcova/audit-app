@@ -1,13 +1,16 @@
+import type { ReportTool } from "./report-tool";
+
 export interface AuditIssue {
-    component: string;
-    file: string;
+    tool: ReportTool;
     location: string;
+    file: string;
     fileType: string;
+    line: number;
     author: string | null;
     rule: string;
-    ruleDocLink: string;
+    ruleDocLink: string | null;
     severity: string;
-    type: string | null;
+    issueType: string | null;
     impacts: {
         softwareQuality?: string;
         severity?: string;

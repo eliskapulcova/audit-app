@@ -1,19 +1,20 @@
-import type { SemgrepIssue } from '../domain/semgrep-issue';
-import type { AuditIssue } from '../domain/audit-issue';
+import type { SemgrepIssue } from '../domain/_obsolete/issue_mapping/semgrep-issue';
+import type { AuditIssue } from '../domain/_obsolete/audit-issue';
+import { ReportTool } from '../domain/_obsolete/report-tool';
 
 export class SemgrepIssueMapper {
     static mapIssue(issue: SemgrepIssue): AuditIssue {
-        console.log('mapping issue', issue);
         return {
-            component: issue.path,
-            file: `${issue.path.substring(issue.path.lastIndexOf('/') + 1)}:${issue.start.line}`,
-            location: issue.path.slice(issue.path.indexOf('/') + 1, issue.path.lastIndexOf('/')),
+            tool: ReportTool.Semgrep,
+            location: issue.path.replace('/', ':').slice(0, issue.path.lastIndexOf('/')),
+            file: issue.path.substring(issue.path.lastIndexOf('/') + 1),
             fileType:  issue.path?.match(/\.([^.]*)$/)?.[1] ?? '',
+            line: issue.start.line,
             author: null,
             rule: issue.extra?.metadata?.cwe?.[0]?.split(':')?.[0] ?? '',
             ruleDocLink: issue.extra?.metadata?.source ?? '',
             severity: issue.extra.severity,
-            type: null,
+            issueType: null,
             impacts: { softwareQuality: issue.extra?.metadata?.category, severity: issue.extra?.metadata?.impact },
             tags: [],
             message: issue.extra.message,

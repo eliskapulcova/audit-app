@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "format": "prettier --write \"app/{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\""
   },
   "dependencies": {
     "@nuxt/eslint": "1.12.1",
@@ -16,6 +18,7 @@
     "@nuxt/image": "2.0.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@primeuix/themes": "^2.0.2",
+    "chart.js": "^4.5.1",
     "eslint": "^9.0.0",
     "material-file-icons": "^2.4.0",
     "nuxt": "^4.2.2",
@@ -25,6 +28,9 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@primevue/nuxt-module": "^4.5.4"
+    "@primevue/nuxt-module": "^4.5.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1"
   }
 }
