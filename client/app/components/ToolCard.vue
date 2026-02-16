@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { TOOL_CARDS_EXPANDED_DEFAULT } from '~/config/general';
+import { TOOL_CARDS_EXPANDED_DEFAULT } from '~/config/general'
 import { toolHealthStatuses } from '~/config/visuals'
 import type { HealthStatus } from '~/domain/types'
 

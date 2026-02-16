@@ -107,7 +107,12 @@
               </span>
             </td>
             <td class="py-3 px-4 text-sm text-cyan-400 font-mono">
-              <a v-if="issue.ruleDocUrl" :href="issue.ruleDocUrl" target="_blank" class="cursor-pointer hover:underline">
+              <a
+                v-if="issue.ruleDocUrl"
+                :href="issue.ruleDocUrl"
+                target="_blank"
+                class="cursor-pointer hover:underline"
+              >
                 {{ issue.ruleId }}
               </a>
               <span v-else>
@@ -120,7 +125,12 @@
             <td
               class="py-3 px-4 text-xs text-slate-400 font-mono max-w-xs truncate"
             >
-              <a v-if="issue.codeUrl" :href="issue.codeUrl" target="_blank" class="cursor-pointer hover:underline">
+              <a
+                v-if="issue.codeUrl"
+                :href="issue.codeUrl"
+                target="_blank"
+                class="cursor-pointer hover:underline"
+              >
                 {{ issue.filePath }}
               </a>
               <span v-else>

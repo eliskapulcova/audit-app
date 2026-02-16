@@ -34,7 +34,10 @@
         <div class="text-sm text-slate-400">{{ kpi.label }}</div>
       </div>
 
-      <div v-if="kpi.sparklineData.length >= TREND_DATA_MIN_POINTS" class="h-12 -mx-2">
+      <div
+        v-if="kpi.sparklineData.length >= TREND_DATA_MIN_POINTS"
+        class="h-12 -mx-2"
+      >
         <Chart
           type="line"
           :data="getSparklineData(kpi.sparklineData)"
