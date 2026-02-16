@@ -55,33 +55,6 @@ GET /v1/report
 }
 ```
 
-GET /v1/report
-
-**Response Example**
-```json
-{
-  "issuesReport": {
-    "issues": [
-      {
-        "updateDate": "2025-12-29T00:34:47+0000",
-        "line": 90,
-        "rule": "php:S1066",
-        "project": "age-verification",
-        "severity": "MAJOR",
-        "status": "OPEN"
-      }
-    ]
-  },
-  "analysisReport": {
-    "totalIssues": 123,
-    "bySeverity": {
-      "MAJOR": 45,
-      "MINOR": 78
-    }
-  }
-}
-```
-
 GET /details?{project_key}
 
 **Response Example**
