@@ -1,0 +1,8 @@
+sonar:
+  base-url: http://localhost:9000
+  token: ${SONAR_TOKEN}
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/auditdb
