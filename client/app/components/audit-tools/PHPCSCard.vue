@@ -5,7 +5,7 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-
+  <template #essentials>
     <TotalFindings :total-violations="data.totalViolations" title="Total Violations">
       <template #additionalInfo>
         <div class="mt-2 text-xs text-cyan-400">
@@ -24,12 +24,15 @@
         <div class="text-xs text-slate-400">Warning</div>
       </div>
     </div>
+  </template>
 
+  <template #details>
     <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
 
     <ViolationCategories title="Top Violated Standards" :data="data.topSniffs" />
 
     <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
+  </template>
   </ToolCard>
 </template>
 

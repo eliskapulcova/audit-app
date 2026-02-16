@@ -19,7 +19,7 @@
             <div
               :class="[
                 'inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r text-white font-bold text-lg',
-                gradeColor,
+                getGradeColor(healthScore.grade),
               ]"
             >
               Grade: {{ healthScore.grade }}
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import type { HealthScore, ProjectSummary } from '../domain/types'
+import type { AToFGrade, HealthScore, ProjectSummary } from '../domain/types'
 import {
   healthGradeChartColors,
   healthGradeGradientColors,
@@ -93,16 +93,6 @@ const props = defineProps<{
   healthScore: HealthScore
   projectSummary: ProjectSummary
 }>()
-
-const gradeColor = computed(() => {
-  if (!props.healthScore.grade) {
-    return healthGradeGradientColors.default
-  }
-  return (
-    healthGradeGradientColors[props.healthScore.grade] ||
-    healthGradeGradientColors.default
-  )
-})
 
 const chartData = computed(() => {
   const grade = props.healthScore.grade ?? 'F'
@@ -153,4 +143,8 @@ ChartJS.register(
   CategoryScale,
   DoughnutController
 )
+
+function getGradeColor(grade: AToFGrade) {
+  return healthGradeGradientColors[grade]
+}
 </script>

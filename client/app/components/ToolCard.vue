@@ -35,21 +35,26 @@
         </div>
       </div>
 
+      <div class="space-y-4">
+        <slot name="essentials" />
+      </div>
+
       <button
         @click="isExpanded = !isExpanded"
-        class="text-sm text-cyan-400 hover:text-cyan-300 mb-4 font-medium"
+        class="text-sm text-cyan-400 hover:text-cyan-300 mb-4 font-medium my-4"
       >
         {{ isExpanded ? 'Collapse' : 'Expand' }} Details
       </button>
 
       <div v-if="isExpanded" class="space-y-4">
-        <slot />
+        <slot name="details" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { TOOL_CARDS_EXPANDED_DEFAULT } from '~/config/general';
 import { toolHealthStatuses } from '~/config/visuals'
 import type { HealthStatus } from '~/domain/types'
 
@@ -60,7 +65,7 @@ const props = defineProps<{
   lastRun: string
 }>()
 
-const isExpanded = ref(true)
+const isExpanded = ref<boolean>(TOOL_CARDS_EXPANDED_DEFAULT)
 
 const formattedDate = computed(() => {
   return new Date(props.lastRun).toLocaleString('en-US', {
