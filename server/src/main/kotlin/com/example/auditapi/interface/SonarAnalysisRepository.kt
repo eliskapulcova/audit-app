@@ -1,0 +1,13 @@
+package com.example.auditapi.`interface`
+
+import com.example.auditapi.domain.model.SonarAnalysisDocument
+import com.example.auditapi.domain.model.SonarQubeDataDto
+
+interface SonarAnalysisRepository {
+    fun save(analysis: SonarAnalysisDocument): SonarAnalysisDocument
+    fun findLatestByProjectKey(projectKey: String): SonarAnalysisDocument?
+    fun findByService(serviceKey: String): List<SonarAnalysisDocument>
+    fun findByServiceAndVersion(serviceKey: String, version: Long): SonarAnalysisDocument?
+    fun getNextVersion(projectKey: String): Long
+    fun aggregateSonarData(projectKey: String): SonarQubeDataDto?
+}
