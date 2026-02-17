@@ -16,7 +16,7 @@ import {
 
 export default defineEventHandler(
   async (event): Promise<ProjectDetails> => {
-    const projectId = getRouterParam(event, 'name')
+    const projectId = getRouterParam(event, 'project')
     const projectSummary = projectSummaries.find((p) => p.id === projectId)
 
     if (!projectSummary) {
