@@ -1,4 +1,4 @@
-# Audit API (Backend)
+# Audit API (Backend) - under server part
 
 Spring Boot backend application written in **Kotlin**, responsible for:
 
@@ -24,37 +24,9 @@ Spring Boot backend application written in **Kotlin**, responsible for:
 
 ### Get Audit Report
 
-Returns parsed CSV issues together with analysis/statistics JSON.
+Returns detailed CSV with issues together with aggregations from multiple reporting tools
 
 **Endpoint**
-
-GET /v1/report
-
-**Response Example**
-```json
-{
-  "issuesReport": {
-    "issues": [
-      {
-        "updateDate": "2025-12-29T00:34:47+0000",
-        "line": 90,
-        "rule": "php:S1066",
-        "project": "age-verification",
-        "severity": "MAJOR",
-        "status": "OPEN"
-      }
-    ]
-  },
-  "analysisReport": {
-    "totalIssues": 123,
-    "bySeverity": {
-      "MAJOR": 45,
-      "MINOR": 78
-    }
-  }
-}
-```
-
 GET /details?{project_key}
 
 **Response Example**
@@ -153,12 +125,8 @@ GET /details?{project_key}
 ### Running locally
 
 1) value for SONAR_TOKEN has to be added as environmental variable
-3) composing Mongo db through docker-compose.yml in root of the server project
+3) composing Mongo DB through docker-compose.yml in root of the server project
 2) ./gradlew bootRun
 
 **Application will be available at**
-http://localhost:8080/v1/report
-
 http://localhost:8080/details
-
-
