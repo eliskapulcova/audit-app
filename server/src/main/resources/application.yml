@@ -1,6 +1,6 @@
 sonar:
   base-url: http://localhost:9000
-  token: ${SONAR_TOKEN}
+  token: ${SONAR_TOKEN:dummy-token}
 
 spring:
   data:

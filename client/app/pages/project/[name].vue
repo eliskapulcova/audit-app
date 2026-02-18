@@ -53,6 +53,7 @@ const route = useRoute()
 
 // TODO: Handle pending and error states
 const { data, pending, error } = await useFetch<ProjectDetails>(
-  '/api/v2/project/' + route.params.name
+  // '/api/v2/project/' + route.params.name
+  'http://localhost:8080/details?projectKey=age_verification'
 )
 </script>

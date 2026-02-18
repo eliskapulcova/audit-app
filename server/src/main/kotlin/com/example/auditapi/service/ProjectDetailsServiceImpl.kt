@@ -43,7 +43,7 @@ class ProjectDetailsServiceImpl(
 
         return listOf(
             KPIDto(
-                id = "open_issues",
+                id = "open-issues",
                 label = "Open Issues",
                 value = openIssues ?: 0,
                 trend = 0,

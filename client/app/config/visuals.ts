@@ -35,7 +35,7 @@ export const healthGradeChartColors = {
  * Keys are ids of KPIs and values are kebab-case names of Lucide icons
  */
 export const kpiIcons = {
-  'total-issues': 'alert-triangle',
+  'open-issues': 'alert-triangle',
   'critical-high': 'alert-octagon',
   'coverage': 'shield',
   'tech-debt': 'clock',
