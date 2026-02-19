@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 class SonarAnalysisDocumentMapper {
 
     fun responseToDocument(
+        repositoryKey: String,
         serviceKey: String,
         projectKey: String,
         version: Long,
@@ -17,6 +18,7 @@ class SonarAnalysisDocumentMapper {
         qualityGateResponse: SonarQualityGateResponse
     ): SonarAnalysisDocument =
         SonarAnalysisDocument(
+            repositoryKey = repositoryKey,
             serviceKey = serviceKey,
             projectKey = projectKey,
             analysisVersion = version,
@@ -80,7 +82,7 @@ class SonarAnalysisDocumentMapper {
                 }
 
                 val coverage = getMeasure(document, "coverage")
-                    ?.toDoubleOrNull()
+                    .toDoubleOrNull()
                     ?: 0.0
 
                 ProjectSummaryDto(
