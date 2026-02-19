@@ -14,10 +14,11 @@ class SonarController(
 
     @PostMapping("/analyze")
     fun analyze(
+        @RequestParam repositoryKey: String,
         @RequestParam serviceKey: String,
         @RequestParam projectKey: String
     ) {
-        service.analyzeAndCreate(serviceKey, projectKey, branch = "main") //main just for now
+        service.analyzeAndCreate(repositoryKey, serviceKey, projectKey, branch = "main") //main just for now
     }
 
     @PostMapping(
@@ -25,6 +26,7 @@ class SonarController(
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE]
     )
     fun createAnalysis(
+        @RequestParam repositoryKey: String,
         @RequestParam serviceKey: String,
         @RequestParam projectKey: String,
 
@@ -35,6 +37,7 @@ class SonarController(
     ): SonarAnalysisDocument {
 
         return service.createAnalysis(
+            repositoryKey,
             serviceKey,
             projectKey,
             issues,
@@ -43,5 +46,4 @@ class SonarController(
             qualityGate
         )
     }
-
 }
