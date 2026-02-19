@@ -108,8 +108,10 @@ export interface Issue {
   severity: SeverityRating
   tool: Tool
   ruleId: string
+  ruleDocUrl: string | null
   description: string
   filePath: string
+  line: number | null
   firstDetected: string
 }
 

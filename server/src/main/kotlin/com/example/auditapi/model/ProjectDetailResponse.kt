@@ -52,8 +52,10 @@ data class IssueDto(
     val severity: String, // "Critical" | "High" | "Medium" | "Low"
     val tool: String,     // "SonarQube"
     val ruleId: String,
+    val ruleDocUrl: String,
     val description: String,
     val filePath: String,
+    val line: Int?,
     val firstDetected: String
 )
 

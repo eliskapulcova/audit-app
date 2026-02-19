@@ -2,7 +2,7 @@ package com.example.auditapi.mapper
 
 import com.example.auditapi.domain.model.*
 import org.springframework.stereotype.Component
-
+import java.net.URLEncoder
 
 @Component
 class SonarAnalysisDocumentMapper {
@@ -42,8 +42,10 @@ class SonarAnalysisDocumentMapper {
                     severity = mapSeverity(it.severity.name),
                     tool = "SonarQube",
                     ruleId = it.rule,
+                    ruleDocUrl = "https://next.sonarqube.com/sonarqube/coding_rules?open=${URLEncoder.encode(it.rule, "UTF-8")}&rule_key=${URLEncoder.encode(it.rule, "UTF-8")}",
                     description = it.message,
                     filePath = it.component.substringAfter(":"),
+                    line = it.textRange?.startLine,
                     firstDetected = it.creationDate
                 )
             }
@@ -80,7 +82,7 @@ class SonarAnalysisDocumentMapper {
                 }
 
                 val coverage = getMeasure(document, "coverage")
-                    ?.toDoubleOrNull()
+                    .toDoubleOrNull()
                     ?: 0.0
 
                 ProjectSummaryDto(

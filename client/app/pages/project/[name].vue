@@ -30,6 +30,15 @@
       Quanti Code Quality Hub v1.0 — Data refreshed daily
     </footer>
   </div>
+  <div v-else-if="pending">
+    <p>Loading project details...</p>
+  </div>
+  <div v-else-if="error">
+    <p v-if="error.message.includes('404')" class="text-red-500">
+      Project not found
+    </p>
+    <p v-else class="text-red-500">Error: {{ error.message }}</p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -51,9 +60,12 @@ definePageMeta({
 
 const route = useRoute()
 
+const useMockData = route.params.name !== 'age_verification'
+
 // TODO: Handle pending and error states
 const { data, pending, error } = await useFetch<ProjectDetails>(
-  // '/api/v2/project/' + route.params.name
-  'http://localhost:8080/details?projectKey=age_verification'
+  useMockData
+    ? '/api/v2/project/' + route.params.name
+    : 'http://localhost:8080/details?projectKey=age_verification'
 )
 </script>
