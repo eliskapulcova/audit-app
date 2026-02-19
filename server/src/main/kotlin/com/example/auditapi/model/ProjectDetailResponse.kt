@@ -42,6 +42,8 @@ data class SonarQubeDataDto(
     val security: String,
     val maintainability: String,
     val severityBreakdown: SeverityBreakdownDto,
+    val trendData: List<Int>,
+    val topFiles: List<FileSummaryDto>,
     val lastRun: String
 )
 
@@ -78,6 +80,11 @@ data class SeverityBreakdownDto(
     val major: Int,
     val minor: Int,
     val info: Int
+)
+
+data class FileSummaryDto(
+    val file: String,
+    val violations: Int,
 )
 
 data class ProjectSummaryDto(

@@ -94,7 +94,7 @@ class SonarAnalysisDocumentMapper {
                     totalIssues = openIssues,
                     criticalIssues = criticalIssues,
                     coverage = coverage,
-                    lastScan = document.id.orEmpty(),
+                    lastScan = document.id.orEmpty(), // FIXME: should be date of analysis, not id
                     trend = 0,
                     tools = listOf("SonarQube")
                 )

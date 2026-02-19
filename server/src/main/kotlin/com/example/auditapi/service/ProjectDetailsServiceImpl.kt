@@ -33,11 +33,13 @@ class ProjectDetailsServiceImpl(
             trendData = emptyList(),
             topIssues = sonarMapper.mapTopIssues(lastDocument),
             repositoryHealth = emptyList(),
+            // FIXME: project summary should not be responsibility of Sonar mapper, it should take into account all tools
             projectSummary = sonarMapper.buildProjectSummary(lastDocument,healthScore)
         )
     }
 
    override fun buildKpis(doc: SonarAnalysisDocument?): List<KPIDto>? {
+        // TODO: implement trend calculation - we need historical data for this
         val openIssues = doc?.issues?.count { it.status == "OPEN" }
         val coverage = sonarMapper.getMeasure(doc, "coverage").toDoubleOrNull() ?: 0.0
 
@@ -47,7 +49,7 @@ class ProjectDetailsServiceImpl(
                 label = "Open Issues",
                 value = openIssues ?: 0,
                 trend = 0,
-                isTrendPositive = true,
+                isTrendPositive = false,
                 sparklineData = emptyList()
             ),
             KPIDto(
@@ -55,7 +57,7 @@ class ProjectDetailsServiceImpl(
                 label = "Coverage",
                 value = coverage,
                 trend = 0,
-                isTrendPositive = coverage >= 80,
+                isTrendPositive = false,
                 sparklineData = emptyList()
             )
         )
