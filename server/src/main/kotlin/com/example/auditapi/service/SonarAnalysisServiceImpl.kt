@@ -14,6 +14,7 @@ class SonarAnalysisServiceImpl(
 ) : SonarAnalysisService {
 
     override fun analyzeAndCreate(
+        repositoryKey: String,
         serviceKey: String,
         projectKey: String,
         branch: String
@@ -24,10 +25,11 @@ class SonarAnalysisServiceImpl(
         val sonarComponentTreeResponse = sonarClient.fetchComponentTree(projectKey, branch)
         val sonarQualityGateResponse = sonarClient.fetchQualityGate(projectKey)
 
-        return createAnalysis(serviceKey, projectKey, sonarIssueResponse, sonarMeasureResponse, sonarComponentTreeResponse, sonarQualityGateResponse)
+        return createAnalysis(repositoryKey, serviceKey, projectKey, sonarIssueResponse, sonarMeasureResponse, sonarComponentTreeResponse, sonarQualityGateResponse)
     }
 
     override fun createAnalysis(
+        repositoryKey: String,
         serviceKey: String,
         projectKey: String,
         sonarIssueResponse: SonarIssuesResponse,
@@ -39,6 +41,7 @@ class SonarAnalysisServiceImpl(
         val nextVersion = repository.getNextVersion(serviceKey)
 
         val document = mapper.responseToDocument(
+            repositoryKey = repositoryKey,
             serviceKey = serviceKey,
             projectKey = projectKey,
             version = nextVersion,

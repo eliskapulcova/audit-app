@@ -6,3 +6,17 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/auditdb
+
+audit:
+  api-url: ${AUDIT_API_URL}
+  token: ${AUDIT_API_TOKEN}
+
+server:
+  address: 0.0.0.0
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

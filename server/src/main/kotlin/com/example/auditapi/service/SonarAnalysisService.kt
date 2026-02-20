@@ -5,12 +5,14 @@ import com.example.auditapi.domain.model.*
 interface SonarAnalysisService {
 
     fun analyzeAndCreate(
+        repositoryKey: String,
         serviceKey: String,
         projectKey: String,
         branch: String,
     ): SonarAnalysisDocument
 
     fun createAnalysis(
+        repositoryKey: String,
         serviceKey: String,
         projectKey: String,
         sonarIssueResponse: SonarIssuesResponse,
