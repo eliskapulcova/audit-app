@@ -1,5 +1,6 @@
 package com.example.auditapi.`interface`
 
+import org.bson.Document
 import com.example.auditapi.domain.model.*
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoTemplate
@@ -48,14 +49,18 @@ class SonarAnalysisRepositoryImpl(
             Aggregation.addFields()
                 .addField("coverage")
                 .withValue(
-                    ArrayOperators.ArrayElemAt
-                        .arrayOf(
-                            ArrayOperators.Filter
-                                .filter(SonarAnalysisDocument::measures.name)
-                                .`as`("m")
-                                .by(ComparisonOperators.Eq.valueOf("m.metric").equalToValue("coverage"))
+                    ConditionalOperators.`when`(ArrayOperators.IsArray.isArray("measures"))
+                        .then(
+                            ArrayOperators.ArrayElemAt
+                                .arrayOf(
+                                    ArrayOperators.Filter
+                                        .filter("measures")
+                                        .`as`("m")
+                                        .by(ComparisonOperators.Eq.valueOf("m.metric").equalToValue("coverage"))
+                                )
+                                .elementAt(0)
                         )
-                        .elementAt(0)
+                        .otherwise(Document("metric", "unknown"))
                 )
                 .build(),
 
@@ -63,44 +68,126 @@ class SonarAnalysisRepositoryImpl(
             Aggregation.addFields()
                 .addField("duplications")
                 .withValue(
-                    ArrayOperators.ArrayElemAt
-                        .arrayOf(
-                            ArrayOperators.Filter
-                                .filter(SonarAnalysisDocument::measures.name)
-                                .`as`("m")
-                                .by(ComparisonOperators.Eq.valueOf("m.metric").equalToValue("duplicated_lines_density"))
+                    ConditionalOperators.`when`(ArrayOperators.IsArray.isArray("measures"))
+                        .then(
+                            ArrayOperators.ArrayElemAt
+                                .arrayOf(
+                                    ArrayOperators.Filter
+                                        .filter("measures")
+                                        .`as`("m")
+                                        .by(ComparisonOperators.Eq.valueOf("m.metric").equalToValue("duplicated_lines_density"))
+                                )
+                                .elementAt(0)
                         )
-                        .elementAt(0)
+                        .otherwise(Document("metric", "unknown"))
                 )
                 .build(),
 
 
         // Group everything in one stage
-            Aggregation.group()
-                // Issue counts
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.type").`is`("BUG")).then(1).otherwise(0)).`as`("bugs")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.type").`is`("VULNERABILITY")).then(1).otherwise(0)).`as`("vulnerabilities")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.type").`is`("CODE_SMELL")).then(1).otherwise(0)).`as`("codeSmells")
-                // Severity breakdown
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.severity").`is`("BLOCKER")).then(1).otherwise(0)).`as`("blocker")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.severity").`is`("CRITICAL")).then(1).otherwise(0)).`as`("critical")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.severity").`is`("MAJOR")).then(1).otherwise(0)).`as`("major")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.severity").`is`("MINOR")).then(1).otherwise(0)).`as`("minor")
-                .sum(ConditionalOperators.`when`(Criteria.where("issues.status").`is`("OPEN")
-                    .and("issues.severity").`is`("INFO")).then(1).otherwise(0)).`as`("info")
-                // Technical debt sum
-                .sum("issues.debtMinutes").`as`("technicalDebt")
-                // Pull first of flattened fields
-                .first("coverage").`as`("coverage")
-                .first("duplications").`as`("duplications")
-                .first(SonarAnalysisDocument::qualityGateStatus.name).`as`("qualityGate")
+            // Facet stage to calculate metrics and top files in parallel
+            Aggregation.facet()
+                .and(
+                    Aggregation.unwind("issues", true),
+                    Aggregation.group()
+                        // Issue counts
+                        // Issue counts
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.type").equalToValue("BUG")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("bugs")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.type").equalToValue("VULNERABILITY")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("vulnerabilities")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.type").equalToValue("CODE_SMELL")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("codeSmells")
+                        // Severity breakdown
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.severity").equalToValue("BLOCKER")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("blocker")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.severity").equalToValue("CRITICAL")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("critical")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.severity").equalToValue("MAJOR")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("major")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.severity").equalToValue("MINOR")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("minor")
+                        .sum(
+                            ConditionalOperators.`when`(
+                                BooleanOperators.And.and(
+                                    ComparisonOperators.Eq.valueOf("issues.status").equalToValue("OPEN"),
+                                    ComparisonOperators.Eq.valueOf("issues.severity").equalToValue("INFO")
+                                )
+                            ).then(1).otherwise(0)
+                        ).`as`("info")
+                        // Technical debt sum
+                        .sum("issues.debtMinutes").`as`("technicalDebt")
+                        // Pull first of flattened fields
+                        .first("coverage").`as`("coverage")
+                        .first("duplications").`as`("duplications")
+                        .first(SonarAnalysisDocument::qualityGateStatus.name).`as`("qualityGateStatus")
+                ).`as`("metrics")
+                .and(
+                    Aggregation.unwind("issues", true),
+                    Aggregation.match(Criteria.where("issues.status").`is`("OPEN")),
+                    Aggregation.group("issues.component").count().`as`("violations"),
+                    Aggregation.sort(Sort.Direction.DESC, "violations"),
+                    Aggregation.limit(5),
+                    Aggregation.project("violations").and("_id").`as`("file")
+                ).`as`("topFiles"),
+
+            // Project to flatten the structure back to SonarAggregationResult
+            Aggregation.project()
+                .and("metrics.bugs").arrayElementAt(0).`as`("bugs")
+                .and("metrics.vulnerabilities").arrayElementAt(0).`as`("vulnerabilities")
+                .and("metrics.codeSmells").arrayElementAt(0).`as`("codeSmells")
+                .and("metrics.blocker").arrayElementAt(0).`as`("blocker")
+                .and("metrics.critical").arrayElementAt(0).`as`("critical")
+                .and("metrics.major").arrayElementAt(0).`as`("major")
+                .and("metrics.minor").arrayElementAt(0).`as`("minor")
+                .and("metrics.info").arrayElementAt(0).`as`("info")
+                .and("metrics.technicalDebt").arrayElementAt(0).`as`("technicalDebt")
+                .and("metrics.coverage").arrayElementAt(0).`as`("coverage")
+                .and("metrics.duplications").arrayElementAt(0).`as`("duplications")
+                .and("metrics.qualityGateStatus").arrayElementAt(0).`as`("qualityGateStatus")
+                .and("topFiles").`as`("topFiles")
         )
 
         return mongoTemplate.aggregate(
@@ -134,6 +221,8 @@ class SonarAnalysisRepositoryImpl(
                 minor = r.minor,
                 info = r.info
             ),
+            trendData = emptyList(), // TODO: implement using historical data
+            topFiles = r.topFiles.map { FileSummaryDto(it.file, it.violations) },
             lastRun = Instant.now().toString()
         )
     }

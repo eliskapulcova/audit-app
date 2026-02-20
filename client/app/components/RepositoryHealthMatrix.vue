@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <div class="overflow-x-auto">
+    <div v-if="repositories.length > 0" class="overflow-x-auto">
       <div class="inline-block min-w-full">
         <div class="flex gap-2">
           <div class="flex flex-col gap-2 pr-4">
@@ -54,6 +54,10 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div v-else class="flex items-center justify-center h-full">
+      <p class="text-slate-500">No repositories found</p>
     </div>
 
     <div

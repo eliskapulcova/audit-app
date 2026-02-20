@@ -9,7 +9,7 @@ export type AToFGrade = 'A' | 'B' | 'C' | 'D' | 'F'
 export type HealthStatus = 'healthy' | 'warning' | 'critical'
 export type PassedOrFailed = 'Passed' | 'Failed'
 
-export type KPIType = 'total-issues' | 'critical-high' | 'coverage' | 'tech-debt'
+export type KPIType = 'open-issues' | 'critical-high' | 'coverage' | 'tech-debt'
 
 export interface HealthScore {
   score: number | null
@@ -108,8 +108,10 @@ export interface Issue {
   severity: SeverityRating
   tool: Tool
   ruleId: string
+  ruleDocUrl: string | null
   description: string
   filePath: string
+  line: number | null
   firstDetected: string
 }
 

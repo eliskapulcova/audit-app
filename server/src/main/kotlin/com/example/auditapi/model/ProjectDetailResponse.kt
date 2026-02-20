@@ -42,6 +42,8 @@ data class SonarQubeDataDto(
     val security: String,
     val maintainability: String,
     val severityBreakdown: SeverityBreakdownDto,
+    val trendData: List<Int>,
+    val topFiles: List<FileSummaryDto>,
     val lastRun: String
 )
 
@@ -50,8 +52,10 @@ data class IssueDto(
     val severity: String, // "Critical" | "High" | "Medium" | "Low"
     val tool: String,     // "SonarQube"
     val ruleId: String,
+    val ruleDocUrl: String,
     val description: String,
     val filePath: String,
+    val line: Int?,
     val firstDetected: String
 )
 
@@ -78,6 +82,11 @@ data class SeverityBreakdownDto(
     val major: Int,
     val minor: Int,
     val info: Int
+)
+
+data class FileSummaryDto(
+    val file: String,
+    val violations: Int,
 )
 
 data class ProjectSummaryDto(
