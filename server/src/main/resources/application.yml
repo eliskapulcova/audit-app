@@ -1,15 +1,17 @@
 sonar:
-  base-url: http://localhost:9000
-  token: ${SONAR_TOKEN:dummy-token}
+  # http://localhost:9000
+  base-url: "" # ${SONAR_URL}
+  token: "" # ${SONAR_TOKEN:dummy-token}
 
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/auditdb
+      # For local development: mongodb://localhost:27017/auditdb
+      uri: "mongodb://localhost:27017/auditdb" # ${MONGODB_URI}
 
 audit:
-  api-url: ${AUDIT_API_URL}
-  token: ${AUDIT_API_TOKEN}
+  api-url: "" # "${AUDIT_API_URL}
+  token: "" # "${AUDIT_API_TOKEN}
 
 server:
   address: 0.0.0.0

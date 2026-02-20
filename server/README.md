@@ -162,3 +162,7 @@ http://localhost:8080/v1/report
 http://localhost:8080/details
 
 
+### Configuration of app
+
+- `src/main/resources/application.yml`
+   - In this file, there is configuration for the database connection via `MONGODB_URI` environment variable 
