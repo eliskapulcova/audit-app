@@ -13,9 +13,15 @@ data class SonarAggregationResult(
 
     val technicalDebt: Int = 0,
 
+    val topFiles: List<FileSummary> = emptyList(),
+
     val coverage: SonarMeasure? = null,
     val duplications: SonarMeasure? = null,
 
     val qualityGateStatus: ProjectStatus? = null
 )
 
+data class FileSummary(
+    val file: String,
+    val violations: Int,
+)

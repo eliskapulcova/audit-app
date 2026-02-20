@@ -5,7 +5,8 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-  <div class="flex flex-row flex-wrap gap-4">
+  <template #essentials>
+    <div class="flex flex-row flex-wrap gap-4">
     <TotalFindings class="flex-1" :total-violations="totalIssues" title="Total Findings" />
     <div v-if="data.technicalDebt" class="flex-1 bg-slate-900 p-4 rounded-lg">
       <div class="text-3xl font-bold text-white mb-1">
@@ -37,7 +38,9 @@
         <div class="text-xs text-slate-400">Info</div>
       </div>
     </div>
-
+  </template>
+  
+  <template #details>
     <div class="flex flex-row flex-wrap gap-4">
       <div class="flex-1 bg-slate-900 p-3 rounded-lg">
         <div class="flex flex-row gap-4 justify-between items-center">
@@ -87,7 +90,7 @@
       </div>
     </div>
 
-    <div class="bg-slate-900 p-3 rounded-lg">
+    <div v-if="hasQualityGateData" class="bg-slate-900 p-3 rounded-lg">
       <div class="flex items-center justify-between mb-4">
         <span class="text-lg text-slate-400">Quality Gate</span>
         <span
@@ -141,6 +144,7 @@
     </div>
 
     <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
+  </template>
   </ToolCard>
 </template>
 
@@ -149,8 +153,9 @@ import ToolCard from '../ToolCard.vue'
 import TotalFindings from './details/TotalFindings.vue'
 import FindingsTrend from './details/FindingsTrend.vue'
 import TopFiles from './details/TopFiles.vue'
-import type { SonarQubeData } from '../../domain/types'
+import type { SonarQubeData, AToEGrade } from '../../domain/types'
 import { TREND_DATA_MIN_POINTS } from '../../config/general'
+import { healthGradeColors } from '~/config/visuals'
 
 const props = defineProps<{
   data: SonarQubeData
@@ -158,15 +163,6 @@ const props = defineProps<{
 
 const totalIssues = computed(
   () => props.data.bugs + props.data.vulnerabilities + props.data.codeSmells
-)
-
-const totalSeverity = computed(
-  () =>
-    props.data.severityBreakdown.blocker +
-    props.data.severityBreakdown.critical +
-    props.data.severityBreakdown.major +
-    props.data.severityBreakdown.minor +
-    props.data.severityBreakdown.info
 )
 
 const hasQualityGateData = computed(() => {
@@ -178,20 +174,7 @@ const hasQualityGateData = computed(() => {
   )
 })
 
-const getRatingColor = (rating: string) => {
-  switch (rating) {
-    case 'A':
-      return 'bg-green-500'
-    case 'B':
-      return 'bg-blue-500'
-    case 'C':
-      return 'bg-yellow-500'
-    case 'D':
-      return 'bg-orange-500'
-    case 'E':
-      return 'bg-red-500'
-    default:
-      return 'bg-slate-500'
-  }
+const getRatingColor = (rating: AToEGrade) => {
+  return healthGradeColors[rating]
 }
 </script>

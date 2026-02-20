@@ -1,3 +1,4 @@
+<<<<<<< server/src/main/kotlin/com/example/auditapi/model/SonarAnalysisDocument.kt
 package com.example.auditapi.domain.model
 
 import org.springframework.data.annotation.Id
@@ -30,4 +31,3 @@ data class SonarAnalysisDocument(
     val componentTrees: List<Component>? = null,
     val qualityGateStatus: ProjectStatus? = null
 )
-

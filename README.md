@@ -130,3 +130,59 @@ GET /details?{project_key}
 
 **Application will be available at**
 http://localhost:8080/details
+
+### Architecture
+
+```mermaid
+flowchart LR
+    phpstan["PHPstan"]
+    phpcs["phpcs"]
+    sonarqube["SonarQube"]
+    semgrep["Semgrep"]
+    publishJob["Publish Job"]
+    phpstan --> publishJob
+    phpcs --> publishJob
+    sonarqube --> publishJob
+    semgrep --> publishJob
+```
+
+### TODOs:
+
+- unify docker compose yaml files
+- clarify mongo db runtime - do not expose port publically
+- Cleanup server to not require sonar and server API definitions in config 
+- API specifikace
+
+#### TODO Apis:
+
+- Overwiew API for dashboard
+- Individual repo view
+
+```openapi
+# List of all projects
+GET /projects?filter={filter}&page={page}&size={size}
+
+# Overview of all projects
+GET /projects/overview?filter={filter}
+
+# Detail of single project
+GET /projects/:project_key
+
+# Overview of single project
+GET /projects/:project_key/overview?filter={filter}
+
+# List of all repositories under project
+GET /projects/:project_key/repositories?filter={filter}&page={page}&size={size}
+
+# Overview of single repository
+GET /projects/:project_key/repositories/:repo_key
+
+
+### Analysis API
+
+PUT /projects/:project_key/repositories/:repo_key/analysis/sonarqube?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/phpstan?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/phpcs?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/junit?tool-name={name}
+
+```

@@ -1,3 +1,13 @@
+/**
+ * Keys are grades and values are Tailwind background colors
+ */
+export const healthGradeColors = {
+  'A': 'bg-green-500',
+  'B': 'bg-blue-500',
+  'C': 'bg-yellow-500',
+  'D': 'bg-orange-500',
+  'E': 'bg-red-500',
+}
 
 /**
  * Keys are grades and values are Tailwind gradient classes
@@ -8,7 +18,6 @@ export const healthGradeGradientColors = {
   'C': 'from-yellow-500 to-orange-500',
   'D': 'from-orange-500 to-red-500',
   'F': 'from-red-500 to-rose-700',
-  'default': 'from-slate-500 to-slate-600',
 }
 
 /**
@@ -26,7 +35,7 @@ export const healthGradeChartColors = {
  * Keys are ids of KPIs and values are kebab-case names of Lucide icons
  */
 export const kpiIcons = {
-  'total-issues': 'alert-triangle',
+  'open-issues': 'alert-triangle',
   'critical-high': 'alert-octagon',
   'coverage': 'shield',
   'tech-debt': 'clock',

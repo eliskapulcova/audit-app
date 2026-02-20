@@ -1,8 +1,20 @@
 services:
+  mongo:
+    image: mongo:7
+    container_name: audit-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: auditdb
+    volumes:
+      - mongo-data:/data/db
+
   audit-api:
     build:
       context: ./server
       target: build
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/auditdb
     command: gradle bootRun --continuous -Pargs=--spring.profiles.active=docker
     develop:
       watch:
@@ -36,3 +48,6 @@ services:
           path: ./client/package.json
         - action: rebuild
           path: ./client/bun.lock
+
+volumes:
+  mongo-data:

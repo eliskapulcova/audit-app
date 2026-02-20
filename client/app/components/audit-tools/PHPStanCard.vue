@@ -5,6 +5,7 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
+  <template #essentials>
     <div class="bg-slate-900 p-4 rounded-lg">
       <div class="text-3xl font-bold text-white mb-1">
         {{ data.totalErrors }}
@@ -19,7 +20,9 @@
         </span>
       </div>
     </div>
+  </template>
 
+  <template #details>
     <div class="bg-slate-900 p-4 rounded-lg">
       <div class="text-sm text-slate-400 mb-3">Errors by Level</div>
       <div class="w-full h-[180px]">
@@ -37,6 +40,7 @@
     <ViolationCategories title="Top Error Categories" :data="data.topCategories" />
 
     <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
+  </template>
   </ToolCard>
 </template>
 

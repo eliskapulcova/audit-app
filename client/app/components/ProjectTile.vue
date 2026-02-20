@@ -117,9 +117,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectSummary } from '../domain/types'
+import type { ProjectSummary, AToFGrade } from '../domain/types'
 import {
-  healthGradeChartColors,
   healthGradeGradientColors,
   projectHealthStatusColors,
   projectHealthStatusIcons,
@@ -129,10 +128,6 @@ const props = defineProps<{
   project: ProjectSummary
 }>()
 
-const getGradeColor = (grade: keyof typeof healthGradeGradientColors) => {
-  return healthGradeGradientColors[grade]
-}
-
 const status = computed(() => {
   return {
     label: props.project.healthStatus,
@@ -140,6 +135,10 @@ const status = computed(() => {
     icon: projectHealthStatusIcons[props.project.healthStatus],
   }
 })
+
+const getGradeColor = (grade: AToFGrade) => {
+  return healthGradeGradientColors[grade]
+}
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {

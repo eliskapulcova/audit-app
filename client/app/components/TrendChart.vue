@@ -5,7 +5,7 @@
     >
       <h2 class="text-xl font-bold text-white">Trend Overview</h2>
 
-      <div class="flex flex-wrap gap-3">
+      <div v-if="hasEnoughData" class="flex flex-wrap gap-3">
         <button
           v-for="tool in tools"
           :key="tool"
@@ -28,11 +28,15 @@
 
     <div class="w-full h-[300px]">
       <Chart
+        v-if="hasEnoughData"
         type="line"
         :data="chartData"
         :options="chartOptions"
         class="w-full h-full"
       />
+      <div v-else class="flex items-center justify-center h-full">
+        <p class="text-slate-500">Not enough data to display trend chart</p>
+      </div>
     </div>
   </div>
 </template>
@@ -51,6 +55,7 @@ import {
 import type { Tool, TrendDataPoint } from '../domain/types'
 import { tools } from '../domain/types'
 import { trendToolColors } from '~/config/visuals'
+import { TREND_DATA_MIN_POINTS } from '~/config/general'
 
 ChartJS.register(
   Title,
@@ -65,6 +70,10 @@ ChartJS.register(
 const props = defineProps<{
   data: TrendDataPoint[]
 }>()
+
+const hasEnoughData = computed(() => {
+  return props.data.length >= TREND_DATA_MIN_POINTS
+})
 
 const visibleTools = ref<Record<string, boolean>>(
   Object.fromEntries(tools.map((tool) => [tool, true]))

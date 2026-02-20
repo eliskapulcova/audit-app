@@ -107,7 +107,12 @@
               </span>
             </td>
             <td class="py-3 px-4 text-sm text-cyan-400 font-mono">
-              {{ issue.ruleId }}
+              <a v-if="issue.ruleDocUrl" :href="issue.ruleDocUrl" target="_blank" class="hover:underline">
+                {{ issue.ruleId }}
+              </a>
+              <span v-else>
+                {{ issue.ruleId }}
+              </span>
             </td>
             <td class="py-3 px-4 text-sm text-slate-300 max-w-md truncate">
               {{ issue.description }}
@@ -115,7 +120,7 @@
             <td
               class="py-3 px-4 text-xs text-slate-400 font-mono max-w-xs truncate"
             >
-              {{ issue.filePath }}
+              {{ issue.filePath }}{{ issue.line ? ':' + issue.line : '' }}
             </td>
             <td class="py-3 px-4 text-sm text-slate-400">
               {{ formatDate(issue.firstDetected) }}

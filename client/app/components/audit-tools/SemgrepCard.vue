@@ -5,7 +5,7 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-
+  <template #essentials>
     <TotalFindings :total-violations="data.totalFindings" title="Total Findings" />
 
     <div class="flex flex-row flex-wrap gap-4">
@@ -22,7 +22,9 @@
         <div class="text-xs text-slate-400">Info</div>
       </div>
     </div>
+  </template>
 
+  <template #details>
     <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
 
     <ViolationCategories title="Top Rule Categories" :data="data.topCategories" />
@@ -43,7 +45,8 @@
         />
       </div>
     </div>
-  </ToolCard>
+  </template>
+</ToolCard>
 </template>
 
 <script setup lang="ts">
