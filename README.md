@@ -150,7 +150,6 @@ flowchart LR
 
 - unify docker compose yaml files
 - clarify mongo db runtime - do not expose port publically
-- test connection wiht MONGODB_URI
 - Cleanup server to not require sonar and server API definitions in config 
 - API specifikace
 
