@@ -16,6 +16,7 @@ data class SonarAnalysisDocument(
 
     @Id
     val id: String? = null,
+    val repositoryKey: String? = null,  // e.g. my-repo (optional for legacy data)
     val serviceKey: String,          // e.g. age_verification
     val analysisVersion: Long,       // comparable version (1, 2, 3...)
     val projectKey: String,
