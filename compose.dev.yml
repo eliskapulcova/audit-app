@@ -14,7 +14,7 @@ services:
       context: ./server
       target: build
     environment:
-      - MONGODB_URI="mongodb://mongo:27017/auditdb"
+      - MONGODB_URI=mongodb://mongo:27017/auditdb
     command: gradle bootRun --continuous -Pargs=--spring.profiles.active=docker
     develop:
       watch:

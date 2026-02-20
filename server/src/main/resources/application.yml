@@ -7,7 +7,7 @@ spring:
   data:
     mongodb:
       # For local development: mongodb://localhost:27017/auditdb
-      uri: "mongodb://localhost:27017/auditdb" # ${MONGODB_URI}
+      uri: ${MONGODB_URI}
 
 audit:
   api-url: "" # "${AUDIT_API_URL}
