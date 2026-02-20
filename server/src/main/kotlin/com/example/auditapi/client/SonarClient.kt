@@ -12,20 +12,6 @@ import org.springframework.web.util.UriComponentsBuilder
 class SonarClient(
     private val restTemplate: RestTemplate
 ) {
-
-    // + count by severity and type - Aggregate by Type and Severity
-    /*
-    val counts = mutableMapOf<String, MutableMap<String, Int>>()
-
-for (issue in issues) {
-    val type = issue.type
-    val severity = issue.severity
-    counts.computeIfAbsent(type) { mutableMapOf() }
-          .merge(severity, 1, Int::plus)
-}
-
-    */
-
     fun fetchIssues(projectKey: String, branch: String): SonarIssuesResponse {
 
         val uri = UriComponentsBuilder
@@ -42,7 +28,6 @@ for (issue in issues) {
 
     fun fetchMeasures(projectKey: String, branch: String): SonarMeasuresResponse {
 
-        //http://localhost:9000/api/measures/component?component=age_verification&branch=main&metricKeys=reliability_rating,security_rating,security_review_rating,sqale_rating,coverage,duplicated_lines_density,comment_lines_density,ncloc,files,sqale_debt_ratio,reliability_remediation_effort,security_remediation_effort,sqale_index
         val uri = UriComponentsBuilder
             .fromPath("/api/measures/component")
             .queryParam("component", projectKey)
@@ -59,9 +44,6 @@ for (issue in issues) {
     }
 
     fun fetchComponentTree(projectKey: String, branch: String): SonarComponentTreeResponse {
-
-        //http://localhost:9000/api/measures/component_tree?component=age_verification&branch=main&metricKeys=ncloc,coverage,duplicated_lines_density,complexity,cognitive_complexity&strategy=all&ps=500
-        // - z toho vypočítat mix a max
 
         val uri = UriComponentsBuilder
             .fromPath("/api/measures/component_tree")
@@ -82,7 +64,6 @@ for (issue in issues) {
 
     fun fetchQualityGate(projectKey: String): SonarQualityGateResponse {
 
-        //http://localhost:9000/api/qualitygates/project_status?projectKey=age_verification&branch=main
         val uri = UriComponentsBuilder
             .fromPath("/api/qualitygates/project_status")
             .queryParam("projectKey", projectKey)
@@ -105,4 +86,3 @@ for (issue in issues) {
             ?: throw IllegalStateException("Empty quality profiles response")
     }*/
 }
-
