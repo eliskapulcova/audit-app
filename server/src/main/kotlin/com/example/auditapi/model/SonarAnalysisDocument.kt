@@ -17,6 +17,7 @@ data class SonarAnalysisDocument(
     @Id
     val id: String? = null,
     val serviceKey: String,          // e.g. age_verification
+    val repositoryKey: String? = null,          // e.g. DrMax-checkout-team
     val analysisVersion: Long,       // comparable version (1, 2, 3...)
     val projectKey: String,
     val totalIssues: Int,
