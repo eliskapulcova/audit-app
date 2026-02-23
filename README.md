@@ -1,4 +1,4 @@
-# Audit API (Backend)
+# Audit API (Backend) - under server part
 
 Spring Boot backend application written in **Kotlin**, responsible for:
 
@@ -24,37 +24,9 @@ Spring Boot backend application written in **Kotlin**, responsible for:
 
 ### Get Audit Report
 
-Returns parsed CSV issues together with analysis/statistics JSON.
+Returns detailed CSV with issues together with aggregations from multiple reporting tools
 
 **Endpoint**
-
-GET /v1/report
-
-**Response Example**
-```json
-{
-  "issuesReport": {
-    "issues": [
-      {
-        "updateDate": "2025-12-29T00:34:47+0000",
-        "line": 90,
-        "rule": "php:S1066",
-        "project": "age-verification",
-        "severity": "MAJOR",
-        "status": "OPEN"
-      }
-    ]
-  },
-  "analysisReport": {
-    "totalIssues": 123,
-    "bySeverity": {
-      "MAJOR": 45,
-      "MINOR": 78
-    }
-  }
-}
-```
-
 GET /details?{project_key}
 
 **Response Example**
@@ -153,16 +125,64 @@ GET /details?{project_key}
 ### Running locally
 
 1) value for SONAR_TOKEN has to be added as environmental variable
-3) composing Mongo db through docker-compose.yml in root of the server project
+3) composing Mongo DB through docker-compose.yml in root of the server project
 2) ./gradlew bootRun
 
 **Application will be available at**
-http://localhost:8080/v1/report
-
 http://localhost:8080/details
 
+### Architecture
 
-### Configuration of app
+```mermaid
+flowchart LR
+    phpstan["PHPstan"]
+    phpcs["phpcs"]
+    sonarqube["SonarQube"]
+    semgrep["Semgrep"]
+    publishJob["Publish Job"]
+    phpstan --> publishJob
+    phpcs --> publishJob
+    sonarqube --> publishJob
+    semgrep --> publishJob
+```
 
-- `src/main/resources/application.yml`
-   - In this file, there is configuration for the database connection via `MONGODB_URI` environment variable 
+### TODOs:
+
+- unify docker compose yaml files
+- clarify mongo db runtime - do not expose port publically
+- Cleanup server to not require sonar and server API definitions in config 
+- API specifikace
+
+#### TODO Apis:
+
+- Overwiew API for dashboard
+- Individual repo view
+
+```openapi
+# List of all projects
+GET /projects?filter={filter}&page={page}&size={size}
+
+# Overview of all projects
+GET /projects/overview?filter={filter}
+
+# Detail of single project
+GET /projects/:project_key
+
+# Overview of single project
+GET /projects/:project_key/overview?filter={filter}
+
+# List of all repositories under project
+GET /projects/:project_key/repositories?filter={filter}&page={page}&size={size}
+
+# Overview of single repository
+GET /projects/:project_key/repositories/:repo_key
+
+
+### Analysis API
+
+PUT /projects/:project_key/repositories/:repo_key/analysis/sonarqube?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/phpstan?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/phpcs?tool-name={name}
+PUT /projects/:project_key/repositories/:repo_key/analysis/junit?tool-name={name}
+
+```

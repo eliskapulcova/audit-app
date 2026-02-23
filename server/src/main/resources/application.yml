@@ -1,0 +1,24 @@
+sonar:
+  # http://localhost:9000
+  base-url: "" # ${SONAR_URL}
+  token: "" # ${SONAR_TOKEN:dummy-token}
+
+spring:
+  data:
+    mongodb:
+      # For local development: mongodb://localhost:27017/auditdb
+      uri: ${MONGODB_URI}
+
+audit:
+  api-url: "" # "${AUDIT_API_URL}
+  token: "" # "${AUDIT_API_TOKEN}
+
+server:
+  address: 0.0.0.0
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

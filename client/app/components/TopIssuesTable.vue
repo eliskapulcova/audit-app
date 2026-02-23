@@ -131,10 +131,10 @@
                 target="_blank"
                 class="cursor-pointer hover:underline"
               >
-                {{ issue.filePath }}
+                {{ issue.filePath }}{{ issue.line ? ':' + issue.line : '' }}
               </a>
               <span v-else>
-                {{ issue.filePath }}
+                {{ issue.filePath }}{{ issue.line ? ':' + issue.line : '' }}
               </span>
             </td>
             <td class="py-3 px-4 text-sm text-slate-400">
