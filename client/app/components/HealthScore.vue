@@ -102,7 +102,10 @@ const chartData = computed(() => {
     labels: ['Score', 'Remaining'],
     datasets: [
       {
-        data: [props.healthScore.score ?? 0, 100 - (props.healthScore.score ?? 0)],
+        data: [
+          props.healthScore.score ?? 0,
+          100 - (props.healthScore.score ?? 0),
+        ],
         backgroundColor: [color, '#1e293b'],
         borderWidth: 0,
         hoverBackgroundColor: [color, '#1e293b'],

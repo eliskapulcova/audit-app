@@ -5,54 +5,71 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-  <template #essentials>
-    <div class="flex flex-row flex-wrap gap-4">
-    <TotalFindings class="flex-1" :total-violations="totalIssues" title="Total Findings" />
-    <div v-if="data.technicalDebt" class="flex-1 bg-slate-900 p-4 rounded-lg">
-      <div class="text-3xl font-bold text-white mb-1">
-        {{ data.technicalDebt }}
+    <template #essentials>
+      <div class="flex flex-row flex-wrap gap-4">
+        <TotalFindings
+          class="flex-1"
+          :total-violations="totalIssues"
+          title="Total Findings"
+        />
+        <div
+          v-if="data.technicalDebt"
+          class="flex-1 bg-slate-900 p-4 rounded-lg"
+        >
+          <div class="text-3xl font-bold text-white mb-1">
+            {{ data.technicalDebt }}
+          </div>
+          <div class="text-sm text-slate-400">Technical debt</div>
+        </div>
       </div>
-      <div class="text-sm text-slate-400">Technical debt</div>
-    </div>
-  </div>
 
-  <div class="flex flex-row flex-wrap gap-4">
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
-        <div class="text-2xl font-bold text-red-400">{{ data.severityBreakdown.blocker }}</div>
-        <div class="text-xs text-slate-400">Blocker</div>
+      <div class="flex flex-row flex-wrap gap-4">
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
+          <div class="text-2xl font-bold text-red-400">
+            {{ data.severityBreakdown.blocker }}
+          </div>
+          <div class="text-xs text-slate-400">Blocker</div>
+        </div>
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-orange-500">
+          <div class="text-2xl font-bold text-orange-400">
+            {{ data.severityBreakdown.critical }}
+          </div>
+          <div class="text-xs text-slate-400">Critical</div>
+        </div>
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
+          <div class="text-2xl font-bold text-yellow-400">
+            {{ data.severityBreakdown.major }}
+          </div>
+          <div class="text-xs text-slate-400">Major</div>
+        </div>
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-blue-500">
+          <div class="text-2xl font-bold text-blue-400">
+            {{ data.severityBreakdown.minor }}
+          </div>
+          <div class="text-xs text-slate-400">Minor</div>
+        </div>
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-green-500">
+          <div class="text-2xl font-bold text-green-400">
+            {{ data.severityBreakdown.info }}
+          </div>
+          <div class="text-xs text-slate-400">Info</div>
+        </div>
       </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-orange-500">
-        <div class="text-2xl font-bold text-orange-400">{{ data.severityBreakdown.critical }}</div>
-        <div class="text-xs text-slate-400">Critical</div>
-      </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
-        <div class="text-2xl font-bold text-yellow-400">{{ data.severityBreakdown.major }}</div>
-        <div class="text-xs text-slate-400">Major</div>
-      </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-blue-500">
-        <div class="text-2xl font-bold text-blue-400">{{ data.severityBreakdown.minor }}</div>
-        <div class="text-xs text-slate-400">Minor</div>
-      </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-green-500">
-        <div class="text-2xl font-bold text-green-400">{{ data.severityBreakdown.info }}</div>
-        <div class="text-xs text-slate-400">Info</div>
-      </div>
-    </div>
-  </template>
-  
-  <template #details>
-    <div class="flex flex-row flex-wrap gap-4">
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg">
-        <div class="flex flex-row gap-4 justify-between items-center">
+    </template>
+
+    <template #details>
+      <div class="flex flex-row flex-wrap gap-4">
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg">
+          <div class="flex flex-row gap-4 justify-between items-center">
             <div>
               <div class="text-2xl font-bold text-white">{{ data.bugs }}</div>
               <div class="text-xs text-slate-400">Bugs</div>
             </div>
             <Icon name="lucide:bug" class="w-6 h-6 text-white" />
+          </div>
         </div>
-      </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg">
-        <div class="flex flex-row gap-4 justify-between items-center">
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg">
+          <div class="flex flex-row gap-4 justify-between items-center">
             <div>
               <div class="text-2xl font-bold text-white">
                 {{ data.vulnerabilities }}
@@ -60,10 +77,10 @@
               <div class="text-xs text-slate-400">Vulnerabilities</div>
             </div>
             <Icon name="lucide:shield-alert" class="w-6 h-6 text-white" />
+          </div>
         </div>
-      </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg">
-        <div class="flex flex-row gap-4 justify-between items-center">
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg">
+          <div class="flex flex-row gap-4 justify-between items-center">
             <div>
               <div class="text-2xl font-bold text-white">
                 {{ data.codeSmells }}
@@ -71,80 +88,95 @@
               <div class="text-xs text-slate-400">Code Smells</div>
             </div>
             <Icon name="lucide:code" class="w-6 h-6 text-white" />
+          </div>
         </div>
       </div>
-    </div>
 
-    <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
+      <FindingsTrend
+        v-if="data.trendData.length >= TREND_DATA_MIN_POINTS"
+        :trend-data="data.trendData"
+      />
 
-    <div class="flex flex-row flex-wrap gap-4">
-      <div v-if="data.coverage != null" class="flex-1 bg-slate-900 p-3 rounded-lg">
-        <div class="text-xl font-bold text-green-400">{{ data.coverage }}%</div>
-        <div class="text-xs text-slate-400">Coverage</div>
-      </div>
-      <div v-if="data.duplications != null" class="flex-1 bg-slate-900 p-3 rounded-lg">
-        <div class="text-xl font-bold text-blue-400">
-          {{ data.duplications }}%
-        </div>
-        <div class="text-xs text-slate-400">Duplications</div>
-      </div>
-    </div>
-
-    <div v-if="hasQualityGateData" class="bg-slate-900 p-3 rounded-lg">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-lg text-slate-400">Quality Gate</span>
-        <span
-          v-if="data.qualityGate"
-          :class="[
-            'text-lg font-bold',
-            data.qualityGate === 'Passed' ? 'text-green-400' : 'text-red-400',
-          ]"
+      <div class="flex flex-row flex-wrap gap-4">
+        <div
+          v-if="data.coverage != null"
+          class="flex-1 bg-slate-900 p-3 rounded-lg"
         >
-          {{ data.qualityGate }}
-        </span>
-      </div>
-      <div class="flex flex-row flex-wrap gap-4 text-sm">
-        <div class="flex items-center gap-2">
-          <div
-            v-if="data.reliability"
-            :class="[
-              'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
-              getRatingColor(data.reliability),
-            ]"
-          >
-            {{ data.reliability }}
+          <div class="text-xl font-bold text-green-400">
+            {{ data.coverage }}%
           </div>
-          <span class="text-slate-400 text-base">Reliability</span>
+          <div class="text-xs text-slate-400">Coverage</div>
         </div>
-        <div class="flex items-center gap-2">
-          <div
-            v-if="data.security"
-            :class="[
-              'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
-              getRatingColor(data.security),
-            ]"
-          >
-            {{ data.security }}
+        <div
+          v-if="data.duplications != null"
+          class="flex-1 bg-slate-900 p-3 rounded-lg"
+        >
+          <div class="text-xl font-bold text-blue-400">
+            {{ data.duplications }}%
           </div>
-          <span class="text-slate-400 text-base">Security</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <div
-            v-if="data.maintainability"
-            :class="[
-              'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
-              getRatingColor(data.maintainability),
-            ]"
-          >
-            {{ data.maintainability }}
-          </div>
-          <span class="text-slate-400 text-base">Maintainability</span>
+          <div class="text-xs text-slate-400">Duplications</div>
         </div>
       </div>
-    </div>
 
-    <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
-  </template>
+      <div v-if="hasQualityGateData" class="bg-slate-900 p-3 rounded-lg">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-lg text-slate-400">Quality Gate</span>
+          <span
+            v-if="data.qualityGate"
+            :class="[
+              'text-lg font-bold',
+              data.qualityGate === 'Passed' ? 'text-green-400' : 'text-red-400',
+            ]"
+          >
+            {{ data.qualityGate }}
+          </span>
+        </div>
+        <div class="flex flex-row flex-wrap gap-4 text-sm">
+          <div class="flex items-center gap-2">
+            <div
+              v-if="data.reliability"
+              :class="[
+                'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
+                getRatingColor(data.reliability),
+              ]"
+            >
+              {{ data.reliability }}
+            </div>
+            <span class="text-slate-400 text-base">Reliability</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div
+              v-if="data.security"
+              :class="[
+                'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
+                getRatingColor(data.security),
+              ]"
+            >
+              {{ data.security }}
+            </div>
+            <span class="text-slate-400 text-base">Security</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div
+              v-if="data.maintainability"
+              :class="[
+                'w-8 h-8 rounded flex items-center justify-center text-xs font-bold text-white',
+                getRatingColor(data.maintainability),
+              ]"
+            >
+              {{ data.maintainability }}
+            </div>
+            <span class="text-slate-400 text-base">Maintainability</span>
+          </div>
+        </div>
+      </div>
+
+      <TopFiles
+        v-if="data.topFiles.length > 0"
+        title="Files with Most Violations"
+        :data="data.topFiles"
+      />
+    </template>
   </ToolCard>
 </template>
 

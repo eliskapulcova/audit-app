@@ -16,13 +16,13 @@ import {
 
 export default defineEventHandler(
   async (event): Promise<ProjectDetails> => {
-    const projectId = getRouterParam(event, 'name')
-    const projectSummary = projectSummaries.find((p) => p.id === projectId)
+    const projectKey = getRouterParam(event, 'project_key')
+    const projectSummary = projectSummaries.find((p) => p.id === projectKey)
 
     if (!projectSummary) {
       throw createError({
         statusCode: 404,
-        statusMessage: 'Project ' + projectId + ' not found',
+        statusMessage: 'Project ' + projectKey + ' not found',
       })
     }
 

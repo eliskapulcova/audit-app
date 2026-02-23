@@ -9,6 +9,7 @@ import type {
   Issue,
   RepositoryHealth,
   ProjectSummary,
+  DashboardData,
 } from '../../domain/types';
 
 export const healthScore: HealthScore = {
@@ -641,3 +642,11 @@ export const projectSummaries: ProjectSummary[] = [
     tools: ['SonarQube', 'Semgrep', 'PHPCS', 'PHPStan'],
   },
 ];
+
+export const dashboardData: DashboardData = {
+  totalProjects: 9,
+  avgHealthScore: 76,
+  totalRepositories: 584,
+  criticalIssues: 112,
+  projectSummaries,
+}

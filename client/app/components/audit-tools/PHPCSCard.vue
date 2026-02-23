@@ -5,34 +5,49 @@
     :status="data.healthStatus"
     :last-run="data.lastRun"
   >
-  <template #essentials>
-    <TotalFindings :total-violations="data.totalViolations" title="Total Violations">
-      <template #additionalInfo>
-        <div class="mt-2 text-xs text-cyan-400">
-          Standard: {{ data.standard }}
+    <template #essentials>
+      <TotalFindings
+        :total-violations="data.totalViolations"
+        title="Total Violations"
+      >
+        <template #additionalInfo>
+          <div class="mt-2 text-xs text-cyan-400">
+            Standard: {{ data.standard }}
+          </div>
+        </template>
+      </TotalFindings>
+
+      <div class="flex flex-row flex-wrap gap-4">
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
+          <div class="text-2xl font-bold text-red-400">{{ data.errors }}</div>
+          <div class="text-xs text-slate-400">Error</div>
         </div>
-      </template>
-    </TotalFindings>
-
-    <div class="flex flex-row flex-wrap gap-4">
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-red-500">
-        <div class="text-2xl font-bold text-red-400">{{ data.errors }}</div>
-        <div class="text-xs text-slate-400">Error</div>
+        <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
+          <div class="text-2xl font-bold text-yellow-400">
+            {{ data.warnings }}
+          </div>
+          <div class="text-xs text-slate-400">Warning</div>
+        </div>
       </div>
-      <div class="flex-1 bg-slate-900 p-3 rounded-lg border-yellow-500">
-        <div class="text-2xl font-bold text-yellow-400">{{ data.warnings }}</div>
-        <div class="text-xs text-slate-400">Warning</div>
-      </div>
-    </div>
-  </template>
+    </template>
 
-  <template #details>
-    <FindingsTrend v-if="data.trendData.length >= TREND_DATA_MIN_POINTS" :trend-data="data.trendData" />
+    <template #details>
+      <FindingsTrend
+        v-if="data.trendData.length >= TREND_DATA_MIN_POINTS"
+        :trend-data="data.trendData"
+      />
 
-    <ViolationCategories title="Top Violated Standards" :data="data.topSniffs" />
+      <ViolationCategories
+        title="Top Violated Standards"
+        :data="data.topSniffs"
+      />
 
-    <TopFiles v-if="data.topFiles.length > 0" title="Files with Most Violations" :data="data.topFiles" />
-  </template>
+      <TopFiles
+        v-if="data.topFiles.length > 0"
+        title="Files with Most Violations"
+        :data="data.topFiles"
+      />
+    </template>
   </ToolCard>
 </template>
 
