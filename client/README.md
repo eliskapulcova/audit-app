@@ -1,41 +1,50 @@
 # Audit App Client
 
-Nuxt application for conducting and browsing code audit reports.
+Nuxt application for visualizing results of code audit reports.
+
+Provides dashboards for code quality metrics and trends in 3 different scopes:
+- Company (all projects)
+- Project (all repositories)
+- Repository
+
+Supports following tools (focusing on PHP in current version):
+- SonarQube
+- Semgrep
+- PHPCS
+- PHPStan
 
 ## Setup
 
-Make sure to install dependencies:
+Make sure to install dependencies
+
+Using Bun is recommended for development for performance reasons and compatibility with Docker
+
+### Install dependencies
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
 # bun
 bun install
+
+# npm
+npm install
 ```
 
-## Development Server
+## Development Server (standalone)
+
+Provide environment variables
+
+```bash
+cp env/.env.development .env
+```
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
+# bun
+bun dev
+
 # npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -43,33 +52,21 @@ bun run dev
 Build the application for production:
 
 ```bash
+# bun
+bun build
+
 # npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
+# bun
+bun preview
+
 # npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

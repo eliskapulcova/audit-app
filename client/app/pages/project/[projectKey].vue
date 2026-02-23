@@ -13,7 +13,7 @@
         <SemgrepCard v-if="data.semgrepData" :data="data.semgrepData" />
         <PHPCSCard v-if="data.phpcsData" :data="data.phpcsData" />
         <PHPStanCard v-if="data.phpstanData" :data="data.phpstanData" />
-        <!-- <AddToolCard /> -->
+        <AddToolCard v-if="ADD_TOOL_CARD_ENABLED" />
       </div>
     </div>
 
@@ -53,6 +53,7 @@ import TrendChart from '~/components/TrendChart.vue'
 import TopIssuesTable from '~/components/TopIssuesTable.vue'
 import RepositoryHealthMatrix from '~/components/RepositoryHealthMatrix.vue'
 import type { ProjectDetails } from '~/domain/types'
+import { ADD_TOOL_CARD_ENABLED } from '~/config/general'
 
 definePageMeta({
   layout: 'v2',
@@ -60,12 +61,14 @@ definePageMeta({
 
 const route = useRoute()
 
-const useMockData = route.params.name !== 'age_verification'
+const useMockData = route.params.projectKey !== 'age_verification'
+
+const config = useRuntimeConfig()
 
 // TODO: Handle pending and error states
 const { data, pending, error } = await useFetch<ProjectDetails>(
   useMockData
-    ? '/api/v2/project/' + route.params.project
-    : 'http://localhost:8080/details?projectKey=age_verification'
+    ? '/api/v2/project/' + route.params.projectKey
+    : `${config.public.apiBase}/details?projectKey=${route.params.projectKey}`
 )
 </script>
