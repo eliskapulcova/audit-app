@@ -22,6 +22,9 @@ const route = useRoute()
 
 // TODO: Handle pending and error states
 const { data, pending, error } = await useFetch<ProjectDetails>(
-  '/api/v2/project/' + route.params.project + '/repository/' + route.params.repository
+  '/api/v2/project/' +
+    route.params.project +
+    '/repository/' +
+    route.params.repository
 )
 </script>

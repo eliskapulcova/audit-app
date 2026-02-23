@@ -108,11 +108,11 @@ export interface Issue {
   severity: SeverityRating
   tool: Tool
   ruleId: string
-  ruleDocUrl: string | null
+  ruleDocUrl?: string | null
   description: string
   filePath: string
-  line: number | null
-  codeUrl: string | null
+  line?: number | null
+  codeUrl?: string | null
   firstDetected: string
 }
 
@@ -121,6 +121,14 @@ export interface RepositoryHealth {
   healthStatuses: {
     [key in Tool]: HealthStatus // TODO: define how to calculate this for each tool
   }
+}
+
+export interface DashboardData {
+  totalProjects: number
+  avgHealthScore: number
+  totalRepositories: number
+  criticalIssues: number
+  projectSummaries: ProjectSummary[]
 }
 
 export interface ProjectSummary {
@@ -152,3 +160,29 @@ export interface ProjectDetails {
   projectSummary: ProjectSummary
 }
 
+export interface RepositorySummary {
+  id: string
+  name: string
+  description: string
+  healthScore: number
+  healthStatus: HealthStatus
+  grade: AToFGrade
+  totalIssues: number
+  criticalIssues: number
+  coverage: number
+  lastScan: string
+  trend: number
+  tools: Tool[]
+}
+
+export interface RepositoryDetails {
+  healthScore: HealthScore // TODO: define how to calculate this
+  kpis: KPI[]
+  sonarQubeData: SonarQubeData | null
+  semgrepData: SemgrepData | null
+  phpcsData: PHPCSData | null
+  phpstanData: PHPStanData | null
+  trendData: TrendDataPoint[] // should only be displayed if at least 3 points are available
+  topIssues: Issue[] // 20 issues with the highest severity (pagination will not be implemented yet)
+  repositorySummary: RepositorySummary
+}
