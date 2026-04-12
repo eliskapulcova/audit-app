@@ -1,4 +1,4 @@
-package com.example.auditapi.domain.model
+package com.example.auditapi.model
 
 data class SonarAggregationResult(
     val bugs: Int = 0,

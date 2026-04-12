@@ -1,9 +1,9 @@
 package com.example.auditapi.service
 
-import com.example.auditapi.domain.model.HealthScoreDto
-import com.example.auditapi.domain.model.KPIDto
-import com.example.auditapi.domain.model.ProjectDetailsResponse
-import com.example.auditapi.domain.model.SonarAnalysisDocument
+import SonarAnalysisDocument
+import com.example.auditapi.model.HealthScoreDto
+import com.example.auditapi.model.KPIDto
+import com.example.auditapi.model.ProjectDetailsResponse
 import com.example.auditapi.`interface`.SonarAnalysisRepository
 import com.example.auditapi.mapper.SonarAnalysisDocumentMapper
 import org.springframework.stereotype.Service
@@ -65,8 +65,8 @@ class ProjectDetailsServiceImpl(
 
     override fun calculateHealthScore(doc: SonarAnalysisDocument?): HealthScoreDto? =
         doc?.run {
-            val openIssues = issues.count { it.status == "OPEN" } ?: 0
-            val coverage = sonarMapper.getMeasure(this, "coverage")?.toDoubleOrNull() ?: 0.0
+            val openIssues = issues.count { it.status == "OPEN" }
+            val coverage = sonarMapper.getMeasure(this, "coverage").toDoubleOrNull() ?: 0.0
 
             val score = (
                     100

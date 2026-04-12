@@ -1,9 +1,13 @@
 package com.example.auditapi.service
 
+import SonarAnalysisDocument
 import com.example.auditapi.client.SonarClient
-import com.example.auditapi.domain.model.*
 import com.example.auditapi.`interface`.SonarAnalysisRepository
 import com.example.auditapi.mapper.SonarAnalysisDocumentMapper
+import com.example.auditapi.model.SonarComponentTreeResponse
+import com.example.auditapi.model.SonarIssuesResponse
+import com.example.auditapi.model.SonarMeasuresResponse
+import com.example.auditapi.model.SonarQualityGateResponse
 import org.springframework.stereotype.Service
 
 @Service

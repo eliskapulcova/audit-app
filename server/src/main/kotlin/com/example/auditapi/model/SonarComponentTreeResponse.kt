@@ -1,4 +1,6 @@
-package com.example.auditapi.domain.model
+package com.example.auditapi.model
+
+import com.example.auditapi.model.SonarMeasure
 
 data class SonarComponentTreeResponse(
     val baseComponent: Component,

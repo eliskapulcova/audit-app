@@ -1,6 +1,5 @@
-<<<<<<< server/src/main/kotlin/com/example/auditapi/model/SonarAnalysisDocument.kt
-package com.example.auditapi.domain.model
 
+import com.example.auditapi.model.*
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.CompoundIndex
 import org.springframework.data.mongodb.core.index.CompoundIndexes
@@ -17,9 +16,9 @@ data class SonarAnalysisDocument(
 
     @Id
     val id: String? = null,
-    val serviceKey: String,          // e.g. age_verification
-    val repositoryKey: String? = null,          // e.g. DrMax-checkout-team
-    val analysisVersion: Long,       // comparable version (1, 2, 3...)
+    val serviceKey: String,
+    val repositoryKey: String? = null,
+    val analysisVersion: Long,
     val projectKey: String,
     val totalIssues: Int,
     val effortTotal: Int?,

@@ -1,8 +1,11 @@
 package com.example.auditapi.controller
 
-import com.example.auditapi.domain.model.*
+import SonarAnalysisDocument
+import com.example.auditapi.model.SonarComponentTreeResponse
+import com.example.auditapi.model.SonarIssuesResponse
+import com.example.auditapi.model.SonarMeasuresResponse
+import com.example.auditapi.model.SonarQualityGateResponse
 import com.example.auditapi.service.SonarAnalysisService
-import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 

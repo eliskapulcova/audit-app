@@ -1,4 +1,4 @@
-package com.example.auditapi.domain.model
+package com.example.auditapi.model
 
 data class SonarComponent(
     val key: String,

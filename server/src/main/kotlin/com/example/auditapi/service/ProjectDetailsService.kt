@@ -1,9 +1,10 @@
 package com.example.auditapi.service
 
-import com.example.auditapi.domain.model.HealthScoreDto
-import com.example.auditapi.domain.model.KPIDto
-import com.example.auditapi.domain.model.ProjectDetailsResponse
-import com.example.auditapi.domain.model.SonarAnalysisDocument
+import SonarAnalysisDocument
+import com.example.auditapi.model.HealthScoreDto
+import com.example.auditapi.model.KPIDto
+import com.example.auditapi.model.ProjectDetailsResponse
+
 
 interface ProjectDetailsService {
 

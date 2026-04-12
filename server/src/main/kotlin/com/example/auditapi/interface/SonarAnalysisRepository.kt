@@ -1,7 +1,7 @@
 package com.example.auditapi.`interface`
 
-import com.example.auditapi.domain.model.SonarAnalysisDocument
-import com.example.auditapi.domain.model.SonarQubeDataDto
+import SonarAnalysisDocument
+import com.example.auditapi.model.SonarQubeDataDto
 
 interface SonarAnalysisRepository {
     fun save(analysis: SonarAnalysisDocument): SonarAnalysisDocument

@@ -1,6 +1,6 @@
 package com.example.auditapi.controller
 
-import com.example.auditapi.domain.model.SonarAnalysisDocument
+import SonarAnalysisDocument
 import com.example.auditapi.service.SonarAnalysisService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

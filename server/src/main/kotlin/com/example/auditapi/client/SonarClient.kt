@@ -1,9 +1,9 @@
 package com.example.auditapi.client
 
-import com.example.auditapi.domain.model.SonarComponentTreeResponse
-import com.example.auditapi.domain.model.SonarIssuesResponse
-import com.example.auditapi.domain.model.SonarMeasuresResponse
-import com.example.auditapi.domain.model.SonarQualityGateResponse
+import com.example.auditapi.model.SonarComponentTreeResponse
+import com.example.auditapi.model.SonarIssuesResponse
+import com.example.auditapi.model.SonarMeasuresResponse
+import com.example.auditapi.model.SonarQualityGateResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder

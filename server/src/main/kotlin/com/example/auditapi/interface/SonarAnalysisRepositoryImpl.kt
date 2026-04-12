@@ -1,11 +1,11 @@
 package com.example.auditapi.`interface`
 
+import SonarAnalysisDocument
+import com.example.auditapi.model.*
 import org.bson.Document
-import com.example.auditapi.domain.model.*
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.aggregation.*
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators.Filter
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.isEqualTo
@@ -45,7 +45,6 @@ class SonarAnalysisRepositoryImpl(
             Aggregation.sort(Sort.Direction.DESC, SonarAnalysisDocument::analysisVersion.name),
             Aggregation.limit(1),
 
-            // Flatten coverage
             Aggregation.addFields()
                 .addField("coverage")
                 .withValue(
@@ -85,12 +84,10 @@ class SonarAnalysisRepositoryImpl(
 
 
         // Group everything in one stage
-            // Facet stage to calculate metrics and top files in parallel
             Aggregation.facet()
                 .and(
                     Aggregation.unwind("issues", true),
                     Aggregation.group()
-                        // Issue counts
                         // Issue counts
                         .sum(
                             ConditionalOperators.`when`(
