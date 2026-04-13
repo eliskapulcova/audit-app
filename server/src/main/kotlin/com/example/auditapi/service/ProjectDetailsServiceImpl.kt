@@ -41,7 +41,11 @@ class ProjectDetailsServiceImpl(
    override fun buildKpis(doc: SonarAnalysisDocument?): List<KPIDto>? {
         // TODO: implement trend calculation - we need historical data for this
         val openIssues = doc?.issues?.count { it.status == "OPEN" }
-        val coverage = sonarMapper.getMeasure(doc, "coverage").toDoubleOrNull() ?: 0.0
+       val coverage = if (doc == null) {
+           0.0
+       } else {
+           sonarMapper.getMeasure(doc, "coverage").toDoubleOrNull() ?: 0.0
+       }
 
         return listOf(
             KPIDto(

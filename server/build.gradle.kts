@@ -25,3 +25,7 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+

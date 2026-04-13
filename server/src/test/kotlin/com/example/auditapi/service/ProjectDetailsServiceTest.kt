@@ -1,11 +1,9 @@
 package com.example.auditapi.service
 
-import com.example.auditapi.model.SonarAnalysisDocument
 import com.example.auditapi.`interface`.SonarAnalysisRepository
 import com.example.auditapi.mapper.SonarAnalysisDocumentMapper
-import com.example.auditapi.model.IssueDto
-import com.example.auditapi.model.ProjectSummaryDto
-import com.example.auditapi.model.SonarQubeDataDto
+import com.example.auditapi.model.*
+import com.example.auditapi.util.Helper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -15,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.*
 
 @ExtendWith(MockitoExtension::class)
-class ProjectDetailsServiceImplTest {
+class ProjectDetailsServiceTest {
 
     @Mock
     lateinit var sonarRepository: SonarAnalysisRepository
@@ -30,12 +28,13 @@ class ProjectDetailsServiceImplTest {
     fun `should return project details when project exists`() {
         val projectKey = "proj-1"
 
-        val doc = mock<SonarAnalysisDocument> {
-            on { issues } doReturn listOf(
-                mock { on { status } doReturn "OPEN" },
-                mock { on { status } doReturn "CLOSED" }
+        val doc = Helper.doc(
+            projectKey = projectKey,
+            issues = listOf(
+                Helper.issue("issue-1", "OPEN"),
+                Helper.issue("issue-2", "CLOSED")
             )
-        }
+        )
 
         val sonarData = mock<SonarQubeDataDto>()
         val topIssues = listOf<IssueDto>()
@@ -57,6 +56,7 @@ class ProjectDetailsServiceImplTest {
         assertEquals(2, result.kpis?.size)
     }
 
+
     @Test
     fun `should throw exception when project not found`() {
         val projectKey = "missing"
@@ -70,13 +70,13 @@ class ProjectDetailsServiceImplTest {
 
     @Test
     fun `should build KPIs correctly`() {
-        val doc = mock<SonarAnalysisDocument> {
-            on { issues } doReturn listOf(
-                mock { on { status } doReturn "OPEN" },
-                mock { on { status } doReturn "OPEN" },
-                mock { on { status } doReturn "CLOSED" }
+        val doc = Helper.doc(
+            issues = listOf(
+                Helper.issue("1", "OPEN"),
+                Helper.issue("2", "OPEN"),
+                Helper.issue("3", "CLOSED")
             )
-        }
+        )
 
         whenever(sonarMapper.getMeasure(doc, "coverage")).thenReturn("75.5")
 
@@ -95,22 +95,29 @@ class ProjectDetailsServiceImplTest {
 
     @Test
     fun `should handle null document in KPIs`() {
-        whenever(sonarMapper.getMeasure(null, "coverage")).thenReturn(null)
 
         val result = service.buildKpis(null)
 
-        assertEquals(0, result?.get(0)?.value)
-        assertEquals(0.0, result?.get(1)?.value)
+        assertNotNull(result)
+        assertEquals(2, result?.size)
+
+        val openIssuesKpi = result?.get(0)
+        assertEquals("open-issues", openIssuesKpi?.id)
+        assertEquals(0, openIssuesKpi?.value)
+
+        val coverageKpi = result?.get(1)
+        assertEquals("coverage", coverageKpi?.id)
+        assertEquals(0.0, coverageKpi?.value)
     }
 
     @Test
     fun `should calculate health score correctly`() {
-        val doc = mock<SonarAnalysisDocument> {
-            on { issues } doReturn listOf(
-                mock { on { status } doReturn "OPEN" },
-                mock { on { status } doReturn "OPEN" }
+        val doc = Helper.doc(
+            issues = listOf(
+                Helper.issue("1", "OPEN"),
+                Helper.issue("2", "OPEN")
             )
-        }
+        )
 
         whenever(sonarMapper.getMeasure(doc, "coverage")).thenReturn("80")
         whenever(sonarMapper.mapGrade(any())).thenReturn("A")
@@ -130,11 +137,9 @@ class ProjectDetailsServiceImplTest {
 
     @Test
     fun `should clamp health score between 0 and 100`() {
-        val doc = mock<SonarAnalysisDocument> {
-            on { issues } doReturn List(100) {
-                mock { on { status } doReturn "OPEN" }
-            }
-        }
+        val doc = Helper.doc(
+            issues = List(100) { Helper.issue("1", "OPEN") }
+        )
 
         whenever(sonarMapper.getMeasure(doc, "coverage")).thenReturn("0")
         whenever(sonarMapper.mapGrade(any())).thenReturn("F")
