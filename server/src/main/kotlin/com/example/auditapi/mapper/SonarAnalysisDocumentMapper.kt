@@ -1,6 +1,6 @@
 package com.example.auditapi.mapper
 
-import SonarAnalysisDocument
+import com.example.auditapi.model.SonarAnalysisDocument
 import com.example.auditapi.model.*
 import org.springframework.stereotype.Component
 import java.net.URLEncoder

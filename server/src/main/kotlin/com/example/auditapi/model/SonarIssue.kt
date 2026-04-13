@@ -1,6 +1,5 @@
 package com.example.auditapi.model
 
-import com.example.auditapi.model.TextRange
 import com.example.auditapi.enumeration.IssueStatus
 import com.example.auditapi.enumeration.IssueType
 import com.example.auditapi.enumeration.Severity

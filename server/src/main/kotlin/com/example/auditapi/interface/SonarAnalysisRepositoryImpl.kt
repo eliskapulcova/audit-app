@@ -1,6 +1,6 @@
 package com.example.auditapi.`interface`
 
-import SonarAnalysisDocument
+import com.example.auditapi.model.SonarAnalysisDocument
 import com.example.auditapi.model.*
 import org.bson.Document
 import org.springframework.data.domain.Sort

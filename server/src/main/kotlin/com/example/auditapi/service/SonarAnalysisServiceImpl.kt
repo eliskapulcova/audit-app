@@ -1,6 +1,6 @@
 package com.example.auditapi.service
 
-import SonarAnalysisDocument
+import com.example.auditapi.model.SonarAnalysisDocument
 import com.example.auditapi.client.SonarClient
 import com.example.auditapi.`interface`.SonarAnalysisRepository
 import com.example.auditapi.mapper.SonarAnalysisDocumentMapper
