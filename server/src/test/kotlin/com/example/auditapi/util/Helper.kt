@@ -4,6 +4,7 @@ import com.example.auditapi.enumeration.IssueStatus
 import com.example.auditapi.enumeration.IssueType
 import com.example.auditapi.enumeration.Severity
 import com.example.auditapi.model.*
+import org.bson.types.ObjectId
 
 object Helper {
 
@@ -40,12 +41,13 @@ object Helper {
     )
 
     fun doc(
+        id: String = ObjectId().toString(),
         projectKey: String = "proj",
         issues: List<SonarIssue> = emptyList(),
         totalIssues: Int = issues.size,
         coverage: String? = "80"
     ) = SonarAnalysisDocument(
-        id = "doc-1",
+        id = id,
         serviceKey = "service",
         repositoryKey = "repo",
         analysisVersion = 1L,
